@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>images/background.png</file>
+        <file>qml/start.qml</file>
+        <file>qml/StartModel.qml</file>
+        <file>qml/StartDelegate.qml</file>
+        <file>qml/rect1.qml</file>
+        <file>qml/IconRect.qml</file>
+        <file>images/search.png</file>
+        <file>images/rss.png</file>
+        <file>images/skaner.png</file>
+        <file>images/note.png</file>
+        <file>images/help.png</file>
+        <file>images/tasks.png</file>
+        <file>images/video.png</file>
+        <file>images/favs.png</file>
+        <file>images/POI.png</file>
+        <file>images/control-panel.png</file>
+        <file>images/sett-big.png</file>
+        <file>images/wether.png</file>
+    </qresource>
+</RCC>
