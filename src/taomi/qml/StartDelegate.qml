@@ -21,8 +21,15 @@ Component {
 
                     Component.onCompleted: {
                         var component;
-                        component = Qt.createComponent("IconRect.qml");
-                        component.createObject(wraper, {"iconSource": iconSource, "iconTitle": iconTitle});
+                        if (style == "IMAGE_RECT") {
+                            component = Qt.createComponent("ImageRect.qml");
+                            component.createObject(wraper, {"iconSource": image, "iconTitle": title});
+
+                        }
+                        else {
+                            component = Qt.createComponent("IconRect.qml");
+                            component.createObject(wraper, {"iconSource": image, "iconTitle": title});
+                        }
                     }
 
                     states: State {

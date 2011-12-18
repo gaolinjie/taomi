@@ -31,8 +31,5 @@ Rectangle {
         text: parent.iconTitle
         font.pixelSize: 28
         color: "white"
-
-
-
     }
 }

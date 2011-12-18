@@ -26,10 +26,31 @@ OTHER_FILES += \
     images/skaner.png \
     images/rss.png \
     images/search.png \
-    images/wether.png
+    images/wether.png \
+    qml/ImageRect.qml \
+    images/BimBimBop.jpg \
+    images/CheeseStraws.jpg \
+    images/Kermit-Lynch-Wine.jpg \
+    images/Tagine_Recipe.jpg \
+    images/baba-ganoush.jpg \
+    images/Carrot-Ginger-Soup.jpg \
+    images/Cherries.jpg \
+    images/Blueberry_muffins.jpg \
+    images/Soft_Scamble_Breakfast.jpg \
+    images/SeaFoodStew.jpg \
+    images/Tagine.jpg \
+    images/Tomato-Basil-Lasagne.jpg \
+    images/Salmon_with_pesto.jpg \
+    images/rustic_soup.jpg \
+    images/veggie_box.jpg \
+    images/Summer_Salad.jpg
 
 RESOURCES += \
     resource.qrc
+
+
+
+
 
 
 
