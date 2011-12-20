@@ -11,7 +11,7 @@ ListModel {
         columnModel: [
             ListElement {
                 rectColor: "#de9317"
-                slotQml: "rect1.qml"
+                slotQml: "ItemsView.qml"
                 image: "qrc:/images/Tagine.jpg"
                 title: "特 色"
                 style: "IMAGE_RECT"

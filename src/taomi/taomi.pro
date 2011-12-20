@@ -43,10 +43,20 @@ OTHER_FILES += \
     images/Salmon_with_pesto.jpg \
     images/rustic_soup.jpg \
     images/veggie_box.jpg \
-    images/Summer_Salad.jpg
+    images/Summer_Salad.jpg \
+    qml/ItemsView.qml \
+    qml/ItemsModel.qml \
+    qml/ItemsDelegate.qml \
+    qml/ItemRect.qml \
+    images/back.png
 
 RESOURCES += \
     resource.qrc
+
+
+
+
+
 
 
 

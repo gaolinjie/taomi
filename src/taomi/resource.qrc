@@ -36,5 +36,10 @@
         <file>images/SeaFoodStew.jpg</file>
         <file>images/Soft_Scamble_Breakfast.jpg</file>
         <file>images/Summer_Salad.jpg</file>
+        <file>qml/ItemsView.qml</file>
+        <file>qml/ItemsModel.qml</file>
+        <file>qml/ItemsDelegate.qml</file>
+        <file>qml/ItemRect.qml</file>
+        <file>images/back.png</file>
     </qresource>
 </RCC>

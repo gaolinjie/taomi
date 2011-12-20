@@ -4,7 +4,6 @@ Item {
     id: rect
     width: parent.width
     height: parent.height
-//    color: rectColor
     state: columnState
 
     property string iconSource: ""
