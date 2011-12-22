@@ -10,10 +10,37 @@ Item {
 
     Image {
         id: itemImage
-        source: parent.image
-        sourceSize.width: parent.width
-        sourceSize.height: parent.height
-        anchors.fill: parent
+        source: itemRect.image
+        sourceSize.width: 235
+        sourceSize.height: 120
+        state: 'inlist'
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if (itemImage.state == 'inlist') {
+                    itemImage.state = 'popup'
+                }
+                else {
+                    itemImage.state = 'inlist'
+                }
+            }
+        }
+
+        states: [
+            State {
+                name: 'inlist'
+                ParentChange { target: itemImage; parent: itemRect}
+                PropertyChanges { target: itemImage;
+                                  sourceSize.width: 235; sourceSize.height: 120}
+            },
+            State {
+                name: 'popup'
+                ParentChange { target: itemImage; parent: itemRect.parent.parent.parent.parent.parent}
+                PropertyChanges { target: itemImage; x: 60; y: 0;
+                                  sourceSize.width: 560; sourceSize.height: 310}
+            }
+        ]
     }
 
     Rectangle {
