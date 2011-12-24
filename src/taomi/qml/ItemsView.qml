@@ -52,6 +52,9 @@ Item {
             }
         }
 
+
+
+
         ListView {
             id: listView
             x: 70; y: 120; width: 800; height:600
@@ -64,6 +67,10 @@ Item {
             section.property: "columnCategory"
             section.criteria: ViewSection.FullString
             section.delegate: startSpace
+            property string itemTitle: ""
+            property string itemImage: ""
+            property bool itemVisible: false
+            property string itemViewState: "before"
         }
 
         Component {
@@ -113,6 +120,123 @@ Item {
                          NumberAnimation { target: view; properties: 'width, height'; duration: 200}
                          NumberAnimation { target: view; properties: 'x'; duration: 200}
                 }
+            }
+        ]
+    }
+
+    Item {
+        id: itemView
+        visible: listView.itemVisible
+        x: 130; y: 120
+        state: listView.itemViewState
+
+        Image {
+            id: image
+            sourceSize.width: 560; sourceSize.height: 310
+            source:  listView.itemImage
+        }
+
+        Text {
+            id: titleText
+            text: listView.itemTitle
+            x: 590; y: 0
+            font.pixelSize: 22
+            color: "white"
+            Behavior on x {
+                NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
+            }
+        }
+
+        Text {
+            id: detailsText
+            text: "\n
+            Made a similar layout like last \n
+            time, with a couple of different\n
+            panels. Also added some extras \n
+            like the clock and the sidebar, \n
+            wondering if I should include it\n
+            in Omnimo in the next update."
+            x: 557; y: 16
+            font.pixelSize: 14
+            color: "white"
+            Behavior on x {
+                NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
+            }
+        }
+
+        Rectangle {
+            id: button
+            x: 617; y: 282
+            width: 79; height: 27
+            color: "#de9317"
+            border.color: "white"
+            border.width: 2
+
+            Text {
+                id: buttonText
+                text: "选 择"
+                anchors.centerIn: parent
+                color: "white"
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    button.color = "#d54d34"
+                }
+                onReleased: {
+                    button.color = "#de9317"
+                }
+            }
+        }
+
+        Rectangle {
+            id: buttonCancel
+            x: 720; y: 282
+            width: 79; height: 27
+            color: "#de9317"
+            border.color: "white"
+            border.width: 2
+
+            Text {
+                id: cancelbuttonText
+                text: "返 回"
+                anchors.centerIn: parent
+                color: "white"
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    buttonCancel.color = "#d54d34"
+                }
+                onClicked: {
+                    listView.visible = true
+                    listView.itemVisible = false
+                    listView.itemViewState= "before"
+                }
+                onReleased: {
+                    buttonCancel.color = "#de9317"
+                }
+            }
+        }
+
+        states: [
+            State {
+                name: 'before'
+ //               PropertyChanges { target: itemImage;
+   //                 sourceSize.width: 235; sourceSize.height: 120}
+                PropertyChanges { target: titleText; x: 650}
+                PropertyChanges { target: detailsText; x: 617}
+
+            },
+            State {
+                name: 'after'
+      //          PropertyChanges { target: itemImage;
+      //              sourceSize.width: 560; sourceSize.height: 310}
+                PropertyChanges { target: titleText; x: 610}
+                PropertyChanges { target: detailsText; x: 577}
+
             }
         ]
     }

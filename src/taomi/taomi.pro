@@ -47,11 +47,11 @@ OTHER_FILES += \
     qml/ItemsView.qml \
     qml/ItemsModel.qml \
     qml/ItemsDelegate.qml \
-    qml/ItemRect.qml \
     images/back.png
 
 RESOURCES += \
     resource.qrc
+
 
 
 
