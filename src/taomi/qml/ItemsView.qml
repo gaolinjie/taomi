@@ -30,7 +30,7 @@ Item {
 
         Text {
             id: startText
-            x: 130; y: 40
+            x: 125; y: 40
             text: "特 色"
             font.pixelSize: 40
             color: "white"
@@ -39,9 +39,9 @@ Item {
         Image {
             id: backIcon
             source: "qrc:/images/back.png"
-            x: 35; y: 38
-            sourceSize.width: 48
-            sourceSize.height: 48
+            x: 35; y: 42
+            sourceSize.width: 44
+            sourceSize.height: 44
 
             MouseArea {
                 anchors.fill: parent
@@ -52,12 +52,17 @@ Item {
             }
         }
 
-
-
+        Text {
+            id: selectedText
+            text: "所有>            已选>            购物车>"
+            x: 130; y: 110
+            font.pixelSize: 16
+            color: "white"
+        }
 
         ListView {
             id: listView
-            x: 70; y: 120; width: 800; height:600
+            x: 70; y: 160; width: 800; height:600
             model: ItemsModel{}
             delegate: ItemsDelegate{}
             orientation: ListView.Horizontal
@@ -79,14 +84,6 @@ Item {
                 width: 60
                 height: 10
             }
-        }
-
-        Text {
-            id: selectedText
-            text: "选中："
-            x: 130; y: 460
-            font.pixelSize: 20
-            color: "white"
         }
 
         states: [
@@ -127,13 +124,31 @@ Item {
     Item {
         id: itemView
         visible: listView.itemVisible
-        x: 130; y: 120
+        x: 130; y: 150
         state: listView.itemViewState
 
         Image {
             id: image
-            sourceSize.width: 560; sourceSize.height: 310
+            sourceSize.width: 560; sourceSize.height: 340
             source:  listView.itemImage
+
+            Text {
+                id: preText
+                text: "<"
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 40
+                color: "white"
+            }
+
+            Text {
+                id: nextText
+                text: ">"
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 40
+                color: "white"
+            }
         }
 
         Text {
@@ -166,7 +181,7 @@ Item {
 
         Rectangle {
             id: button
-            x: 617; y: 282
+            x: 617; y: 312
             width: 79; height: 27
             color: "#de9317"
             border.color: "white"
@@ -192,7 +207,7 @@ Item {
 
         Rectangle {
             id: buttonCancel
-            x: 720; y: 282
+            x: 720; y: 312
             width: 79; height: 27
             color: "#de9317"
             border.color: "white"
@@ -221,19 +236,26 @@ Item {
             }
         }
 
+        ListView {
+            id: shopcarList
+            x: 0; y: 365; width: 780; height:40
+            model: ShopcarModel{}
+            delegate: ShopcarDelegate{}
+            orientation: ListView.Horizontal
+            cacheBuffer: 300
+            spacing: 6
+            smooth: true
+        }
+
         states: [
             State {
                 name: 'before'
- //               PropertyChanges { target: itemImage;
-   //                 sourceSize.width: 235; sourceSize.height: 120}
                 PropertyChanges { target: titleText; x: 650}
                 PropertyChanges { target: detailsText; x: 617}
 
             },
             State {
                 name: 'after'
-      //          PropertyChanges { target: itemImage;
-      //              sourceSize.width: 560; sourceSize.height: 310}
                 PropertyChanges { target: titleText; x: 610}
                 PropertyChanges { target: detailsText; x: 577}
 

@@ -40,5 +40,7 @@
         <file>qml/ItemsModel.qml</file>
         <file>qml/ItemsDelegate.qml</file>
         <file>images/back.png</file>
+        <file>qml/ShopcarModel.qml</file>
+        <file>qml/ShopcarDelegate.qml</file>
     </qresource>
 </RCC>
