@@ -64,8 +64,6 @@ Item {
             color: "white"
         }
 
-
-
         ListView {
             id: listView
             x: 70; y: 160; width: 800; height:600
@@ -107,7 +105,6 @@ Item {
                 PropertyChanges { target: view; width: 1024 * 0.9; height: 600 * 0.9}
                 when: view.state == "gone"
             }
-
         ]
 
         transitions: [
@@ -129,7 +126,7 @@ Item {
 
     Item {
         id: itemView
-        visible: listView.itemVisible
+//      visible: listView.itemVisible
         x: 130; y: 150
         state: listView.itemViewState
 
@@ -137,6 +134,15 @@ Item {
             id: image
             sourceSize.width: 560; sourceSize.height: 340
             source:  listView.itemImage
+            transform: Rotation {
+                id:rotation2;
+                origin.x: image.width*0.5; origin.y: image.height * 0.5;
+                axis { x: 1; y: 0; z: 0 }
+                angle: 90
+                Behavior on angle {
+                    NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
+                }
+            }
 
             Text {
                 id: preText
@@ -170,6 +176,7 @@ Item {
             x: 590; y: 0
             font.pixelSize: 22
             color: "white"
+            visible: listView.itemVisible
             Behavior on x {
                 NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
             }
@@ -187,6 +194,7 @@ Item {
             x: 557; y: 16
             font.pixelSize: 14
             color: "white"
+            visible: listView.itemVisible
             Behavior on x {
                 NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
             }
@@ -199,6 +207,7 @@ Item {
             color: "#de9317"
             border.color: "white"
             border.width: 2
+            visible: listView.itemVisible
 
             Text {
                 id: buttonText
@@ -225,6 +234,7 @@ Item {
             color: "#de9317"
             border.color: "white"
             border.width: 2
+            visible: listView.itemVisible
 
             Text {
                 id: cancelbuttonText
@@ -248,42 +258,20 @@ Item {
                 }
             }
         }       
-/*
-        ListView {
-            id: shopcarList
-            x: 0; y: 365; width: 600; height:40
-            model: ShopcarModel{}
-            delegate: ShopcarDelegate{}
-            orientation: ListView.Horizontal
-            cacheBuffer: 100
-            spacing: 6
-            smooth: true
-        }
-
-        Rectangle {
-            x: -130; y: 365
-            width: 130; height: 40
-            color: "#de9317"
-        }
-
-        Rectangle {
-            x: 560; y: 365
-            width: 400; height: 40
-            color: "#de9317"
-        }*/
 
         states: [
             State {
                 name: 'before'
                 PropertyChanges { target: titleText; x: 650}
                 PropertyChanges { target: detailsText; x: 617}
+                PropertyChanges { target: rotation2; origin.x: image.width*0.5; origin.y: image.height * 0.5; axis { x: 1; y: 0; z: 0 } angle: 90}
 
             },
             State {
                 name: 'after'
                 PropertyChanges { target: titleText; x: 610}
                 PropertyChanges { target: detailsText; x: 577}
-
+                PropertyChanges { target: rotation2; angle: 0}
             }
         ]
     }
