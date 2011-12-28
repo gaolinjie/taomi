@@ -48,6 +48,10 @@ Item {
                 onClicked: {
                     view.state = "gone"
                     timer2.running = true
+
+                    while(listView.model.count > 3) {
+                        listView.model.remove(listView.model.count - 1)
+                    }
                 }
             }
         }
@@ -59,6 +63,8 @@ Item {
             font.pixelSize: 16
             color: "white"
         }
+
+
 
         ListView {
             id: listView
@@ -139,6 +145,13 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 40
                 color: "white"
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+
+                    }
+                }
             }
 
             Text {
@@ -234,18 +247,30 @@ Item {
                     buttonCancel.color = "#de9317"
                 }
             }
-        }
-
+        }       
+/*
         ListView {
             id: shopcarList
-            x: 0; y: 365; width: 780; height:40
+            x: 0; y: 365; width: 600; height:40
             model: ShopcarModel{}
             delegate: ShopcarDelegate{}
             orientation: ListView.Horizontal
-            cacheBuffer: 300
+            cacheBuffer: 100
             spacing: 6
             smooth: true
         }
+
+        Rectangle {
+            x: -130; y: 365
+            width: 130; height: 40
+            color: "#de9317"
+        }
+
+        Rectangle {
+            x: 560; y: 365
+            width: 400; height: 40
+            color: "#de9317"
+        }*/
 
         states: [
             State {
