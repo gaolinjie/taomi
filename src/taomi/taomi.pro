@@ -10,7 +10,6 @@ OTHER_FILES += \
     qml/start.qml \
     qml/StartModel.qml \
     qml/StartDelegate.qml \
-    qml/rect1.qml \
     qml/IconRect.qml \
     images/MB_0010_tasks.png \
     images/MB_0020_sett-big.png \
@@ -49,10 +48,15 @@ OTHER_FILES += \
     qml/ItemsDelegate.qml \
     images/back.png \
     qml/ShopcarModel.qml \
-    qml/ShopcarDelegate.qml
+    qml/ShopcarDelegate.qml \
+    qml/rect.qml \
+    images/shadow.png
 
 RESOURCES += \
     resource.qrc
+
+
+
 
 
 

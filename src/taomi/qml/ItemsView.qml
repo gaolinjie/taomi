@@ -1,7 +1,7 @@
 import QtQuick 1.0
 
 Item {
-    id: start
+    id: itemsScreen
     width: 1024
     height: 600
     signal loadStart
@@ -12,24 +12,25 @@ Item {
     }
 
     Timer {
-        id: timer2
-        interval: 350; running: false
+        id: timer
+        interval: 350
+        running: false
         onTriggered: {
             loadStart()
         }
     }
 
     Rectangle {
-        id: view
+        id: itemsView
         width: parent.width * 0.8; height: parent.height * 0.8
         color: "#de9317"
         anchors.verticalCenter: parent.verticalCenter
-        transform: Rotation { id:rotation; origin.x: parent.width * 0.8; origin.y: parent.height * 0.8 * 0.5 + 100; axis { x: 0; y: 1; z: 0 } angle: -70 }
+        transform: Rotation { id: viewRotation; origin.x: parent.width * 0.8; origin.y: parent.height * 0.8 * 0.5 + 100; axis { x: 0; y: 1; z: 0 } angle: -70 }
         smooth: true
         property string state: "back"
 
         Text {
-            id: startText
+            id: viewTitle
             x: 125; y: 40
             text: "特 色"
             font.pixelSize: 40
@@ -37,17 +38,17 @@ Item {
         }
 
         Image {
-            id: backIcon
+            id: backButton
             source: "qrc:/images/back.png"
-            x: 35; y: 42
+            x: 35; y: 41
             sourceSize.width: 44
             sourceSize.height: 44
 
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    view.state = "gone"
-                    timer2.running = true
+                    itemsView.state = "gone"
+                    timer.running = true
 
                     while(listView.model.count > 3) {
                         listView.model.remove(listView.model.count - 1)
@@ -57,11 +58,36 @@ Item {
         }
 
         Text {
-            id: selectedText
-            text: "所有>            已选>            购物车>"
+            id: allButton
+            text: "所有>"
             x: 130; y: 110
             font.pixelSize: 16
             color: "white"
+        }
+
+        Text {
+            id: selectedButton
+            text: "已选>"
+            x: 220; y: 110
+            font.pixelSize: 16
+            color: "white"
+        }
+
+        Text {
+            id: shopcarButton
+            text: "购物车>"
+            x: 310; y: 110
+            font.pixelSize: 16
+            color: "white"
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    shopcarButton.font.bold = true
+                    shopcarView.x = 724
+                    shopcarButton.color = "#d54d34"
+                }
+            }
         }
 
         ListView {
@@ -75,7 +101,7 @@ Item {
             smooth: true
             section.property: "columnCategory"
             section.criteria: ViewSection.FullString
-            section.delegate: startSpace
+            section.delegate: listSpace
             property string itemTitle: ""
             property string itemImage: ""
             property bool itemVisible: false
@@ -83,7 +109,7 @@ Item {
         }
 
         Component {
-            id: startSpace
+            id: listSpace
             Item {
                 width: 60
                 height: 10
@@ -93,50 +119,48 @@ Item {
         states: [
             State {
                 name: "back"
-                PropertyChanges { target: rotation; angle: 0; origin.x: parent.width; origin.y: parent.height * 0.5 +100}
-                PropertyChanges { target: view; width: 1024; height: 600; x: 0}
-                when: view.state == "back"
+                PropertyChanges { target: viewRotation; angle: 0; origin.x: parent.width; origin.y: parent.height * 0.5 +100}
+                PropertyChanges { target: itemsView; width: 1024; height: 600; x: 0}
+                when: itemsView.state == "back"
             },
 
             State {
                 name: "gone"
-                PropertyChanges { target: view; x: -1024}
-                PropertyChanges { target: rotation; angle: 0}
-                PropertyChanges { target: view; width: 1024 * 0.9; height: 600 * 0.9}
-                when: view.state == "gone"
+                PropertyChanges { target: itemsView; x: -1024; width: 1024 * 0.9; height: 600 * 0.9}
+                PropertyChanges { target: viewRotation; angle: 0}
+                when: itemsView.state == "gone"
             }
         ]
 
         transitions: [
             Transition {
                 from: ''; to: 'back'
-                NumberAnimation { target: rotation; property: "angle"; duration: 500; easing.type: 'OutExpo'}
-                NumberAnimation { target: view; properties: 'width, height'; duration: 500; easing.type: 'OutExpo'}
+                NumberAnimation { target: viewRotation; property: "angle"; duration: 500; easing.type: 'OutExpo'}
+                NumberAnimation { target: itemsView; properties: 'width, height'; duration: 500; easing.type: 'OutExpo'}
             },
 
             Transition {
                 from: 'back'; to: 'gone'
                 SequentialAnimation {
-                         NumberAnimation { target: view; properties: 'width, height'; duration: 200}
-                         NumberAnimation { target: view; properties: 'x'; duration: 200}
+                         NumberAnimation { target: itemsView; properties: 'width, height'; duration: 200}
+                         NumberAnimation { target: itemsView; properties: 'x'; duration: 200}
                 }
             }
         ]
     }
 
     Item {
-        id: itemView
-//      visible: listView.itemVisible
+        id: detailView
         x: 130; y: 150
         state: listView.itemViewState
 
         Image {
-            id: image
+            id: detaiImage
             sourceSize.width: 560; sourceSize.height: 340
-            source:  listView.itemImage
+            source: listView.itemImage
             transform: Rotation {
-                id:rotation2;
-                origin.x: image.width*0.5; origin.y: image.height * 0.5;
+                id: detailRotation
+                origin.x: detaiImage.width * 0.5; origin.y: detaiImage.height * 0.5;
                 axis { x: 1; y: 0; z: 0 }
                 angle: 90
                 Behavior on angle {
@@ -151,13 +175,6 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 40
                 color: "white"
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-
-                    }
-                }
             }
 
             Text {
@@ -171,7 +188,7 @@ Item {
         }
 
         Text {
-            id: titleText
+            id: detailTitle
             text: listView.itemTitle
             x: 590; y: 0
             font.pixelSize: 22
@@ -183,7 +200,7 @@ Item {
         }
 
         Text {
-            id: detailsText
+            id: detailText
             text: "\n
             Made a similar layout like last \n
             time, with a couple of different\n
@@ -201,7 +218,7 @@ Item {
         }
 
         Rectangle {
-            id: button
+            id: selectButton
             x: 617; y: 312
             width: 79; height: 27
             color: "#de9317"
@@ -210,7 +227,6 @@ Item {
             visible: listView.itemVisible
 
             Text {
-                id: buttonText
                 text: "选 择"
                 anchors.centerIn: parent
                 color: "white"
@@ -219,16 +235,16 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onPressed: {
-                    button.color = "#d54d34"
+                    selectButton.color = "#d54d34"
                 }
                 onReleased: {
-                    button.color = "#de9317"
+                    selectButton.color = "#de9317"
                 }
             }
         }
 
         Rectangle {
-            id: buttonCancel
+            id: returnButton
             x: 720; y: 312
             width: 79; height: 27
             color: "#de9317"
@@ -237,7 +253,6 @@ Item {
             visible: listView.itemVisible
 
             Text {
-                id: cancelbuttonText
                 text: "返 回"
                 anchors.centerIn: parent
                 color: "white"
@@ -246,7 +261,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onPressed: {
-                    buttonCancel.color = "#d54d34"
+                    returnButton.color = "#d54d34"
                 }
                 onClicked: {
                     listView.visible = true
@@ -254,7 +269,7 @@ Item {
                     listView.itemViewState= "before"
                 }
                 onReleased: {
-                    buttonCancel.color = "#de9317"
+                    returnButton.color = "#de9317"
                 }
             }
         }       
@@ -262,17 +277,41 @@ Item {
         states: [
             State {
                 name: 'before'
-                PropertyChanges { target: titleText; x: 650}
-                PropertyChanges { target: detailsText; x: 617}
-                PropertyChanges { target: rotation2; origin.x: image.width*0.5; origin.y: image.height * 0.5; axis { x: 1; y: 0; z: 0 } angle: 90}
+                PropertyChanges { target: detailTitle; x: 650}
+                PropertyChanges { target: detailText; x: 617}
+                PropertyChanges { target: detailRotation; origin.x: detaiImage.width*0.5; origin.y: detaiImage.height * 0.5; axis { x: 1; y: 0; z: 0 } angle: 90}
 
             },
             State {
                 name: 'after'
-                PropertyChanges { target: titleText; x: 610}
-                PropertyChanges { target: detailsText; x: 577}
-                PropertyChanges { target: rotation2; angle: 0}
+                PropertyChanges { target: detailTitle; x: 610}
+                PropertyChanges { target: detailText; x: 577}
+                PropertyChanges { target: detailRotation; angle: 0}
             }
         ]
+    }
+
+    Rectangle {
+        id: shopcarView
+        width: 300; x: 1024
+        anchors.top: parent.top; anchors.bottom: parent.bottom
+        color: "#d54d34"
+        z: 2
+
+        Text {
+            x: 30; y: 40
+            text: "购物车"
+            font.pixelSize: 38
+            color: "white"
+        }
+    }
+
+    BorderImage {
+        anchors.fill: shopcarView
+        anchors { leftMargin: -9; topMargin: -6; rightMargin: -8; bottomMargin: -8 }
+        border { left: 10; top: 10; right: 10; bottom: 10 }
+        source: "qrc:/images/shadow.png";
+        smooth: true
+        z: 1
     }
 }

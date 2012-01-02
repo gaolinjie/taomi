@@ -5,7 +5,6 @@
         <file>qml/start.qml</file>
         <file>qml/StartModel.qml</file>
         <file>qml/StartDelegate.qml</file>
-        <file>qml/rect1.qml</file>
         <file>qml/IconRect.qml</file>
         <file>images/search.png</file>
         <file>images/rss.png</file>
@@ -42,5 +41,7 @@
         <file>images/back.png</file>
         <file>qml/ShopcarModel.qml</file>
         <file>qml/ShopcarDelegate.qml</file>
+        <file>qml/rect.qml</file>
+        <file>images/shadow.png</file>
     </qresource>
 </RCC>
