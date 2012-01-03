@@ -31,7 +31,7 @@ Item {
 
         Image {
             id: viewback
-            source: "qrc:/images/wether.png"
+            source: "qrc:/images/store.png"
             anchors.fill: parent
             smooth: true
         }

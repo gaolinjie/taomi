@@ -50,10 +50,20 @@ OTHER_FILES += \
     qml/ShopcarModel.qml \
     qml/ShopcarDelegate.qml \
     qml/rect.qml \
-    images/shadow.png
+    images/shadow.png \
+    images/appbar.close.rest.png \
+    images/appbar.new.rest.png \
+    images/appbar.minus.rest.png \
+    images/store.png
 
 RESOURCES += \
     resource.qrc
+
+
+
+
+
+
 
 
 

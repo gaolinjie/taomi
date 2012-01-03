@@ -43,5 +43,9 @@
         <file>qml/ShopcarDelegate.qml</file>
         <file>qml/rect.qml</file>
         <file>images/shadow.png</file>
+        <file>images/appbar.minus.rest.png</file>
+        <file>images/appbar.new.rest.png</file>
+        <file>images/appbar.close.rest.png</file>
+        <file>images/store.png</file>
     </qresource>
 </RCC>

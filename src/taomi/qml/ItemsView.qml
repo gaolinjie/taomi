@@ -293,16 +293,100 @@ Item {
 
     Rectangle {
         id: shopcarView
-        width: 300; x: 1024
+        width: 300; x: 1034
         anchors.top: parent.top; anchors.bottom: parent.bottom
         color: "#d54d34"
         z: 2
 
-        Text {
-            x: 30; y: 40
-            text: "购物车"
-            font.pixelSize: 38
-            color: "white"
+        Behavior on x {
+            NumberAnimation { duration: 300; easing.type: Easing.OutQuint}
+        }
+
+        Rectangle {
+            width: 300; height: 100
+            color: "#d54d34"
+            z: 2
+
+            Text {
+                x: 28; y: 40
+                text: "购物车"
+                font.pixelSize: 38
+                color: "white"
+            }
+        }
+
+        ListView {
+            id: shopcarList
+            x: 30; y: 110; width: 200; height:400
+            model: ShopcarModel{}
+            delegate: ShopcarDelegate{}
+            cacheBuffer: 1000
+            spacing: 25
+            smooth: true
+ //           section.property: "columnCategory"
+  //          section.criteria: ViewSection.FullString
+   //         section.delegate: listSpace
+        }
+
+        Rectangle {
+            width: 300; height: 80
+            color: "#d54d34"
+            z: 2
+            anchors.bottom: parent.bottom
+
+            Rectangle {
+                id: sendButton
+                x: 31; y: 30
+                width: 79; height: 27
+                color: "#d54d34"
+                border.color: "white"
+                border.width: 2
+
+                Text {
+                    text: "发 送"
+                    anchors.centerIn: parent
+                    color: "white"
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: {
+                        sendButton.color = "#de9317"
+                    }
+                    onReleased: {
+                        sendButton.color = "#d54d34"
+                    }
+                }
+            }
+
+            Rectangle {
+                id: returnButto
+                x: 139; y: 30
+                width: 79; height: 27
+                color: "#d54d34"
+                border.color: "white"
+                border.width: 2
+
+                Text {
+                    text: "返 回"
+                    anchors.centerIn: parent
+                    color: "white"
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: {
+                        returnButto.color = "#de9317"
+                    }
+                    onClicked: {
+                        shopcarView.x = 1034
+                        shopcarButton.color = "white"
+                    }
+                    onReleased: {
+                        returnButto.color = "#d54d34"
+                    }
+                }
+            }
         }
     }
 
