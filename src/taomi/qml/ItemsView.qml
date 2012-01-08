@@ -1,10 +1,12 @@
 import QtQuick 1.0
+import "../js/global.js" as Global
 
 Item {
     id: itemsScreen
     width: 1024
     height: 600
     signal loadStart
+    signal loadRect(string qmlFile)
 
     Image {
         id: background
@@ -23,7 +25,7 @@ Item {
     Rectangle {
         id: itemsView
         width: parent.width * 0.8; height: parent.height * 0.8
-        color: "#de9317"
+        color: Global.rectColor
         anchors.verticalCenter: parent.verticalCenter
         transform: Rotation { id: viewRotation; origin.x: parent.width * 0.8; origin.y: parent.height * 0.8 * 0.5 + 100; axis { x: 0; y: 1; z: 0 } angle: -70 }
         smooth: true
@@ -32,7 +34,7 @@ Item {
         Text {
             id: viewTitle
             x: 125; y: 40
-            text: "特 色"
+            text: Global.title
             font.pixelSize: 40
             color: "white"
         }
@@ -85,7 +87,7 @@ Item {
                 onClicked: {
                     shopcarButton.font.bold = true
                     shopcarView.x = 724
-                    shopcarButton.color = "#d54d34"
+                    shopcarButton.color = Global.hotColor
                 }
             }
         }
@@ -99,13 +101,14 @@ Item {
             cacheBuffer: 1000
             spacing: 6
             smooth: true
-            section.property: "columnCategory"
+            section.property: "segment"
             section.criteria: ViewSection.FullString
             section.delegate: listSpace
             property string itemTitle: ""
             property string itemImage: ""
             property bool itemVisible: false
             property string itemViewState: "before"
+            property string tag: "itemsScreen.tag"
         }
 
         Component {
@@ -221,7 +224,7 @@ Item {
             id: selectButton
             x: 617; y: 312
             width: 79; height: 27
-            color: "#de9317"
+            color: Global.rectColor
             border.color: "white"
             border.width: 2
             visible: listView.itemVisible
@@ -235,10 +238,10 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onPressed: {
-                    selectButton.color = "#d54d34"
+                    selectButton.color = Global.hotColor
                 }
                 onReleased: {
-                    selectButton.color = "#de9317"
+                    selectButton.color = Global.rectColor
                 }
             }
         }
@@ -247,7 +250,7 @@ Item {
             id: returnButton
             x: 720; y: 312
             width: 79; height: 27
-            color: "#de9317"
+            color: Global.rectColor
             border.color: "white"
             border.width: 2
             visible: listView.itemVisible
@@ -261,7 +264,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onPressed: {
-                    returnButton.color = "#d54d34"
+                    returnButton.color = Global.hotColor
                 }
                 onClicked: {
                     listView.visible = true
@@ -269,7 +272,7 @@ Item {
                     listView.itemViewState= "before"
                 }
                 onReleased: {
-                    returnButton.color = "#de9317"
+                    returnButton.color = Global.rectColor
                 }
             }
         }       
@@ -343,7 +346,7 @@ Item {
                 border.width: 2
 
                 Text {
-                    text: "发 送"
+                    text: "管 理"
                     anchors.centerIn: parent
                     color: "white"
                 }
@@ -352,6 +355,9 @@ Item {
                     anchors.fill: parent
                     onPressed: {
                         sendButton.color = "#de9317"
+                    }
+                    onClicked: {
+                        loadRect("rect.qml")
                     }
                     onReleased: {
                         sendButton.color = "#d54d34"

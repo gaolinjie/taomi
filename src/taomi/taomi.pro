@@ -54,10 +54,14 @@ OTHER_FILES += \
     images/appbar.close.rest.png \
     images/appbar.new.rest.png \
     images/appbar.minus.rest.png \
-    images/store.png
+    images/store.png \
+    js/global.js
 
 RESOURCES += \
     resource.qrc
+
+
+
 
 
 

@@ -1,4 +1,5 @@
 import QtQuick 1.0
+import "../js/global.js" as Global
 
 Component {
     id: itemsDelegate
@@ -9,12 +10,12 @@ Component {
         signal showItem(string name, string image)
 
         Column {
-            id: column
+            id: col
             anchors.centerIn: parent
             spacing: 38
 
             Repeater {
-                model: columnModel
+                model: column
 
                 Item {
                     id: itemRect
@@ -31,7 +32,7 @@ Component {
                             anchors.fill: parent
                             onClicked: {
                                 wraper.ListView.view.visible = false
-                                wraper.ListView.view.itemTitle = title
+                                wraper.ListView.view.itemTitle = name
                                 wraper.ListView.view.itemImage = image
                                 wraper.ListView.view.itemVisible = true
                                 wraper.ListView.view.itemViewState = "after"
@@ -44,11 +45,11 @@ Component {
                         width: parent.width; height: 32
                         anchors.left: parent.left
                         anchors.top: parent.bottom
-                        color: "#d54d34"
+                        color: Global.hotColor
 
                         Text {
                             id: nameText
-                            text: title
+                            text: name
                             x: 10
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 14

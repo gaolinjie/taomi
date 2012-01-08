@@ -1,4 +1,5 @@
 import QtQuick 1.0
+import "../js/global.js" as Global
 
 Item {
     id: rect
@@ -11,7 +12,13 @@ Item {
 
     MouseArea{
         anchors.fill: parent
-        onClicked: loadRect(slotQml)
+        onClicked: {
+            Global.tag = tag
+            Global.rectColor = rectColor
+            Global.hotColor = hotColor
+            Global.title = title
+            loadRect(slotQml)
+        }
     }
 
     Image {

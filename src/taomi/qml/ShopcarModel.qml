@@ -7,7 +7,7 @@ ListModel {
     }
     ListElement {
         image: "qrc:/images/Soft_Scamble_Breakfast.jpg"
-        title: "Soft Scamble Breakfast"
+        title: "Soft Scamble Break"
     }
     ListElement {
         image: "qrc:/images/Carrot-Ginger-Soup.jpg"
