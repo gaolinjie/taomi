@@ -240,6 +240,31 @@ Item {
                 onPressed: {
                     selectButton.color = Global.hotColor
                 }
+                onClicked: {
+                    if(shopcarList.model.count != 0)
+                    {
+                        for (var i = 0; i < shopcarList.model.count; i++)
+                        {
+                            if (shopcarList.model.get(i).name == listView.itemTitle)
+                            {
+                                shopcarList.model.get(i).num++;
+                                return;
+                            }
+                        }
+                        if (i == shopcarList.model.count)
+                        {
+                            shopcarList.model.append({"name": listView.itemTitle,
+                                                      "image": listView.itemImage,
+                                                      "num": 1});
+                        }
+                    }
+                    else
+                    {
+                        shopcarList.model.append({"name": listView.itemTitle,
+                                                  "image": listView.itemImage,
+                                                  "num": 1});
+                    }
+                }
                 onReleased: {
                     selectButton.color = Global.rectColor
                 }
@@ -298,7 +323,7 @@ Item {
         id: shopcarView
         width: 300; x: 1034
         anchors.top: parent.top; anchors.bottom: parent.bottom
-        color: "#d54d34"
+        color: Global.hotColor
         z: 2
 
         Behavior on x {
@@ -307,7 +332,7 @@ Item {
 
         Rectangle {
             width: 300; height: 100
-            color: "#d54d34"
+            color: Global.hotColor
             z: 2
 
             Text {
@@ -322,18 +347,15 @@ Item {
             id: shopcarList
             x: 30; y: 110; width: 200; height:400
             model: ShopcarModel{}
-            delegate: ShopcarDelegate{}
+            delegate: ShopcarListDelegate{}
             cacheBuffer: 1000
             spacing: 25
             smooth: true
- //           section.property: "columnCategory"
-  //          section.criteria: ViewSection.FullString
-   //         section.delegate: listSpace
         }
 
         Rectangle {
             width: 300; height: 80
-            color: "#d54d34"
+            color: Global.hotColor
             z: 2
             anchors.bottom: parent.bottom
 
@@ -341,7 +363,7 @@ Item {
                 id: sendButton
                 x: 31; y: 30
                 width: 79; height: 27
-                color: "#d54d34"
+                color: Global.hotColor
                 border.color: "white"
                 border.width: 2
 
@@ -354,13 +376,13 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
-                        sendButton.color = "#de9317"
+                        sendButton.color = Global.rectColor
                     }
                     onClicked: {
-                        loadRect("rect.qml")
+                        loadRect("ShopcarView.qml")
                     }
                     onReleased: {
-                        sendButton.color = "#d54d34"
+                        sendButton.color = Global.hotColor
                     }
                 }
             }
@@ -369,7 +391,7 @@ Item {
                 id: returnButto
                 x: 139; y: 30
                 width: 79; height: 27
-                color: "#d54d34"
+                color: Global.hotColor
                 border.color: "white"
                 border.width: 2
 
@@ -382,14 +404,14 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
-                        returnButto.color = "#de9317"
+                        returnButto.color = Global.rectColor
                     }
                     onClicked: {
                         shopcarView.x = 1034
                         shopcarButton.color = "white"
                     }
                     onReleased: {
-                        returnButto.color = "#d54d34"
+                        returnButto.color = Global.hotColor
                     }
                 }
             }

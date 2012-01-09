@@ -48,17 +48,29 @@ OTHER_FILES += \
     qml/ItemsDelegate.qml \
     images/back.png \
     qml/ShopcarModel.qml \
-    qml/ShopcarDelegate.qml \
     qml/rect.qml \
     images/shadow.png \
     images/appbar.close.rest.png \
     images/appbar.new.rest.png \
     images/appbar.minus.rest.png \
     images/store.png \
-    js/global.js
+    js/global.js \
+    images/add.png \
+    images/minus.png \
+    images/close.png \
+    qml/ShopcarView.qml \
+    qml/ShopcarListDelegate.qml \
+    qml/ShopcarViewDelegate.qml
 
 RESOURCES += \
     resource.qrc
+
+
+
+
+
+
+
 
 
 

@@ -1,60 +1,46 @@
 import QtQuick 1.0
 
 ListModel {
-    ListElement {
-        image: "qrc:/images/Tagine.jpg"
-        title: "Tagine"
+    id: shopcarModel
+    Component.onCompleted: loadItemsData()
+    Component.onDestruction: saveItemsData()
+    function loadItemsData() {
+        var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
+        db.transaction(
+            function(tx) {
+                //tx.executeSql('DROP TABLE itemsData');
+                // Create the database if it doesn't already exist
+                //
+                tx.executeSql('CREATE TABLE IF NOT EXISTS shopcarData(name TEXT, image TEXT, num INTEGER)');
+                var rs = tx.executeSql('SELECT * FROM shopcarData');
+                var index = 0;
+                if (rs.rows.length > 0) {
+                    while (index < rs.rows.length) {
+                        var item = rs.rows.item(index);
+                        shopcarModel.append({"name": item.name,
+                                             "image": item.image,
+                                             "num": item.num});
+                        index++;
+                    }
+                }
+            }
+        )
     }
-    ListElement {
-        image: "qrc:/images/Soft_Scamble_Breakfast.jpg"
-        title: "Soft Scamble Break"
+
+    function saveItemsData() {
+        var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
+        db.transaction(
+            function(tx) {
+                tx.executeSql('DROP TABLE shopcarData');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS shopcarData(name TEXT, image TEXT, num INTEGER)');
+                var index = 0;
+                while (index < shopcarModel.count) {
+                    var item = shopcarModel.get(index);
+                    tx.executeSql('INSERT INTO shopcarData VALUES(?,?,?)', [item.name, item.image, item.num]);
+                    index++;
+                }
+            }
+        )
     }
-    ListElement {
-        image: "qrc:/images/Carrot-Ginger-Soup.jpg"
-        title: "Carrot Ginger Soup"
-    }
-    ListElement {
-        image: "qrc:/images/CheeseStraws.jpg"
-        title: "CheeseStraws"
-    }
-    ListElement {
-        image: "qrc:/images/Kermit-Lynch-Wine.jpg"
-        title: "Kermit Lynch Wine"
-    }
-    ListElement {
-        image: "qrc:/images/Blueberry_muffins.jpg"
-        title: "Blueberry muffins"
-    }
-    ListElement {
-        image: "qrc:/images/baba-ganoush.jpg"
-        title: "baba ganoush"
-    }
-    ListElement {
-        image: "qrc:/images/rustic_soup.jpg"
-        title: "rustic soup"
-    }
-    ListElement {
-        image: "qrc:/images/Tagine_Recipe.jpg"
-        title: "Tagine Recipe"
-    }
-    ListElement {
-        image: "qrc:/images/BimBimBop.jpg"
-        title: "BimBimBop"
-    }
-    ListElement {
-        image: "qrc:/images/rustic_soup.jpg"
-        title: "rustic soup"
-    }
-    ListElement {
-        image: "qrc:/images/Salmon_with_pesto.jpg"
-        title: "Salmon with pesto"
-    }
-    ListElement {
-        image: "qrc:/images/Summer_Salad.jpg"
-        title: "Summer Salad"
-    }
-    ListElement {
-        image: "qrc:/images/Cherries.jpg"
-        title: "Cherries"
-    }
+
 }

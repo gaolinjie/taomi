@@ -55,6 +55,28 @@ Component {
                             font.pixelSize: 14
                             color: "white"
                         }
+/*
+                        Image {
+                            id: addIcon
+                            source: "qrc:/images/add.png"
+                            sourceSize.width: 24; sourceSize.height: 24
+                            anchors.right: minusIcon.left
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                        Image {
+                            id: minusIcon
+                            source: "qrc:/images/minus.png"
+                            sourceSize.width: 24; sourceSize.height: 24
+                            anchors.right: closeIcon.left
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                        Image {
+                            id: closeIcon
+                            source: "qrc:/images/close.png"
+                            sourceSize.width: 24; sourceSize.height: 24
+                            anchors.right: parent.right
+                            anchors.verticalCenter: parent.verticalCenter
+                        }*/
                     }
                 }
             }

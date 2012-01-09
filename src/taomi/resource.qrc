@@ -40,7 +40,6 @@
         <file>qml/ItemsDelegate.qml</file>
         <file>images/back.png</file>
         <file>qml/ShopcarModel.qml</file>
-        <file>qml/ShopcarDelegate.qml</file>
         <file>qml/rect.qml</file>
         <file>images/shadow.png</file>
         <file>images/appbar.minus.rest.png</file>
@@ -48,5 +47,11 @@
         <file>images/appbar.close.rest.png</file>
         <file>images/store.png</file>
         <file>js/global.js</file>
+        <file>images/close.png</file>
+        <file>images/minus.png</file>
+        <file>images/add.png</file>
+        <file>qml/ShopcarView.qml</file>
+        <file>qml/ShopcarListDelegate.qml</file>
+        <file>qml/ShopcarViewDelegate.qml</file>
     </qresource>
 </RCC>
