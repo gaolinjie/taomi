@@ -21,9 +21,9 @@ ListModel {
             ListElement {
                 rectColor: "#5859b9"
                 hotColor: "#d54d34"
-                slotQml: "rect.qml"
+                slotQml: "ShopcarView.qml"
                 image: "qrc:/images/note.png"
-                title: "订单"
+                title: "购物车"
                 style: "ICON_RECT"
             },
             ListElement {

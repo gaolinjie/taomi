@@ -106,6 +106,7 @@ Item {
             section.delegate: listSpace
             property string itemTitle: ""
             property string itemImage: ""
+            property real itemPrice: 1.0
             property bool itemVisible: false
             property string itemViewState: "before"
             property string tag: "itemsScreen.tag"
@@ -122,7 +123,7 @@ Item {
         states: [
             State {
                 name: "back"
-                PropertyChanges { target: viewRotation; angle: 0; origin.x: parent.width; origin.y: parent.height * 0.5 +100}
+                PropertyChanges { target: viewRotation; angle: 0; origin.x: itemsView.width; origin.y: itemsView.height * 0.5 +100}
                 PropertyChanges { target: itemsView; width: 1024; height: 600; x: 0}
                 when: itemsView.state == "back"
             },
@@ -203,6 +204,18 @@ Item {
         }
 
         Text {
+            id: priceText
+            text: "￥ " + listView.itemPrice + " 元/例"
+            x: 630; y: 36
+            font.pixelSize: 14
+            color: "white"
+            visible: listView.itemVisible
+            Behavior on x {
+                NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
+            }
+        }
+
+        Text {
             id: detailText
             text: "\n
             Made a similar layout like last \n
@@ -211,7 +224,7 @@ Item {
             like the clock and the sidebar, \n
             wondering if I should include it\n
             in Omnimo in the next update."
-            x: 557; y: 16
+            x: 557; y: 32
             font.pixelSize: 14
             color: "white"
             visible: listView.itemVisible
@@ -241,7 +254,7 @@ Item {
                     selectButton.color = Global.hotColor
                 }
                 onClicked: {
-                    if(shopcarList.model.count != 0)
+                    if (shopcarList.model.count != 0)
                     {
                         for (var i = 0; i < shopcarList.model.count; i++)
                         {
@@ -255,6 +268,7 @@ Item {
                         {
                             shopcarList.model.append({"name": listView.itemTitle,
                                                       "image": listView.itemImage,
+                                                      "price": listView.itemPrice,
                                                       "num": 1});
                         }
                     }
@@ -262,6 +276,7 @@ Item {
                     {
                         shopcarList.model.append({"name": listView.itemTitle,
                                                   "image": listView.itemImage,
+                                                  "price": listView.itemPrice,
                                                   "num": 1});
                     }
                 }
@@ -306,13 +321,15 @@ Item {
             State {
                 name: 'before'
                 PropertyChanges { target: detailTitle; x: 650}
-                PropertyChanges { target: detailText; x: 617}
+                PropertyChanges { target: priceText; x: 657}
+                PropertyChanges { target: detailText; x: 647}
                 PropertyChanges { target: detailRotation; origin.x: detaiImage.width*0.5; origin.y: detaiImage.height * 0.5; axis { x: 1; y: 0; z: 0 } angle: 90}
 
             },
             State {
                 name: 'after'
                 PropertyChanges { target: detailTitle; x: 610}
+                PropertyChanges { target: priceText; x: 610}
                 PropertyChanges { target: detailText; x: 577}
                 PropertyChanges { target: detailRotation; angle: 0}
             }
@@ -379,10 +396,27 @@ Item {
                         sendButton.color = Global.rectColor
                     }
                     onClicked: {
+                        saveItemsData()
                         loadRect("ShopcarView.qml")
                     }
                     onReleased: {
                         sendButton.color = Global.hotColor
+                    }
+
+                    function saveItemsData() {
+                        var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
+                        db.transaction(
+                            function(tx) {
+                                tx.executeSql('DROP TABLE shopcarData');
+                                tx.executeSql('CREATE TABLE IF NOT EXISTS shopcarData(name TEXT, image TEXT, price MONEY, num INTEGER)');
+                                var index = 0;
+                                while (index < shopcarList.model.count) {
+                                    var item = shopcarList.model.get(index);
+                                    tx.executeSql('INSERT INTO shopcarData VALUES(?,?,?,?)', [item.name, item.image, item.price, item.num]);
+                                    index++;
+                                }
+                            }
+                        )
                     }
                 }
             }

@@ -34,6 +34,7 @@ Component {
                                 wraper.ListView.view.visible = false
                                 wraper.ListView.view.itemTitle = name
                                 wraper.ListView.view.itemImage = image
+                                wraper.ListView.view.itemPrice = price
                                 wraper.ListView.view.itemVisible = true
                                 wraper.ListView.view.itemViewState = "after"
                             }
@@ -50,33 +51,20 @@ Component {
                         Text {
                             id: nameText
                             text: name
-                            x: 10
+                            anchors.left: parent.left; anchors.leftMargin: 10
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 14
                             color: "white"
                         }
-/*
-                        Image {
-                            id: addIcon
-                            source: "qrc:/images/add.png"
-                            sourceSize.width: 24; sourceSize.height: 24
-                            anchors.right: minusIcon.left
+
+                        Text {
+                            id: priceText
+                            text: "￥ " + price + " 元"
+                            anchors.right: parent.right; anchors.rightMargin: 10
                             anchors.verticalCenter: parent.verticalCenter
+                            font.pixelSize: 14
+                            color: "white"
                         }
-                        Image {
-                            id: minusIcon
-                            source: "qrc:/images/minus.png"
-                            sourceSize.width: 24; sourceSize.height: 24
-                            anchors.right: closeIcon.left
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                        Image {
-                            id: closeIcon
-                            source: "qrc:/images/close.png"
-                            sourceSize.width: 24; sourceSize.height: 24
-                            anchors.right: parent.right
-                            anchors.verticalCenter: parent.verticalCenter
-                        }*/
                     }
                 }
             }

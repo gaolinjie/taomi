@@ -51,73 +51,14 @@ Item {
                 onClicked: {
                     itemsView.state = "gone"
                     timer.running = true
-
-                    while(listView.model.count > 3) {
-                        listView.model.remove(listView.model.count - 1)
-                    }
                 }
             }
         }
-/*
-        Text {
-            id: allButton
-            text: "所有>"
-            x: 130; y: 110
-            font.pixelSize: 16
-            color: "white"
-        }
-
-        Text {
-            id: selectedButton
-            text: "已选>"
-            x: 220; y: 110
-            font.pixelSize: 16
-            color: "white"
-        }
-
-        Text {
-            id: shopcarButton
-            text: "购物车>"
-            x: 310; y: 110
-            font.pixelSize: 16
-            color: "white"
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    shopcarButton.font.bold = true
-                    shopcarView.x = 724
-                    shopcarButton.color = Global.hotColor
-                }
-            }
-        }*/
-/*
-        ListView {
-            id: listView
-            x: 70; y: 160; width: 800; height:600
-            model: ItemsModel{}
-            delegate: ItemsDelegate{}
-            orientation: ListView.Horizontal
-            cacheBuffer: 1000
-            spacing: 6
-            smooth: true
-            section.property: "segment"
-            section.criteria: ViewSection.FullString
-            section.delegate: listSpace
-        }
-
-        Component {
-            id: listSpace
-            Item {
-                width: 60
-                height: 10
-            }
-        }*/
 
         GridView {
             id: shopcarView
             x:130
-            y:130
+            y:120
             model: ShopcarModel{}
             delegate: ShopcarViewDelegate{}
             cacheBuffer: 100
@@ -127,6 +68,33 @@ Item {
             height: 390
             flow: GridView.TopToBottom
 
+        }
+
+        Rectangle {
+            id: sendButton
+            x: 130; y: 525
+            width: 79; height: 27
+            color: Global.rectColor
+            border.color: "white"
+            border.width: 2
+
+            Text {
+                text: "发 送"
+                anchors.centerIn: parent
+                color: "white"
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    sendButton.color = Global.hotColor
+                }
+                onClicked: {                
+                }
+                onReleased: {
+                    sendButton.color = Global.rectColor
+                }               
+            }
         }
 
         states: [

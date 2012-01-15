@@ -26,7 +26,7 @@ Component {
 
         Text {
             id: priceText
-            text: "￥ 16.5 元 x "
+            text: "￥ " + price + " 元 x "
             x: 80; anchors.bottom: parent.bottom
             font.pixelSize: 14
             color: "white"
