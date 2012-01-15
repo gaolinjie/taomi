@@ -60,10 +60,14 @@ OTHER_FILES += \
     images/close.png \
     qml/ShopcarView.qml \
     qml/ShopcarListDelegate.qml \
-    qml/ShopcarViewDelegate.qml
+    qml/ShopcarViewDelegate.qml \
+    qml/ScrollBar.qml
 
 RESOURCES += \
     resource.qrc
+
+
+
 
 
 

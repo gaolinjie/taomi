@@ -53,5 +53,6 @@
         <file>qml/ShopcarView.qml</file>
         <file>qml/ShopcarListDelegate.qml</file>
         <file>qml/ShopcarViewDelegate.qml</file>
+        <file>qml/ScrollBar.qml</file>
     </qresource>
 </RCC>

@@ -214,7 +214,7 @@ Item {
                 NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
             }
         }
-
+/*
         Text {
             id: detailText
             text: "\n
@@ -231,7 +231,57 @@ Item {
             Behavior on x {
                 NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
             }
-        }
+        }*/
+/*
+        Text {
+            id: detailText
+            width: 100; height: 300
+            text: "Made a similar layout like last time, with a couple of different panels. Also added some extras like the clock and the sidebar, wondering if I should include it in Omnimo in the next update."
+            x: 557; y: 62
+            font.pixelSize: 14
+            color: "white"
+            visible: listView.itemVisible
+            Behavior on x {
+                NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
+            }
+        }*/
+
+        Rectangle {
+                id: detail
+                width: 200; height: 230
+                x: 557; y: 65
+                color: Global.rectColor
+                visible: listView.itemVisible
+
+                Flickable {
+                    id: flickArea
+                     anchors.fill: parent
+                     contentWidth: detailText.width; contentHeight: detailText.height
+                     flickableDirection: Flickable.VerticalFlick
+                     clip: true
+
+                     TextEdit{
+                         id: detailText
+                         wrapMode: TextEdit.Wrap
+                         width: detail.width;
+                         readOnly:true
+                         font.pixelSize: 14
+                         color: "white"
+                         text:  "        此菜清末民初便享誉中原，素有“奇味”之称。他以大青鱼为主料，取头尾巧施刀工，摆置扒盘两端，鱼肉剁块圆铺在头尾之间。下锅两面煎黄后以冬笋、香菇、葱段为配料，上锅箅高汤旺火扒制，中小火收汁。汁浓鱼透、色泽红亮。食时头酥肉嫩，香味醇厚。民国初年，康有为游学汴京，尝此菜后有“味烹侯鲭”之赞，康君知味，意犹未尽，又书扇面“海内存知己 小弟康有为”赠又一村饭店的灶头黄润生，成一段文人、名厨相交之佳话。糖醋软熘鱼焙面又称熘鱼焙面、鲤鱼焙面，是豫菜的历史名菜。此菜名，首先在鲤鱼，河南得黄河中下游之利，金色鲤鱼，历代珍品。“岂其食鱼、必河之鲤”，此鱼上市，宋代曾有“不惜百金持于归”之语，可见之珍。其二是豫菜的软熘，他以活汁而闻名。所谓活汁，历来两解，一是熘鱼之汁需达到泛出泡花的程度，称作汁要烘活；二是取方言中和、活之谐音，糖、醋、油三物，甜、咸、酸三味，要在高温下，在搅拌中充分融和，各物、各味俱在，但均不出头，你中有我，我中有你；不见油，不见糖，不见醋，甜中透酸，酸中透咸，鱼肉肥嫩爽口而不腻。鱼肉食完而汁不尽，上火回汁，下入精细的焙面，热汁酥面，口感极妙。 "
+                    }
+                }
+
+                ScrollBar {
+                    id: scroll
+                    pageSize: flickArea.height / flickArea.contentHeight
+                    position: flickArea.contentY / flickArea.contentHeight
+                    anchors.top: flickArea.top
+                    anchors.bottom: flickArea.bottom
+                    anchors.left: flickArea.right
+                    barColor: Global.hotColor
+                    width: 8
+                }
+            }
 
         Rectangle {
             id: selectButton
@@ -322,7 +372,7 @@ Item {
                 name: 'before'
                 PropertyChanges { target: detailTitle; x: 650}
                 PropertyChanges { target: priceText; x: 657}
-                PropertyChanges { target: detailText; x: 647}
+                PropertyChanges { target: detail; x: 647}
                 PropertyChanges { target: detailRotation; origin.x: detaiImage.width*0.5; origin.y: detaiImage.height * 0.5; axis { x: 1; y: 0; z: 0 } angle: 90}
 
             },
@@ -330,7 +380,7 @@ Item {
                 name: 'after'
                 PropertyChanges { target: detailTitle; x: 610}
                 PropertyChanges { target: priceText; x: 610}
-                PropertyChanges { target: detailText; x: 577}
+                PropertyChanges { target: detail; x: 610}
                 PropertyChanges { target: detailRotation; angle: 0}
             }
         ]

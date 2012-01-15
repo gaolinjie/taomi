@@ -8,6 +8,7 @@ Component {
         id: itemRect
         width: 235
         height: 184
+        property real number: num
 
         Rectangle {
             id: nameRect
@@ -75,7 +76,7 @@ Component {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        itemRect.parent.parent.model.get(index).num++
+                        itemRect.parent.parent.model.setProperty(index, "num", number+1);
                     }
                 }
             }
@@ -91,7 +92,7 @@ Component {
                     anchors.fill: parent
                     onClicked: {
                         if (itemRect.parent.parent.model.get(index).num > 1) {
-                            itemRect.parent.parent.model.get(index).num--
+                            itemRect.parent.parent.model.setProperty(index, "num", number-1);
                         }
                     }
                 }
@@ -104,20 +105,10 @@ Component {
                 anchors.verticalCenter: parent.verticalCenter
                 x: 136
 
-
-
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        removeItem()
-                    }
-
-                    function removeItem() {
-                        var i = 0;
-                        while (itemRect.parent.parent.model.get(i).name != name) {
-                            i++;
-                        }
-                        itemRect.parent.parent.model.remove(i);
+                        itemRect.parent.parent.model.remove(index);
                     }
                 }
             }
