@@ -34,6 +34,7 @@ Component {
                                 wraper.ListView.view.visible = false
                                 wraper.ListView.view.itemTitle = name
                                 wraper.ListView.view.itemImage = image
+                                wraper.ListView.view.itemDetail = detail
                                 wraper.ListView.view.itemPrice = price
                                 wraper.ListView.view.itemVisible = true
                                 wraper.ListView.view.itemViewState = "after"
