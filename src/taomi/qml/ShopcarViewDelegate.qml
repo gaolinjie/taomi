@@ -42,6 +42,7 @@ Component {
             sourceSize.width: 235
             sourceSize.height: 120
             anchors.verticalCenter: parent.verticalCenter
+            smooth: true
 
             Rectangle {
                 width: 32; height: 32

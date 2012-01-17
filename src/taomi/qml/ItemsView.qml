@@ -97,7 +97,7 @@ Item {
         }
 
         ListView {
-            id: listView
+            id: itemsList
             anchors.left: allButton.left; anchors.leftMargin: -60
             anchors.top: allButton.bottom; anchors.topMargin: 34
             width: 800; height:600
@@ -137,8 +137,8 @@ Item {
 
             State {
                 name: "gone"
-                PropertyChanges { target: itemsView; x: -1024; width: 1024 * 0.9; height: 600 * 0.9}
                 PropertyChanges { target: viewRotation; angle: 0}
+                PropertyChanges { target: itemsView; x: -1024; width: 1024 * 0.9; height: 600 * 0.9}               
                 when: itemsView.state == "gone"
             }
         ]
@@ -162,13 +162,15 @@ Item {
 
     Item {
         id: detailView
-        x: 130; y: 150
-        state: listView.itemViewState
+        anchors.left: parent.left; anchors.leftMargin: 130
+        anchors.top: parent.top; anchors.topMargin: 160
+        state: itemsList.itemViewState
 
         Image {
             id: detaiImage
             sourceSize.width: 560; sourceSize.height: 340
-            source: listView.itemImage
+            source: itemsList.itemImage
+            visible: itemsList.itemVisible
             transform: Rotation {
                 id: detailRotation
                 origin.x: detaiImage.width * 0.5; origin.y: detaiImage.height * 0.5;
@@ -200,14 +202,15 @@ Item {
 
         Item {
             id: detailPane
+            anchors.left: detaiImage.right; anchors.leftMargin: 50
+            anchors.top: detaiImage.top;
+            visible: itemsList.itemVisible
 
             Text {
                 id: detailTitle
-                text: listView.itemTitle
-                x: 590; y: 0
+                text: itemsList.itemTitle
                 font.pixelSize: 22
                 color: "white"
-                visible: listView.itemVisible
                 Behavior on x {
                     NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
                 }
@@ -215,22 +218,22 @@ Item {
 
             Text {
                 id: priceText
-                text: "￥ " + listView.itemPrice + " 元 / 例"
-                x: 630; y: 36
+                text: "￥ " + itemsList.itemPrice + " 元 / 例"
+                anchors.left: detailTitle.left
+                anchors.top: detailTitle.bottom; anchors.topMargin: 10
                 font.pixelSize: 14
                 color: "white"
-                visible: listView.itemVisible
                 Behavior on x {
                     NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
                 }
             }
 
             Rectangle {
-                id: detail
+                id: detailArea
                 width: 200; height: 230
-                x: 557; y: 65
+                anchors.left: priceText.left
+                anchors.top: priceText.bottom; anchors.topMargin: 10
                 color: Global.rectColor
-                visible: listView.itemVisible
 
                 Flickable {
                     id: flickArea
@@ -242,11 +245,11 @@ Item {
                     TextEdit {
                         id: detailText
                         wrapMode: TextEdit.Wrap
-                        width: detail.width;
+                        width: detailArea.width;
                         readOnly:true
                         font.pixelSize: 14
                         color: "white"
-                        text: listView.itemDetail
+                        text: itemsList.itemDetail
                     }
                 }
 
@@ -258,19 +261,19 @@ Item {
                     anchors.bottom: flickArea.bottom
                     anchors.left: flickArea.right
                     barColor: Global.hotColor
-                    width: 8
+                    width: 6
                     visible: flickArea.contentHeight > flickArea.height
                 }
             }
 
             Rectangle {
                 id: selectButton
-                x: 617; y: 312
+                anchors.left: detailArea.left; anchors.leftMargin: 3
+                anchors.top: detailArea.bottom; anchors.topMargin: 19
                 width: 79; height: 27
                 color: Global.rectColor
                 border.color: "white"
                 border.width: 2
-                visible: listView.itemVisible
 
                 Text {
                     text: "选 择"
@@ -286,22 +289,22 @@ Item {
                     onClicked: {
                         if (shopcarList.model.count != 0) {
                             for (var i = 0; i < shopcarList.model.count; i++) {
-                                if (shopcarList.model.get(i).name == listView.itemTitle) {
+                                if (shopcarList.model.get(i).name == itemsList.itemTitle) {
                                     shopcarList.model.get(i).num++;
                                     return;
                                 }
                             }
                             if (i == shopcarList.model.count) {
-                                shopcarList.model.append({"name": listView.itemTitle,
-                                                          "image": listView.itemImage,
-                                                          "price": listView.itemPrice,
+                                shopcarList.model.append({"name": itemsList.itemTitle,
+                                                          "image": itemsList.itemImage,
+                                                          "price": itemsList.itemPrice,
                                                           "num": 1});
                             }
                         }
                         else {
-                            shopcarList.model.append({"name": listView.itemTitle,
-                                                      "image": listView.itemImage,
-                                                      "price": listView.itemPrice,
+                            shopcarList.model.append({"name": itemsList.itemTitle,
+                                                      "image": itemsList.itemImage,
+                                                      "price": itemsList.itemPrice,
                                                       "num": 1});
                         }
                     }
@@ -313,12 +316,12 @@ Item {
 
             Rectangle {
                 id: returnButton
-                x: 720; y: 312
+                anchors.left: selectButton.right; anchors.leftMargin: 25
+                anchors.top: selectButton.top
                 width: 79; height: 27
                 color: Global.rectColor
                 border.color: "white"
                 border.width: 2
-                visible: listView.itemVisible
 
                 Text {
                     text: "返 回"
@@ -332,9 +335,9 @@ Item {
                         returnButton.color = Global.hotColor
                     }
                     onClicked: {
-                        listView.visible = true
-                        listView.itemVisible = false
-                        listView.itemViewState= "before"
+                        itemsList.visible = true
+                        itemsList.itemVisible = false
+                        itemsList.itemViewState= "before"
                     }
                     onReleased: {
                         returnButton.color = Global.rectColor
@@ -346,17 +349,11 @@ Item {
         states: [
             State {
                 name: 'before'
-                PropertyChanges { target: detailTitle; x: 650}
-                PropertyChanges { target: priceText; x: 657}
-                PropertyChanges { target: detail; x: 647}
                 PropertyChanges { target: detailRotation; origin.x: detaiImage.width*0.5; origin.y: detaiImage.height * 0.5; axis { x: 1; y: 0; z: 0 } angle: 90}
 
             },
             State {
                 name: 'after'
-                PropertyChanges { target: detailTitle; x: 610}
-                PropertyChanges { target: priceText; x: 610}
-                PropertyChanges { target: detail; x: 610}
                 PropertyChanges { target: detailRotation; angle: 0}
             }
         ]

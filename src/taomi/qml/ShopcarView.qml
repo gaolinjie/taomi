@@ -3,8 +3,7 @@ import "../js/global.js" as Global
 
 Item {
     id: itemsScreen
-    width: 1024
-    height: 600
+    width: 1024; height: 600
     signal loadStart
     signal loadRect(string qmlFile)
 
@@ -33,7 +32,8 @@ Item {
 
         Text {
             id: viewTitle
-            x: 125; y: 40
+            anchors.left: parent.left; anchors.top: parent.top
+            anchors.leftMargin: 125; anchors.topMargin: 40
             text: "购物车"
             font.pixelSize: 40
             color: "white"
@@ -42,9 +42,9 @@ Item {
         Image {
             id: backButton
             source: "qrc:/images/back.png"
-            x: 35; y: 41
-            sourceSize.width: 44
-            sourceSize.height: 44
+            anchors.right: viewTitle.left; anchors.rightMargin: 46
+            anchors.verticalCenter: viewTitle.verticalCenter
+            sourceSize.width: 40; sourceSize.height: 40
 
             MouseArea {
                 anchors.fill: parent
@@ -57,8 +57,8 @@ Item {
 
         GridView {
             id: shopcarView
-            x:130
-            y:120
+            anchors.left: viewTitle.left; anchors.leftMargin: 3
+            anchors.top: viewTitle.bottom; anchors.topMargin: 30
             model: ShopcarModel{}
             delegate: ShopcarViewDelegate{}
             cacheBuffer: 100
@@ -67,12 +67,12 @@ Item {
             width: 800
             height: 390
             flow: GridView.TopToBottom
-
         }
 
         Rectangle {
             id: sendButton
-            x: 130; y: 525
+            anchors.left: shopcarView.left; anchors.leftMargin: 1
+            anchors.top: shopcarView.bottom; anchors.topMargin: 15
             width: 79; height: 27
             color: Global.rectColor
             border.color: "white"
