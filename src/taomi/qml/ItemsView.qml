@@ -279,6 +279,7 @@ Item {
                     text: "选 择"
                     anchors.centerIn: parent
                     color: "white"
+                    font.pixelSize: 16
                 }
 
                 MouseArea {
@@ -327,6 +328,7 @@ Item {
                     text: "返 回"
                     anchors.centerIn: parent
                     color: "white"
+                    font.pixelSize: 16
                 }
 
                 MouseArea {
@@ -411,6 +413,7 @@ Item {
                     text: "管 理"
                     anchors.centerIn: parent
                     color: "white"
+                    font.pixelSize: 16
                 }
 
                 MouseArea {
@@ -456,6 +459,7 @@ Item {
                     text: "返 回"
                     anchors.centerIn: parent
                     color: "white"
+                    font.pixelSize: 16
                 }
 
                 MouseArea {

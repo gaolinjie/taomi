@@ -82,6 +82,7 @@ Item {
                 text: "发 送"
                 anchors.centerIn: parent
                 color: "white"
+                font.pixelSize: 16
             }
 
             MouseArea {
