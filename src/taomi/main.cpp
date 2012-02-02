@@ -1,7 +1,7 @@
 #include <QtGui/QApplication>
 #include <QtDeclarative/QDeclarativeView>
 #include <QObject>
-
+#include <QGLFormat>
 
 int main(int argc, char *argv[])
 {
@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QDeclarativeView view;
     view.setSource(QUrl("qrc:/qml/main.qml"));
 
-    view.show();
+    view.showFullScreen();
 
     return a.exec();
 }

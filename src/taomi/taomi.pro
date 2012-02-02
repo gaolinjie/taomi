@@ -1,5 +1,6 @@
 QT += core gui
 QT += core gui declarative
+QT += opengl
 
 SOURCES += \
     main.cpp

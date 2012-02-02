@@ -23,7 +23,7 @@ Item {
 
     Rectangle {
         id: itemsView
-        width: parent.width * 0.8; height: parent.height * 0.8
+        width: parent.width; height: parent.height
         color: Global.rectColor
         anchors.verticalCenter: parent.verticalCenter
         transform: Rotation { id: viewRotation; origin.x: parent.width * 0.8; origin.y: parent.height * 0.8 * 0.5 + 100; axis { x: 0; y: 1; z: 0 } angle: -70 }
@@ -102,13 +102,13 @@ Item {
             State {
                 name: "back"
                 PropertyChanges { target: viewRotation; angle: 0; origin.x: parent.width; origin.y: parent.height * 0.5 +100}
-                PropertyChanges { target: itemsView; width: 1024; height: 600; x: 0}
+                PropertyChanges { target: itemsView; x: 0}
                 when: itemsView.state == "back"
             },
 
             State {
                 name: "gone"
-                PropertyChanges { target: itemsView; x: -1024; width: 1024 * 0.9; height: 600 * 0.9}
+                PropertyChanges { target: itemsView; x: -1024}
                 PropertyChanges { target: viewRotation; angle: 0}
                 when: itemsView.state == "gone"
             }
