@@ -4,7 +4,7 @@ Component {
     id: startDelegate
 
     Item {
-        width: 235; height: 372
+        width: 300; height: 465
         Column {
             id: column
             anchors.centerIn: parent
@@ -34,7 +34,7 @@ Component {
 
                     states: State {
                         name: "active"
-                        PropertyChanges { target: wraper; width: 235; height: 120; opacity: 1 }
+                        PropertyChanges { target: wraper; width: 300; height: 150; opacity: 1 }
                     }
 
                     transitions: [

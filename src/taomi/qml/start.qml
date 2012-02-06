@@ -2,7 +2,7 @@ import QtQuick 1.0
 
 Item {
     id: start
-    width: 1024; height: 600
+    width: 1280; height: 800
 
     signal loadRect(string qmlFile)
 
@@ -13,10 +13,10 @@ Item {
 
     Text {
         id: startText
-        x: 130; y: 40
+        x: 130; y: 70
         text: "菜 单"
         font.family: "Vera Sans YuanTi"
-        font.pixelSize: 40
+        font.pixelSize: 50
         color: "white"
         opacity: 0
 
@@ -39,7 +39,7 @@ Item {
 
     ListView {
         id: listView
-        x:550; y:141; width: 800; height:400
+        x:550; y:201; width: 1000; height:500
         model: StartModel{}
         delegate: StartDelegate{}
         orientation: ListView.Horizontal

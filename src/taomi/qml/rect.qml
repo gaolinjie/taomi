@@ -2,13 +2,14 @@ import QtQuick 1.0
 
 Item {
     id: start
-    width: 1024
-    height: 600
+    width: 1280
+    height: 800
     signal loadStart
 
     Image {
         id: background
         source: "qrc:/images/background.png"
+        sourceSize.width: 1280; sourceSize.height: 800
     }
 
     Timer {

@@ -6,7 +6,7 @@ Component {
 
     Item {
         id: wraper
-        width: 235; height: 120 * 2 + 38
+        width: 294; height: 150 * 2 + 38
         signal showItem(string name, string image)
 
         Column {
@@ -19,14 +19,14 @@ Component {
 
                 Item {
                     id: itemRect
-                    width: 235
-                    height: 120
+                    width: 294
+                    height: 150
 
                     Image {
                         id: itemImage
                         source: image
-                        sourceSize.width: 235
-                        sourceSize.height: 120
+                        sourceSize.width: 294
+                        sourceSize.height: 150
 
                         MouseArea {
                             anchors.fill: parent

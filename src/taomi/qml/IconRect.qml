@@ -17,7 +17,7 @@ Rectangle {
 
     Image {
         id: icon
-        x: 20
+        x: 50
         anchors.verticalCenter: parent.verticalCenter
         source: parent.iconSource
         sourceSize.width: 90
@@ -26,10 +26,10 @@ Rectangle {
 
     Text {
         id: text
-        x: 120
+        x: 150
         anchors.verticalCenter: parent.verticalCenter
         text: parent.iconTitle
-        font.pixelSize: 28
+        font.pixelSize: 30
         color: "white"
     }
 }

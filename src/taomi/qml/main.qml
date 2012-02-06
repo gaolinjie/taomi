@@ -2,7 +2,7 @@ import QtQuick 1.0
 
 Item {
     id: screen
-    width: 1024; height: 600
+    width: 1280; height: 800
 
     Loader {
         id: mainLoader

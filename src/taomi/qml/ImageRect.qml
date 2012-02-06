@@ -40,10 +40,10 @@ Item {
 
     Text {
         id: text
-        x: 30
+        x: 40
         anchors.verticalCenter: titleRect.verticalCenter
         text: parent.iconTitle
-        font.pixelSize: 18
+        font.pixelSize: 20
         color: "white"
     }
 }

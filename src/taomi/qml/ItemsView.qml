@@ -3,8 +3,8 @@ import "../js/global.js" as Global
 
 Item {
     id: itemsScreen
-    width: 1024
-    height: 600
+    width: 1280
+    height: 800
     signal loadStart
     signal loadRect(string qmlFile)
 
@@ -34,17 +34,17 @@ Item {
         Text {
             id: viewTitle
             anchors.left: parent.left; anchors.top: parent.top
-            anchors.leftMargin: 125; anchors.topMargin: 40
+            anchors.leftMargin: 125; anchors.topMargin: 70
             text: Global.title
-            font.pixelSize: 40
+            font.pixelSize: 50
             color: "white"
         }
 
         Image {
-            id: backButton           
+            id: backButton
             anchors.right: viewTitle.left; anchors.rightMargin: 46
             anchors.verticalCenter: viewTitle.verticalCenter
-            sourceSize.width: 40; sourceSize.height: 40
+            sourceSize.width: 50; sourceSize.height: 50
             source: "qrc:/images/back.png"
 
             MouseArea {
@@ -64,8 +64,8 @@ Item {
             id: allButton
             text: "所有>"
             anchors.left: viewTitle.left; anchors.leftMargin: 5
-            anchors.top: viewTitle.bottom; anchors.topMargin: 25
-            font.pixelSize: 16
+            anchors.top: viewTitle.bottom; anchors.topMargin: 35
+            font.pixelSize: 20
             color: "white"
         }
 
@@ -74,7 +74,7 @@ Item {
             text: "已选>"
             anchors.left: allButton.right; anchors.leftMargin: 42
             anchors.verticalCenter: allButton.verticalCenter
-            font.pixelSize: 16
+            font.pixelSize: 20
             color: "white"
         }
 
@@ -83,14 +83,14 @@ Item {
             text: "购物车>"
             anchors.left: selectedButton.right; anchors.leftMargin: 42
             anchors.verticalCenter: selectedButton.verticalCenter
-            font.pixelSize: 16
+            font.pixelSize: 20
             color: "white"
 
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
                     shopcarButton.font.bold = true
-                    shopcarView.x = 724
+                    shopcarView.x = 983
                     shopcarButton.color = Global.hotColor
                 }
             }
@@ -99,8 +99,8 @@ Item {
         ListView {
             id: itemsList
             anchors.left: allButton.left; anchors.leftMargin: -60
-            anchors.top: allButton.bottom; anchors.topMargin: 34
-            width: 800; height:600
+            anchors.top: allButton.bottom; anchors.topMargin: 50
+            width: 1000; height:750
             model: ItemsModel{}
             delegate: ItemsDelegate{}
             orientation: ListView.Horizontal
@@ -163,12 +163,12 @@ Item {
     Item {
         id: detailView
         anchors.left: parent.left; anchors.leftMargin: 130
-        anchors.top: parent.top; anchors.topMargin: 160
+        anchors.top: parent.top; anchors.topMargin: 220
         state: itemsList.itemViewState
 
         Image {
             id: detaiImage
-            sourceSize.width: 560; sourceSize.height: 340
+            sourceSize.width: 756; sourceSize.height: 459
             source: itemsList.itemImage
             visible: itemsList.itemVisible
             transform: Rotation {
@@ -209,7 +209,7 @@ Item {
             Text {
                 id: detailTitle
                 text: itemsList.itemTitle
-                font.pixelSize: 22
+                font.pixelSize: 24
                 color: "white"
                 Behavior on x {
                     NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
@@ -221,7 +221,7 @@ Item {
                 text: "￥ " + itemsList.itemPrice + " 元 / 例"
                 anchors.left: detailTitle.left
                 anchors.top: detailTitle.bottom; anchors.topMargin: 10
-                font.pixelSize: 14
+                font.pixelSize: 18
                 color: "white"
                 Behavior on x {
                     NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
@@ -230,7 +230,7 @@ Item {
 
             Rectangle {
                 id: detailArea
-                width: 200; height: 230
+                width: 200; height: 345
                 anchors.left: priceText.left
                 anchors.top: priceText.bottom; anchors.topMargin: 10
                 color: Global.rectColor
@@ -247,7 +247,7 @@ Item {
                         wrapMode: TextEdit.Wrap
                         width: detailArea.width;
                         readOnly:true
-                        font.pixelSize: 14
+                        font.pixelSize: 16
                         color: "white"
                         text: itemsList.itemDetail
                     }
@@ -363,7 +363,7 @@ Item {
 
     Rectangle {
         id: shopcarView
-        width: 300; x: 1034
+        width: 300; x: 1283
         anchors.top: parent.top; anchors.bottom: parent.bottom
         color: Global.hotColor
         z: 2
@@ -468,7 +468,7 @@ Item {
                         returnButto.color = Global.rectColor
                     }
                     onClicked: {
-                        shopcarView.x = 1034
+                        shopcarView.x = 1283
                         shopcarButton.color = "white"
                     }
                     onReleased: {
