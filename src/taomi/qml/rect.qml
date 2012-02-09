@@ -22,11 +22,10 @@ Item {
 
     Rectangle {
         id: view
-        width: parent.width * 0.8; height: parent.height * 0.8
+        width: parent.width; height: parent.height
         visible: true
-        x: 102
         anchors.verticalCenter: parent.verticalCenter
-        transform: Rotation { id:rotation; origin.x: parent.width * 0.8; origin.y: parent.height * 0.8 * 0.5 + 100; axis { x: 0; y: 1; z: 0 } angle: -70 }
+        transform: Rotation { id:rotation; origin.x: parent.width; origin.y: parent.height * 0.5 + 100; axis { x: 0; y: 1; z: 0 } angle: -70 }
         smooth: true
         property string state: "back"
 
@@ -49,7 +48,7 @@ Item {
             State {
                 name: "back"
                 PropertyChanges { target: rotation; angle: 0; origin.x: parent.width; origin.y: parent.height * 0.5 +100}
-                PropertyChanges { target: view; width: 1024; height: 600; x: 0}
+                //PropertyChanges { target: view; width: 1024; height: 600; x: 0}
                 when: view.state == "back"
             },
 
@@ -57,7 +56,7 @@ Item {
                 name: "gone"
                 PropertyChanges { target: view; x: -1024}
                 PropertyChanges { target: rotation; angle: 0}
-                PropertyChanges { target: view; width: 1024 * 0.9; height: 600 * 0.9}
+                //PropertyChanges { target: view; width: 1024 * 0.9; height: 600 * 0.9}
                 when: view.state == "gone"
             }
 
@@ -68,13 +67,13 @@ Item {
 
                 from: ''; to: 'back'
                 NumberAnimation { target: rotation; property: "angle"; duration: 500; easing.type: 'OutExpo'}
-                NumberAnimation { target: view; properties: 'width, height'; duration: 500; easing.type: 'OutExpo'}
+                //NumberAnimation { target: view; properties: 'width, height'; duration: 500; easing.type: 'OutExpo'}
             },
 
             Transition {
                 from: 'back'; to: 'gone'
                 SequentialAnimation {
-                         NumberAnimation { target: view; properties: 'width, height'; duration: 200}
+                         //NumberAnimation { target: view; properties: 'width, height'; duration: 200}
                          NumberAnimation { target: view; properties: 'x'; duration: 200}
                 }
             }

@@ -6,8 +6,8 @@ Component {
 
     Item {
         id: itemRect
-        width: 235
-        height: 184
+        width: 293
+        height: 218
         property real number: num
 
         Rectangle {
@@ -39,8 +39,8 @@ Component {
         Image {
             id: itemImage
             source: image
-            sourceSize.width: 235
-            sourceSize.height: 120
+            sourceSize.width: 293
+            sourceSize.height: 150
             anchors.verticalCenter: parent.verticalCenter
             smooth: true
 
@@ -72,7 +72,7 @@ Component {
                 source: "qrc:/images/add.png"
                 sourceSize.width: 24; sourceSize.height: 24
                 anchors.verticalCenter: parent.verticalCenter
-                x: 75
+                anchors.right: minusIcon.left; anchors.rightMargin: 20
 
                 MouseArea {
                     anchors.fill: parent
@@ -104,7 +104,7 @@ Component {
                 source: "qrc:/images/close.png"
                 sourceSize.width: 24; sourceSize.height: 24
                 anchors.verticalCenter: parent.verticalCenter
-                x: 136
+                anchors.left: minusIcon.right; anchors.leftMargin: 20
 
                 MouseArea {
                     anchors.fill: parent

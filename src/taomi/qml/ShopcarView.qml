@@ -44,7 +44,7 @@ Item {
             source: "qrc:/images/back.png"
             anchors.right: viewTitle.left; anchors.rightMargin: 46
             anchors.verticalCenter: viewTitle.verticalCenter
-            sourceSize.width: 50; sourceSize.height: 50
+            sourceSize.width: 40; sourceSize.height: 40
 
             MouseArea {
                 anchors.fill: parent
@@ -58,14 +58,14 @@ Item {
         GridView {
             id: shopcarView
             anchors.left: viewTitle.left; anchors.leftMargin: 3
-            anchors.top: viewTitle.bottom; anchors.topMargin: 60
+            anchors.top: viewTitle.bottom; anchors.topMargin: 40
             model: ShopcarModel{}
             delegate: ShopcarViewDelegate{}
             cacheBuffer: 100
-            cellWidth: 241
-            cellHeight: 190
-            width: 800
-            height: 390
+            cellWidth: 301
+            cellHeight: 223
+            width: 1000
+            height: 446
             flow: GridView.TopToBottom
         }
 
@@ -90,11 +90,106 @@ Item {
                 onPressed: {
                     sendButton.color = Global.hotColor
                 }
-                onClicked: {                
+                onClicked: {
+                    foreground.visible = true
+                    dialog.visible = true
+                    dialog.y = 275
                 }
                 onReleased: {
                     sendButton.color = Global.rectColor
                 }               
+            }
+        }
+
+        Rectangle {
+            id: foreground
+            width: 1280; height: 800
+            anchors.centerIn: parent
+            color: Global.rectColor
+            opacity: 0.7
+            visible: false
+        }
+
+        Rectangle {
+            id: dialog
+            y: 800
+            width: 1280; height: 250
+            color: Global.hotColor
+            visible: false
+
+            Behavior on y {
+                NumberAnimation { duration: 400; easing.type: Easing.OutQuint}
+            }
+
+            Text {
+                id: sendPrompt
+                text: "  发送您点的菜单到厨房？"
+                color: "white"
+                font.pixelSize: 28
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom; anchors.bottomMargin: 140
+            }
+
+            Rectangle {
+                id: okButton
+                anchors.right: dialog.horizontalCenter; anchors.rightMargin: 20
+                anchors.bottom: dialog.bottom; anchors.bottomMargin: 70
+                width: 79; height: 27
+                color: Global.hotColor
+                border.color: "white"
+                border.width: 2
+
+                Text {
+                    text: "确 定"
+                    anchors.centerIn: parent
+                    color: "white"
+                    font.pixelSize: 16
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: {
+                        okButton.color = Global.rectColor
+                    }
+                    onClicked: {
+                        dialog.y = 800
+                        foreground.visible = false
+                    }
+                    onReleased: {
+                        okButton.color = Global.hotColor
+                    }
+                }
+            }
+
+            Rectangle {
+                id: cancelButton
+                anchors.left: dialog.horizontalCenter; anchors.leftMargin: 20
+                anchors.bottom: dialog.bottom; anchors.bottomMargin: 70
+                width: 79; height: 27
+                color: Global.hotColor
+                border.color: "white"
+                border.width: 2
+
+                Text {
+                    text: "取 消"
+                    anchors.centerIn: parent
+                    color: "white"
+                    font.pixelSize: 16
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: {
+                        cancelButton.color = Global.rectColor
+                    }
+                    onClicked: {
+                        dialog.y = 800
+                        foreground.visible = false
+                    }
+                    onReleased: {
+                        cancelButton.color = Global.hotColor
+                    }
+                }
             }
         }
 

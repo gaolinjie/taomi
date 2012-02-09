@@ -53,8 +53,8 @@ Item {
                     itemsView.state = "gone"
                     timer.running = true
 
-                    while(listView.model.count > 3) {
-                        listView.model.remove(listView.model.count - 1)
+                    while(itemsList.model.count > 3) {
+                        itemsList.model.remove(itemsList.model.count - 1)
                     }
                 }
             }
@@ -168,7 +168,7 @@ Item {
 
         Image {
             id: detaiImage
-            sourceSize.width: 756; sourceSize.height: 459
+            sourceSize.width: 800; sourceSize.height: 459
             source: itemsList.itemImage
             visible: itemsList.itemVisible
             transform: Rotation {
@@ -202,7 +202,7 @@ Item {
 
         Item {
             id: detailPane
-            anchors.left: detaiImage.right; anchors.leftMargin: 50
+            anchors.left: detaiImage.right; anchors.leftMargin: 55
             anchors.top: detaiImage.top;
             visible: itemsList.itemVisible
 
