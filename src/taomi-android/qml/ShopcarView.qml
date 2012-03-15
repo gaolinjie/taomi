@@ -4,7 +4,7 @@ import "../js/global.js" as Global
 Item {
     id: itemsScreen
     width: 1280; height: 800
-    signal loadStart()
+    signal loadStart
     signal loadRect(string qmlFile)
 
     Image {
@@ -152,10 +152,9 @@ Item {
                         okButton.color = Global.rectColor
                     }
                     onClicked: {
+                        client.sendOrder()
                         dialog.y = 800
                         foreground.visible = false
-                        orderManager.sendOrder()
-                        orderManager.suborderNO = orderManager.suborderNO + 1;
                     }
                     onReleased: {
                         okButton.color = Global.hotColor

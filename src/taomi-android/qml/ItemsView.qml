@@ -242,18 +242,14 @@ Item {
                                 }
                             }
                             if (i == shopcarList.model.count) {
-                                shopcarList.model.append({"orderNO": orderManager.orderNO,
-                                                          "suborderNO": orderManager.suborderNO,
-                                                          "name": itemsList.itemTitle,
+                                shopcarList.model.append({"name": itemsList.itemTitle,
                                                           "image": itemsList.itemImage,
                                                           "price": itemsList.itemPrice,
                                                           "num": 1});
                             }
                         }
                         else {
-                            shopcarList.model.append({"orderNO": orderManager.orderNO,
-                                                      "suborderNO": orderManager.suborderNO,
-                                                      "name": itemsList.itemTitle,
+                            shopcarList.model.append({"name": itemsList.itemTitle,
                                                       "image": itemsList.itemImage,
                                                       "price": itemsList.itemPrice,
                                                       "num": 1});
@@ -431,12 +427,12 @@ Item {
                         var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
                         db.transaction(
                             function(tx) {
-                                tx.executeSql('DROP TABLE shopcarOrder');
-                                tx.executeSql('CREATE TABLE IF NOT EXISTS shopcarOrder(orderNO INTEGER key, suborderNO INTEGER, name TEXT, image TEXT, price REAL, num INTEGER)');
+                                tx.executeSql('DROP TABLE shopcarData');
+                                tx.executeSql('CREATE TABLE IF NOT EXISTS shopcarData(name TEXT, image TEXT, price MONEY, num INTEGER)');
                                 var index = 0;
                                 while (index < shopcarList.model.count) {
                                     var item = shopcarList.model.get(index);
-                                    tx.executeSql('INSERT INTO shopcarOrder VALUES(?,?,?,?,?,?)', [item.orderNO, item.suborderNO, item.name, item.image, item.price, item.num]);
+                                    tx.executeSql('INSERT INTO shopcarData VALUES(?,?,?,?)', [item.name, item.image, item.price, item.num]);
                                     index++;
                                 }
                             }

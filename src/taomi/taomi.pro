@@ -1,9 +1,14 @@
 QT += core gui
 QT += core gui declarative
-QT += opengl
+QT += network
+QT += sql
 
 SOURCES += \
-    main.cpp
+    main.cpp \
+    client.cpp \
+    ordermanager.cpp \
+    server.cpp \
+    clientsocket.cpp
 
 OTHER_FILES += \
     qml/main.qml \
@@ -62,10 +67,21 @@ OTHER_FILES += \
     qml/ShopcarView.qml \
     qml/ShopcarListDelegate.qml \
     qml/ShopcarViewDelegate.qml \
-    qml/ScrollBar.qml
+    qml/ScrollBar.qml \
+    images/detail.jpg
 
 RESOURCES += \
     resource.qrc
+
+HEADERS += \
+    client.h \
+    ordermanager.h \
+    server.h \
+    clientsocket.h
+
+
+
+
 
 
 

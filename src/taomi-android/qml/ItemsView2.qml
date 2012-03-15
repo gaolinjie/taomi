@@ -1,4 +1,4 @@
-import QtQuick 1.0
+import QtQuick 1.1
 import "../js/global.js" as Global
 
 Item {
@@ -67,7 +67,6 @@ Item {
             anchors.top: viewTitle.bottom; anchors.topMargin: 35
             font.pixelSize: 20
             color: "white"
-            visible: !itemsList.itemVisible
         }
 
         Text {
@@ -77,7 +76,6 @@ Item {
             anchors.verticalCenter: allButton.verticalCenter
             font.pixelSize: 20
             color: "white"
-            visible: allButton.visible
         }
 
         Text {
@@ -87,7 +85,6 @@ Item {
             anchors.verticalCenter: selectedButton.verticalCenter
             font.pixelSize: 20
             color: "white"
-            visible: allButton.visible
 
             MouseArea {
                 anchors.fill: parent
@@ -101,8 +98,7 @@ Item {
 
         ListView {
             id: itemsList
-            x: itemsList.visible ? 70 : 190
-            //anchors.left: allButton.left; anchors.leftMargin: -60
+            anchors.left: allButton.left; anchors.leftMargin: -60
             anchors.top: allButton.bottom; anchors.topMargin: 50
             width: 1000; height:750
             model: ItemsModel{}
@@ -121,10 +117,6 @@ Item {
             property bool itemVisible: false
             property string itemViewState: "before"
             property string tag: "itemsScreen.tag"
-
-            Behavior on x {
-                NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
-            }
         }
 
         Component {
@@ -167,35 +159,57 @@ Item {
             }
         ]
     }
-
+/*
     Item {
         id: detailView
-        x: itemsList.itemVisible ? 130 : 190
-        //anchors.left: parent.left; anchors.leftMargin: 130
-        anchors.top: parent.top; anchors.topMargin: 170
+        anchors.left: parent.left; anchors.leftMargin: 130
+        anchors.top: parent.top; anchors.topMargin: 220
         state: itemsList.itemViewState
-
-        Behavior on x {
-            NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
-        }
 
         Image {
             id: detaiImage
-            sourceSize.width: 780; //sourceSize.height: 459
+            sourceSize.width: 800; sourceSize.height: 459
             source: itemsList.itemImage
             visible: itemsList.itemVisible
+            transform: Rotation {
+                id: detailRotation
+                origin.x: detaiImage.width * 0.5; origin.y: detaiImage.height * 0.5;
+                axis { x: 1; y: 0; z: 0 }
+                angle: 90
+                Behavior on angle {
+                    NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
+                }
+            }
+/////////
+            Text {
+                id: preText
+                text: "<"
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 40
+                color: "white"
+            }
+
+            Text {
+                id: nextText
+                text: ">"
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 40
+                color: "white"
+            }///////////
         }
 
         Item {
             id: detailPane
-            anchors.left: detaiImage.right; anchors.leftMargin: 30
+            anchors.left: detaiImage.right; anchors.leftMargin: 55
             anchors.top: detaiImage.top;
             visible: itemsList.itemVisible
 
             Text {
                 id: detailTitle
                 text: itemsList.itemTitle
-                font.pixelSize: 28
+                font.pixelSize: 24
                 color: "white"
                 Behavior on x {
                     NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
@@ -205,8 +219,8 @@ Item {
             Text {
                 id: priceText
                 text: "￥ " + itemsList.itemPrice + " 元 / 例"
-                anchors.right: returnButton.right
-                anchors.bottom: detailTitle.bottom; anchors.bottomMargin: 3
+                anchors.left: detailTitle.left
+                anchors.top: detailTitle.bottom; anchors.topMargin: 10
                 font.pixelSize: 18
                 color: "white"
                 Behavior on x {
@@ -215,102 +229,10 @@ Item {
             }
 
             Rectangle {
-                id: selectButton
-                anchors.left: detailTitle.left; anchors.leftMargin: 3
-                anchors.top: detailTitle.bottom; anchors.topMargin: 20
-                width: 140; height: 32
-                color: Global.hotColor
-
-                Text {
-                    text: "选 择"
-                    anchors.centerIn: parent
-                    color: "white"
-                    font.pixelSize: 14
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onPressed: {
-                        selectButton.color = Global.rectColor
-                    }
-                    onClicked: {
-                        if (shopcarList.model.count != 0) {
-                            for (var i = 0; i < shopcarList.model.count; i++) {
-                                if (shopcarList.model.get(i).name == itemsList.itemTitle) {
-                                    shopcarList.model.get(i).num++;
-                                    return;
-                                }
-                            }
-                            if (i == shopcarList.model.count) {
-                                shopcarList.model.append({"orderNO": orderManager.orderNO,
-                                                          "suborderNO": orderManager.suborderNO,
-                                                          "name": itemsList.itemTitle,
-                                                          "image": itemsList.itemImage,
-                                                          "price": itemsList.itemPrice,
-                                                          "num": 1});
-                            }
-                        }
-                        else {
-                            shopcarList.model.append({"orderNO": orderManager.orderNO,
-                                                      "suborderNO": orderManager.suborderNO,
-                                                      "name": itemsList.itemTitle,
-                                                      "image": itemsList.itemImage,
-                                                      "price": itemsList.itemPrice,
-                                                      "num": 1});
-                        }
-                    }
-                    onReleased: {
-                        selectButton.color = Global.hotColor
-                    }
-                }
-            }
-
-            Rectangle {
-                id: returnButton
-                anchors.left: selectButton.right; anchors.leftMargin: 5
-                anchors.top: selectButton.top
-                width: 140; height: 32
-                color: Global.hotColor
-
-                Text {
-                    text: "返 回"
-                    anchors.centerIn: parent
-                    color: "white"
-                    font.pixelSize: 14
-                }
-
-                Timer {
-                    id: timer2
-                    interval: 600
-                    running: false
-                    onTriggered: {
-                        itemsList.itemVisible = false
-                        itemsList.visible = true
-                    }
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onPressed: {
-                        returnButton.color = Global.rectColor
-                    }
-                    onClicked: {
-                        itemsList.itemVisible = false
-                        itemsList.visible = true
-                        itemsList.itemViewState= "before"
-                    }
-                    onReleased: {
-                        returnButton.color = Global.hotColor
-
-                    }
-                }
-            }
-
-            Rectangle {
                 id: detailArea
-                width: 280; height: 345
-                anchors.left: selectButton.left
-                anchors.top: selectButton.bottom; anchors.topMargin: 20
+                width: 200; height: 345
+                anchors.left: priceText.left
+                anchors.top: priceText.bottom; anchors.topMargin: 10
                 color: Global.rectColor
 
                 Flickable {
@@ -343,21 +265,101 @@ Item {
                     visible: flickArea.contentHeight > flickArea.height
                 }
             }
-}
 
+            Rectangle {
+                id: selectButton
+                anchors.left: detailArea.left; anchors.leftMargin: 3
+                anchors.top: detailArea.bottom; anchors.topMargin: 19
+                width: 79; height: 27
+                color: Global.rectColor
+                border.color: "white"
+                border.width: 2
+
+                Text {
+                    text: "选 择"
+                    anchors.centerIn: parent
+                    color: "white"
+                    font.pixelSize: 16
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: {
+                        selectButton.color = Global.hotColor
+                    }
+                    onClicked: {
+                        if (shopcarList.model.count != 0) {
+                            for (var i = 0; i < shopcarList.model.count; i++) {
+                                if (shopcarList.model.get(i).name == itemsList.itemTitle) {
+                                    shopcarList.model.get(i).num++;
+                                    return;
+                                }
+                            }
+                            if (i == shopcarList.model.count) {
+                                shopcarList.model.append({"name": itemsList.itemTitle,
+                                                          "image": itemsList.itemImage,
+                                                          "price": itemsList.itemPrice,
+                                                          "num": 1});
+                            }
+                        }
+                        else {
+                            shopcarList.model.append({"name": itemsList.itemTitle,
+                                                      "image": itemsList.itemImage,
+                                                      "price": itemsList.itemPrice,
+                                                      "num": 1});
+                        }
+                    }
+                    onReleased: {
+                        selectButton.color = Global.rectColor
+                    }
+                }
+            }
+
+            Rectangle {
+                id: returnButton
+                anchors.left: selectButton.right; anchors.leftMargin: 25
+                anchors.top: selectButton.top
+                width: 79; height: 27
+                color: Global.rectColor
+                border.color: "white"
+                border.width: 2
+
+                Text {
+                    text: "返 回"
+                    anchors.centerIn: parent
+                    color: "white"
+                    font.pixelSize: 16
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: {
+                        returnButton.color = Global.hotColor
+                    }
+                    onClicked: {
+                        itemsList.visible = true
+                        itemsList.itemVisible = false
+                        itemsList.itemViewState= "before"
+                    }
+                    onReleased: {
+                        returnButton.color = Global.rectColor
+                    }
+                }
+            }
+        }
 
         states: [
             State {
                 name: 'before'
-                //PropertyChanges { target: detailRotation; origin.x: detaiImage.width*0.5; origin.y: detaiImage.height * 0.5; axis { x: 1; y: 0; z: 0 } angle: 90}
+                PropertyChanges { target: detailRotation; origin.x: detaiImage.width*0.5; origin.y: detaiImage.height * 0.5; axis { x: 1; y: 0; z: 0 } angle: 90}
 
             },
             State {
                 name: 'after'
-                //PropertyChanges { target: detailRotation; angle: 0}
+                PropertyChanges { target: detailRotation; angle: 0}
             }
         ]
-    }
+    }*/
 
     Rectangle {
         id: shopcarView
@@ -431,12 +433,12 @@ Item {
                         var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
                         db.transaction(
                             function(tx) {
-                                tx.executeSql('DROP TABLE shopcarOrder');
-                                tx.executeSql('CREATE TABLE IF NOT EXISTS shopcarOrder(orderNO INTEGER key, suborderNO INTEGER, name TEXT, image TEXT, price REAL, num INTEGER)');
+                                tx.executeSql('DROP TABLE shopcarData');
+                                tx.executeSql('CREATE TABLE IF NOT EXISTS shopcarData(name TEXT, image TEXT, price MONEY, num INTEGER)');
                                 var index = 0;
                                 while (index < shopcarList.model.count) {
                                     var item = shopcarList.model.get(index);
-                                    tx.executeSql('INSERT INTO shopcarOrder VALUES(?,?,?,?,?,?)', [item.orderNO, item.suborderNO, item.name, item.image, item.price, item.num]);
+                                    tx.executeSql('INSERT INTO shopcarData VALUES(?,?,?,?)', [item.name, item.image, item.price, item.num]);
                                     index++;
                                 }
                             }
