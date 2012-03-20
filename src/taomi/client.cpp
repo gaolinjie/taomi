@@ -51,7 +51,7 @@ void Client::sendOrder()
         if (shopcarOrderNO == 0)
         {
             shopcarOrderNO = query.value(0).toUInt();
-            out << quint32(shopcarOrderNO )  << quint16(seatNO);
+            out << quint32(shopcarOrderNO)  << quint16(shopcarSuborderNO)  << quint16(seatNO);
             qDebug() << QString("%1").arg(shopcarOrderNO) << QString("%1").arg(seatNO);
         }
         name = query.value(2).toString();
