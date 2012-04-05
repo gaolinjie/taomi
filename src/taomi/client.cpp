@@ -1,4 +1,5 @@
 #include "client.h"
+#include "devicemanager.h"
 
 #include <QtNetwork>
 #include <QDebug>
@@ -31,13 +32,14 @@ void Client::sendOrder()
     block = new QByteArray();
     QDataStream out(block, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_7);
-    out << quint16(0) << quint8('C');
+    out << quint16(0) << quint8('O');
 
     QSqlQuery query;
     query.exec("select max(suborderNO) from shopcarOrder");
     quint32 shopcarOrderNO = 0;
     quint16 shopcarSuborderNO = 0;
-    while (query.next()) {
+    if (query.next())
+    {
         shopcarSuborderNO = query.value(0).toUInt();
     }
 
@@ -51,27 +53,62 @@ void Client::sendOrder()
         if (shopcarOrderNO == 0)
         {
             shopcarOrderNO = query.value(0).toUInt();
-            out << quint32(shopcarOrderNO)  << quint16(shopcarSuborderNO)  << quint16(seatNO);
-            qDebug() << QString("%1").arg(shopcarOrderNO) << QString("%1").arg(seatNO);
+            out << quint32(shopcarOrderNO)  << quint16(shopcarSuborderNO)  << quint16(seatNO) << DeviceManager::getDeviceMac();
         }
         name = query.value(2).toString();
         price = query.value(4).toFloat();
         num = query.value(5).toUInt();
-        out << name  << price << num;
-        qDebug() << name;
+        out << 0x1111 << name  << price << num;
     }
-    QString endFlag = "FFFF";
-    out << endFlag;
+    out << 0xFFFF;
 
     out.device()->seek(0);
     out << quint16(block->size() - sizeof(quint16));
 
-    connectToServer();
+    QString serverIP = DeviceManager::getServerIP();
+    connectToServer(serverIP);
 }
 
-void Client::connectToServer()
+void Client::sendRegistration()
+{/*
+    block = new QByteArray();
+    QDataStream out(block, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_4_7);
+    out << quint16(0) << quint8('R');
+
+    out << DeviceManager::getDeviceMac() << DeviceManager::getDeviceIP();
+    out << 0xFFFF;
+
+    out.device()->seek(0);
+    out << quint16(block->size() - sizeof(quint16));
+
+    //QHostAddress address = QHostAddress::Broadcast;
+    QHostAddress address = QHostAddress::LocalHost;
+    connectToServer(address);*/
+
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_4_7);
+    out << quint16(0) << quint8('R');
+
+    out << DeviceManager::getDeviceMac() << DeviceManager::getDeviceIP();
+    out << 0xFFFF;
+
+    //out.device()->seek(0);
+    //out << quint16(block->size() - sizeof(quint16));
+
+    udpSocket.writeDatagram(datagram, QHostAddress::Broadcast, 6178);
+}
+
+void Client::connectToServer(const QString & serverIP)
 {
-    tcpSocket.connectToHost(QHostAddress::LocalHost, 6178);
+    tcpSocket.connectToHost(serverIP, 6178);
+    nextBlockSize = 0;
+}
+
+void Client::connectToServer(const QHostAddress & address)
+{
+    tcpSocket.connectToHost(address, 6178);
     nextBlockSize = 0;
 }
 

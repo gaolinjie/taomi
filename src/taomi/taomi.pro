@@ -8,7 +8,8 @@ SOURCES += \
     client.cpp \
     ordermanager.cpp \
     server.cpp \
-    clientsocket.cpp
+    clientsocket.cpp \
+    devicemanager.cpp
 
 OTHER_FILES += \
     qml/main.qml \
@@ -68,7 +69,9 @@ OTHER_FILES += \
     qml/ShopcarListDelegate.qml \
     qml/ShopcarViewDelegate.qml \
     qml/ScrollBar.qml \
-    images/detail.jpg
+    images/detail.jpg \
+    qml/Dialog.qml \
+    qml/AlertDialog.qml
 
 RESOURCES += \
     resource.qrc
@@ -77,7 +80,8 @@ HEADERS += \
     client.h \
     ordermanager.h \
     server.h \
-    clientsocket.h
+    clientsocket.h \
+    devicemanager.h
 
 
 

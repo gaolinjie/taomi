@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTcpSocket>
+#include <QUdpSocket>
 
 class Client : public QObject
 {
@@ -13,7 +14,7 @@ public:
 
 public slots:
     void sendOrder();
-
+    void sendRegistration();
 
 private slots:
     void sendData();
@@ -22,10 +23,12 @@ private slots:
     void error();
 
 private:
-    void connectToServer();
+    void connectToServer(const QString & serverIP);
+    void connectToServer(const QHostAddress & address);
     void closeConnection();
 
     QTcpSocket tcpSocket;
+    QUdpSocket udpSocket;
     quint16 nextBlockSize;
     QByteArray *block;
 };

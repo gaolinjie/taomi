@@ -9,6 +9,7 @@
 #include "server.h"
 #include "client.h"
 #include "ordermanager.h"
+#include "devicemanager.h"
 
 int main(int argc, char *argv[])
 { 
@@ -57,6 +58,11 @@ int main(int argc, char *argv[])
     Client client;
     QObject::connect(&orderManager, SIGNAL(send()), &client, SLOT(sendOrder()));
     QObject::connect(&server, SIGNAL(paied(quint32)), &orderManager, SLOT(payOrder(quint32)));
+
+    DeviceManager deviceManager;
+    QObject::connect(&deviceManager, SIGNAL(registerSignal()), &client, SLOT(sendRegistration()));
+    view.rootContext()->setContextProperty("deviceManager", &deviceManager);
+    deviceManager.registerDevice();
 
     return a.exec();
 }

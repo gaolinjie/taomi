@@ -1,4 +1,6 @@
 #include "ordermanager.h"
+#include "devicemanager.h"
+
 #include <QtSql>
 #include <QDebug>
 #include <QDateTime>
@@ -26,7 +28,8 @@ void OrderManager::updateOrderNO()
     query.exec("SELECT * FROM lastSentOrder");
     quint32 lastSentOrderNO = 0;
     quint16 lastSentSuborderNO = 0;
-    while (query.next()) {
+    while (query.next())
+    {
         lastSentOrderNO = query.value(0).toUInt();
         lastSentSuborderNO = query.value(1).toUInt();
         if (lastSentOrderNO == 0 || lastSentSuborderNO == 0)
@@ -40,13 +43,13 @@ void OrderManager::updateOrderNO()
     query.exec("SELECT * FROM shopcarOrder");
     quint32 shopcarOrderNO = 0;
     quint16 shopcarSuborderNO = 0;
-    while (query.next()) {
+    while (query.next())
+    {
         shopcarOrderNO = query.value(0).toUInt();
         shopcarSuborderNO = query.value(1).toUInt();
         if (shopcarOrderNO == 0 || shopcarSuborderNO == 0)
         {
             qDebug() << __FILE__ << __LINE__ << TAG << "shopcarTable 中数据有错误";
-
         }
     }
 
@@ -113,17 +116,12 @@ void OrderManager::sendOrder()
     QSqlQuery query;
     query.exec("CREATE TABLE IF NOT EXISTS shopcarOrder(orderNO INTEGER key, suborderNO INTEGER, name TEXT, image TEXT, price REAL, num INTEGER)");
     query.exec("SELECT * FROM shopcarOrder");
-    //query.exec("select top 1 * from shopcarOrder order by suborderNO desc");
     quint32 shopcarOrderNO = 0;
     quint16 shopcarSuborderNO = 0;
-    while (query.next()) {
+    while (query.next())
+    {
         shopcarOrderNO = query.value(0).toUInt();
         shopcarSuborderNO = query.value(1).toUInt();
-        if (shopcarOrderNO == 0 || shopcarSuborderNO == 0)
-        {
-            qDebug() << __FILE__ << __LINE__ << TAG << "shopcarTable 中数据有错误";
-
-        }
     }
 
     query.exec("CREATE TABLE IF NOT EXISTS lastSentOrder(orderNO INTEGER key, suborderNO INTEGER)");
@@ -145,6 +143,39 @@ void OrderManager::payOrder(quint32 orderNO)
     query.exec("DROP TABLE shopcarOrder");
     mOrderNO = orderNO + 1;
     qDebug() << mOrderNO;
+}
+
+bool OrderManager::isHaveNewOrder()
+{
+    QSqlQuery query;
+    query.exec("CREATE TABLE IF NOT EXISTS lastSentOrder(orderNO INTEGER key, suborderNO INTEGER)");
+    query.exec("SELECT * FROM lastSentOrder");
+    quint32 lastSentOrderNO = 0;
+    quint16 lastSentSuborderNO = 0;
+    if (query.next())
+    {
+        lastSentOrderNO = query.value(0).toUInt();
+        lastSentSuborderNO = query.value(1).toUInt();
+    }
+
+    query.exec("CREATE TABLE IF NOT EXISTS shopcarOrder(orderNO INTEGER key, suborderNO INTEGER, name TEXT, image TEXT, price REAL, num INTEGER)");
+    query.exec("SELECT * FROM shopcarOrder");
+    quint32 shopcarOrderNO = 0;
+    quint16 shopcarSuborderNO = 0;
+    while (query.next())
+    {
+        shopcarOrderNO = query.value(0).toUInt();
+        shopcarSuborderNO = query.value(1).toUInt();
+    }
+
+    if (shopcarOrderNO == 0 || (shopcarOrderNO != 0 && lastSentSuborderNO == shopcarSuborderNO))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 

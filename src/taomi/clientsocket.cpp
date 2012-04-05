@@ -3,6 +3,7 @@
 #include <QDebug>
 
 #include "clientsocket.h"
+#include "devicemanager.h"
 
 ClientSocket::ClientSocket(QObject *parent)
     : QTcpSocket(parent)
@@ -18,7 +19,8 @@ void ClientSocket::readClient()
     QDataStream in(this);
     in.setVersion(QDataStream::Qt_4_7);
 
-    if (nextBlockSize == 0) {
+    if (nextBlockSize == 0)
+    {
         if (bytesAvailable() < sizeof(quint16))
             return;
         in >> nextBlockSize;
@@ -28,13 +30,25 @@ void ClientSocket::readClient()
         return;
 
     quint8 requestType;
-    quint32 orderNO;
+
 
     in >> requestType;
-    if (requestType == 'S') {
+    if (requestType == 'S')
+    {
+        quint32 orderNO;
         in >> orderNO;
 
         emit paied(orderNO);
+    }
+    else if (requestType == 'R')
+    {
+        quint32 deviceNO;
+        QString serverIP;
+
+        in >> deviceNO >> serverIP;
+
+        DeviceManager::setDeviceNO(deviceNO);
+        DeviceManager::setServerIP(serverIP);
     }
 
     close();

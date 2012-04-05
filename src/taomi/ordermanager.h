@@ -30,6 +30,7 @@ signals:
 public slots:
     void sendOrder();
     void payOrder(quint32 orderNO);
+    bool isHaveNewOrder();
 
 private:
     quint32 mOrderNO;

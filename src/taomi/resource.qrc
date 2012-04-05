@@ -54,5 +54,7 @@
         <file>qml/ShopcarListDelegate.qml</file>
         <file>qml/ShopcarViewDelegate.qml</file>
         <file>qml/ScrollBar.qml</file>
+        <file>qml/Dialog.qml</file>
+        <file>qml/AlertDialog.qml</file>
     </qresource>
 </RCC>

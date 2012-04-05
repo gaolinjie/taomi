@@ -74,7 +74,7 @@ Item {
             anchors.left: shopcarView.left; anchors.leftMargin: 1
             anchors.top: shopcarView.bottom; anchors.topMargin: 35
             width: 79; height: 27
-            color: Global.rectColor
+            color: orderManager.isHaveNewOrder() ? Global.rectColor : "grey"
             border.color: "white"
             border.width: 2
 
@@ -88,15 +88,33 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onPressed: {
-                    sendButton.color = Global.hotColor
+                    if (orderManager.isHaveNewOrder())
+                    {
+                        sendButton.color = Global.hotColor
+                    }
                 }
-                onClicked: {                   
-                    foreground.visible = true
-                    dialog.visible = true
-                    dialog.y = 275
+                onClicked: {
+                    if (orderManager.isHaveNewOrder())
+                    {
+                        if (deviceManager.isRegistered()) {
+                            foreground.visible = true
+                            dialogSend.visible = true
+                            dialogSend.y = 275
+                            sendButton.color = "grey"
+                        }
+                        else {
+                            foreground.visible = true
+                            dialogAlert.visible = true
+                            dialogAlert.y = 275
+                            deviceManager.registerDevice()
+                        }
+                    }
                 }
                 onReleased: {
-                    sendButton.color = Global.rectColor
+                    if (orderManager.isHaveNewOrder())
+                    {
+                        sendButton.color = Global.rectColor
+                    }
                 }               
             }
         }
@@ -110,88 +128,35 @@ Item {
             visible: false
         }
 
-        Rectangle {
-            id: dialog
-            y: 800
-            width: 1280; height: 250
-            color: Global.hotColor
-            visible: false
+        Dialog {
+            id: dialogSend
+            content: "  发送您点的菜单到厨房？"
 
-            Behavior on y {
-                NumberAnimation { duration: 400; easing.type: Easing.OutQuint}
+            onOk: {
+                dialogSend.y = 800
+                foreground.visible = false
+                orderManager.sendOrder()
+                orderManager.suborderNO = orderManager.suborderNO + 1;
             }
 
-            Text {
-                id: sendPrompt
-                text: "  发送您点的菜单到厨房？"
-                color: "white"
-                font.pixelSize: 28
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom; anchors.bottomMargin: 140
+            onCancel: {
+                dialogSend.y = 800
+                foreground.visible = false
+            }
+        }
+
+        AlertDialog {
+            id: dialogAlert
+            content: "  服务器未能连接，请稍后再试！"
+
+            onOk: {
+                dialogAlert.y = 800
+                foreground.visible = false
             }
 
-            Rectangle {
-                id: okButton
-                anchors.right: dialog.horizontalCenter; anchors.rightMargin: 20
-                anchors.bottom: dialog.bottom; anchors.bottomMargin: 70
-                width: 79; height: 27
-                color: Global.hotColor
-                border.color: "white"
-                border.width: 2
-
-                Text {
-                    text: "确 定"
-                    anchors.centerIn: parent
-                    color: "white"
-                    font.pixelSize: 16
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onPressed: {
-                        okButton.color = Global.rectColor
-                    }
-                    onClicked: {
-                        dialog.y = 800
-                        foreground.visible = false
-                        orderManager.sendOrder()
-                        orderManager.suborderNO = orderManager.suborderNO + 1;
-                    }
-                    onReleased: {
-                        okButton.color = Global.hotColor
-                    }
-                }
-            }
-
-            Rectangle {
-                id: cancelButton
-                anchors.left: dialog.horizontalCenter; anchors.leftMargin: 20
-                anchors.bottom: dialog.bottom; anchors.bottomMargin: 70
-                width: 79; height: 27
-                color: Global.hotColor
-                border.color: "white"
-                border.width: 2
-
-                Text {
-                    text: "取 消"
-                    anchors.centerIn: parent
-                    color: "white"
-                    font.pixelSize: 16
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onPressed: {
-                        cancelButton.color = Global.rectColor
-                    }
-                    onClicked: {
-                        dialog.y = 800
-                        foreground.visible = false
-                    }
-                    onReleased: {
-                        cancelButton.color = Global.hotColor
-                    }
-                }
+            onCancel: {
+                dialogAlert.y = 800
+                foreground.visible = false
             }
         }
 
