@@ -71,7 +71,8 @@ OTHER_FILES += \
     qml/ScrollBar.qml \
     images/detail.jpg \
     qml/Dialog.qml \
-    qml/AlertDialog.qml
+    qml/AlertDialog.qml \
+    qml/SendedViewDelegate.qml
 
 RESOURCES += \
     resource.qrc

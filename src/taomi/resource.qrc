@@ -56,5 +56,6 @@
         <file>qml/ScrollBar.qml</file>
         <file>qml/Dialog.qml</file>
         <file>qml/AlertDialog.qml</file>
+        <file>qml/SendedViewDelegate.qml</file>
     </qresource>
 </RCC>

@@ -6,73 +6,59 @@ Component {
 
     Item {
         id: itemRect
-        width: 293
-        height: 218
+        width: 465
+        height: 80
         property real number: num
+
+        Image {
+            id: itemImage
+            source: image
+            sourceSize.width: 100
+            sourceSize.height: 70
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left; anchors.leftMargin: 5
+            smooth: true
+        }
 
         Rectangle {
             id: nameRect
-            width: parent.width; height: 32
-            anchors.left: parent.left
-            anchors.bottom: itemImage.top
+            width: 350; height: 70
+            anchors.left: itemImage.right; anchors.leftMargin: 5
+            anchors.verticalCenter: parent.verticalCenter
             color: Global.hotColor
 
             Text {
                 id: nameText
                 text: name
-                anchors.left: parent.left; anchors.leftMargin: 5
-                anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: 14
+                anchors.left: parent.left; anchors.leftMargin: 10
+                anchors.top: parent.top; anchors.topMargin: 10
+                font.pixelSize: 20
                 color: "white"
             }
 
             Text {
                 id: priceText
                 text: "￥ " + price + " 元"
-                anchors.right: parent.right; anchors.rightMargin: 5
-                anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: 14
+                anchors.left: nameText.left
+                anchors.top: nameText.bottom; anchors.topMargin: 10
+                font.pixelSize: 16
                 color: "white"
             }
-        }
 
-        Image {
-            id: itemImage
-            source: image
-            sourceSize.width: 293
-            sourceSize.height: 150
-            anchors.verticalCenter: parent.verticalCenter
-            smooth: true
-
-            Rectangle {
-                width: 32; height: 32
-                anchors.right: parent.right
-                anchors.top: parent.top
-                color: Global.hotColor
-
-                Text {
-                    text: num + "份"
-                    x: 10
-                    anchors.centerIn: parent
-                    font.pixelSize: 14
-                    color: "white"
-                }
+            Text {
+                text: "x " + num + "份"
+                anchors.left: priceText.right; anchors.leftMargin: 10
+                anchors.top: priceText.top
+                font.pixelSize: 16
+                color: "white"
             }
-        }
-
-        Rectangle {
-            id: controlRect
-            width: parent.width; height: 32
-            anchors.left: parent.left
-            anchors.top: itemImage.bottom
-            color: Global.hotColor
 
             Image {
                 id: addIcon
                 source: "qrc:/images/add.png"
-                sourceSize.width: 24; sourceSize.height: 24
+                sourceSize.width: 32; sourceSize.height: 32
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.right: minusIcon.left; anchors.rightMargin: 20
+                anchors.right: minusIcon.left; anchors.rightMargin: 10
 
                 MouseArea {
                     anchors.fill: parent
@@ -85,9 +71,9 @@ Component {
             Image {
                 id: minusIcon
                 source: "qrc:/images/minus.png"
-                sourceSize.width: 24; sourceSize.height: 24
+                sourceSize.width: 32; sourceSize.height: 32
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.right: closeIcon.left; anchors.rightMargin: 10
 
                 MouseArea {
                     anchors.fill: parent
@@ -102,9 +88,9 @@ Component {
             Image {
                 id: closeIcon
                 source: "qrc:/images/close.png"
-                sourceSize.width: 24; sourceSize.height: 24
+                sourceSize.width: 32; sourceSize.height: 32
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.left: minusIcon.right; anchors.leftMargin: 20
+                anchors.right: parent.right; anchors.rightMargin: 10
 
                 MouseArea {
                     anchors.fill: parent

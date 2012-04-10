@@ -55,24 +55,33 @@ Item {
             }
         }
 
+        Text {
+            id: allButton
+            text: "未发送的菜单◢"
+            anchors.left: viewTitle.left; anchors.leftMargin: 5
+            anchors.top: viewTitle.bottom; anchors.topMargin: 35
+            font.pixelSize: 20
+            color: "white"
+        }
+
         GridView {
             id: shopcarView
             anchors.left: viewTitle.left; anchors.leftMargin: 3
-            anchors.top: viewTitle.bottom; anchors.topMargin: 40
+            anchors.top: viewTitle.bottom; anchors.topMargin: 70
             model: ShopcarModel{}
             delegate: ShopcarViewDelegate{}
             cacheBuffer: 100
-            cellWidth: 301
-            cellHeight: 223
+            cellWidth: 465
+            cellHeight: 80
             width: 1000
-            height: 446
+            height: 180
             flow: GridView.TopToBottom
         }
 
         Rectangle {
             id: sendButton
-            anchors.left: shopcarView.left; anchors.leftMargin: 1
-            anchors.top: shopcarView.bottom; anchors.topMargin: 35
+            anchors.left: shopcarView.left; anchors.leftMargin: 6
+            anchors.top: shopcarView.bottom; anchors.topMargin: 5
             width: 79; height: 27
             color: orderManager.isHaveNewOrder() ? Global.rectColor : "grey"
             border.color: "white"
@@ -117,6 +126,29 @@ Item {
                     }
                 }               
             }
+        }
+
+        Text {
+            id: selectedButton
+            text: "已发送的菜单◢"
+            anchors.left: allButton.left
+            anchors.top: sendButton.bottom; anchors.topMargin: 50
+            font.pixelSize: 20
+            color: "white"
+        }
+
+        GridView {
+            id: shopcarView2
+            anchors.left: shopcarView.left
+            anchors.top: selectedButton.bottom; anchors.topMargin: 15
+            model: ShopcarModel{}
+            delegate: SendedViewDelegate{}
+            cacheBuffer: 100
+            cellWidth: 465
+            cellHeight: 80
+            width: 1000
+            height: 180
+            flow: GridView.TopToBottom
         }
 
         Rectangle {
