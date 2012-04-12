@@ -34,7 +34,7 @@ void OrderManager::updateOrderNO()
         lastSentSuborderNO = query.value(1).toUInt();
         if (lastSentOrderNO == 0 || lastSentSuborderNO == 0)
         {
-            qDebug() << __FILE__ << __LINE__ << TAG << "lastSentOrder 表中数据有错误";
+            qDebug() << TAG << "lastSentOrder 表中数据有错误" << __FILE__ << __LINE__ ;
 
         }
     }
@@ -49,7 +49,7 @@ void OrderManager::updateOrderNO()
         shopcarSuborderNO = query.value(1).toUInt();
         if (shopcarOrderNO == 0 || shopcarSuborderNO == 0)
         {
-            qDebug() << __FILE__ << __LINE__ << TAG << "shopcarTable 中数据有错误";
+            qDebug() << TAG << "shopcarTable 中数据有错误" << __FILE__ << __LINE__;
         }
     }
 
@@ -88,7 +88,7 @@ void OrderManager::updateOrderNO()
         mOrderNO = shopcarOrderNO;
         mSuborderNO = shopcarSuborderNO;
     }
-    qDebug() << __FILE__ << __LINE__ << TAG << QString("%1").arg(mOrderNO) << QString("%1").arg(mSuborderNO);
+    qDebug() << TAG << QString("%1").arg(mOrderNO) << QString("%1").arg(mSuborderNO) << __FILE__ << __LINE__;
 }
 
 quint32 OrderManager::getOrderNO() const
@@ -132,17 +132,15 @@ void OrderManager::sendOrder()
     query.exec();
 
     emit send();
-    qDebug() << __FILE__ << __LINE__ << TAG << "send order";
+    qDebug() << TAG << "send order" << __FILE__ << __LINE__;
 }
 
 void OrderManager::payOrder(quint32 orderNO)
 {
-    qDebug() << "paied in ordermanager" << orderNO;
     QSqlQuery query;
     query.exec("CREATE TABLE IF NOT EXISTS shopcarOrder(orderNO INTEGER key, suborderNO INTEGER, name TEXT, image TEXT, price REAL, num INTEGER)");
     query.exec("DROP TABLE shopcarOrder");
     mOrderNO = orderNO + 1;
-    qDebug() << mOrderNO;
 }
 
 bool OrderManager::isHaveNewOrder()

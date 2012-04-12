@@ -1,5 +1,8 @@
 #include "devicemanager.h"
 #include <QtNetwork>
+#include <QDebug>
+
+#define TAG "[DeviceManager]"
 
 DeviceManager::DeviceManager(QObject *parent) :
     QObject(parent)
@@ -59,5 +62,19 @@ QString DeviceManager::getDeviceIP()
     QNetworkInterface *qni;
     qni = new QNetworkInterface();
     *qni = qni->interfaceFromName(QString("%1").arg("wlan0"));
-    return qni->addressEntries().at(0).ip().toString();
+
+    // Begin Issue #4, gaolinjie, 2012-04-12 //
+    QString ip;
+    if (qni->addressEntries().isEmpty())
+    {
+        qCritical() << TAG << "ERROR: Cannot find wireless network hardware" << __FILE__ << __LINE__ ;
+    }
+    else
+    {
+
+        ip = qni->addressEntries().at(0).ip().toString();
+    }
+
+    return ip;
+    // End Issue #4 //
 }

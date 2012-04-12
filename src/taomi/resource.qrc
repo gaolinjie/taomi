@@ -19,22 +19,6 @@
         <file>images/sett-big.png</file>
         <file>images/wether.png</file>
         <file>qml/ImageRect.qml</file>
-        <file>images/Blueberry_muffins.jpg</file>
-        <file>images/Cherries.jpg</file>
-        <file>images/Carrot-Ginger-Soup.jpg</file>
-        <file>images/baba-ganoush.jpg</file>
-        <file>images/Tagine_Recipe.jpg</file>
-        <file>images/Kermit-Lynch-Wine.jpg</file>
-        <file>images/CheeseStraws.jpg</file>
-        <file>images/BimBimBop.jpg</file>
-        <file>images/veggie_box.jpg</file>
-        <file>images/rustic_soup.jpg</file>
-        <file>images/Salmon_with_pesto.jpg</file>
-        <file>images/Tomato-Basil-Lasagne.jpg</file>
-        <file>images/Tagine.jpg</file>
-        <file>images/SeaFoodStew.jpg</file>
-        <file>images/Soft_Scamble_Breakfast.jpg</file>
-        <file>images/Summer_Salad.jpg</file>
         <file>qml/ItemsView.qml</file>
         <file>qml/ItemsModel.qml</file>
         <file>qml/ItemsDelegate.qml</file>
@@ -57,5 +41,22 @@
         <file>qml/Dialog.qml</file>
         <file>qml/AlertDialog.qml</file>
         <file>qml/SendedViewDelegate.qml</file>
+        <file>images/veggie_box.png</file>
+        <file>images/Tomato-Basil-Lasagne.png</file>
+        <file>images/Tagine_Recipe.png</file>
+        <file>images/Tagine.png</file>
+        <file>images/Summer_Salad.png</file>
+        <file>images/Soft_Scamble_Breakfast.png</file>
+        <file>images/SeaFoodStew.png</file>
+        <file>images/Salmon_with_pesto.png</file>
+        <file>images/rustic_soup.png</file>
+        <file>images/Kermit-Lynch-Wine.png</file>
+        <file>images/detail.png</file>
+        <file>images/Cherries.png</file>
+        <file>images/CheeseStraws.png</file>
+        <file>images/Carrot-Ginger-Soup.png</file>
+        <file>images/Blueberry_muffins.png</file>
+        <file>images/BimBimBop.png</file>
+        <file>images/baba-ganoush.png</file>
     </qresource>
 </RCC>
