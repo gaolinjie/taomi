@@ -35,31 +35,50 @@ void Client::sendOrder()
     out << quint16(0) << quint8('O');
 
     QSqlQuery query;
-    query.exec("select max(suborderNO) from shopcarOrder");
-    quint32 shopcarOrderNO = 0;
-    quint16 shopcarSuborderNO = 0;
-    if (query.next())
-    {
-        shopcarSuborderNO = query.value(0).toUInt();
-    }
+    QSqlQuery query2;
+    QSqlQuery query3;
+    query.exec("SELECT * FROM unsentModel");
 
-    query.prepare("SELECT * FROM shopcarOrder WHERE suborderNO = ?");
-    query.addBindValue(shopcarSuborderNO);
-    query.exec();
+    quint32 orderNO = 0;
     QString name = "";
+    QString image = "";
     float price = 0;
     quint16 num = 0;
     while (query.next()) {
-        if (shopcarOrderNO == 0)
-        {
-            shopcarOrderNO = query.value(0).toUInt();
-            out << quint32(shopcarOrderNO)  << quint16(shopcarSuborderNO)  << quint16(seatNO) << DeviceManager::getDeviceMac();
+        if (orderNO == 0) {
+            orderNO = query.value(0).toUInt();
+            out << quint32(orderNO) << quint16(seatNO) << DeviceManager::getDeviceMac();
         }
-        name = query.value(2).toString();
-        price = query.value(4).toFloat();
-        num = query.value(5).toUInt();
+        name = query.value(1).toString();
+        image = query.value(2).toString();
+        price = query.value(3).toFloat();
+        num = query.value(4).toUInt();
         out << 0x1111 << name  << price << num;
+
+        query2.exec("CREATE TABLE IF NOT EXISTS sentModel(orderNO INTEGER key, name TEXT, image TEXT, price REAL, num INTEGER, sent INTEGER)");
+        query2.prepare("SELECT * FROM sentModel WHERE name = ?");
+        query2.addBindValue(name);
+        query2.exec();
+
+        if (query2.next()) {
+            quint16 n = query2.value(4).toUInt();
+            query3.prepare("UPDATE sentModel SET num = ? WHERE name = ?" );
+            query3.addBindValue(n + num);
+            query3.addBindValue(name);
+            query3.exec();
+        }
+        else {
+            query3.prepare("INSERT INTO sentModel(orderNO, name, image, price, num, sent) VALUES (?, ?, ?, ?, ?, ?)");
+            query3.addBindValue(orderNO);
+            query3.addBindValue(name);
+            query3.addBindValue(image);
+            query3.addBindValue(price);
+            query3.addBindValue(num);
+            query3.addBindValue(1);
+            query3.exec();
+        }
     }
+    query.exec("DELETE FROM unsentModel");
     out << 0xFFFF;
 
     out.device()->seek(0);
@@ -70,22 +89,7 @@ void Client::sendOrder()
 }
 
 void Client::sendRegistration()
-{/*
-    block = new QByteArray();
-    QDataStream out(block, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_4_7);
-    out << quint16(0) << quint8('R');
-
-    out << DeviceManager::getDeviceMac() << DeviceManager::getDeviceIP();
-    out << 0xFFFF;
-
-    out.device()->seek(0);
-    out << quint16(block->size() - sizeof(quint16));
-
-    //QHostAddress address = QHostAddress::Broadcast;
-    QHostAddress address = QHostAddress::LocalHost;
-    connectToServer(address);*/
-
+{
     QByteArray datagram;
     QDataStream out(&datagram, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_7);
@@ -129,7 +133,7 @@ void Client::getData()
 void Client::connectionClosedByServer()
 {
     if (nextBlockSize != 0xFFFF)
-        ;
+    {};
     closeConnection();
 }
 

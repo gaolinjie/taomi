@@ -56,7 +56,7 @@ Item {
         }
 
         Text {
-            id: allButton
+            id: unsendedButton
             text: "未发送的菜单◢"
             anchors.left: viewTitle.left; anchors.leftMargin: 5
             anchors.top: viewTitle.bottom; anchors.topMargin: 35
@@ -64,24 +64,31 @@ Item {
             color: "white"
         }
 
-        GridView {
-            id: shopcarView
+        Loader {
+            id: unsentLoader
             anchors.left: viewTitle.left; anchors.leftMargin: 3
             anchors.top: viewTitle.bottom; anchors.topMargin: 70
-            model: ShopcarModel{}
-            delegate: ShopcarViewDelegate{}
+            source: "qrc:/qml/UnsentView.qml"
+        }
+/*
+        GridView {
+            id: unsentView
+            anchors.left: viewTitle.left; anchors.leftMargin: 3
+            anchors.top: viewTitle.bottom; anchors.topMargin: 70
+            model: UnsentModel{}
+            delegate: UnsentDelegate{}
             cacheBuffer: 100
             cellWidth: 465
             cellHeight: 80
             width: 1000
             height: 180
             flow: GridView.TopToBottom
-        }
+        }*/
 
         Rectangle {
             id: sendButton
-            anchors.left: shopcarView.left; anchors.leftMargin: 6
-            anchors.top: shopcarView.bottom; anchors.topMargin: 5
+            anchors.left: unsentLoader.left; anchors.leftMargin: 6
+            anchors.top: unsentLoader.bottom; anchors.topMargin: 5
             width: 79; height: 27
             color: orderManager.isHaveNewOrder() ? Global.rectColor : "grey"
             border.color: "white"
@@ -129,27 +136,34 @@ Item {
         }
 
         Text {
-            id: selectedButton
+            id: sendedButton
             text: "已发送的菜单◢"
-            anchors.left: allButton.left
+            anchors.left: unsendedButton.left
             anchors.top: sendButton.bottom; anchors.topMargin: 50
             font.pixelSize: 20
             color: "white"
         }
 
+        Loader {
+            id: sentLoader
+            anchors.left: unsentLoader.left
+            anchors.top: sendedButton.bottom; anchors.topMargin: 15
+            source: "qrc:/qml/SentView.qml"
+        }
+/*
         GridView {
-            id: shopcarView2
-            anchors.left: shopcarView.left
-            anchors.top: selectedButton.bottom; anchors.topMargin: 15
-            model: ShopcarModel{}
-            delegate: SendedViewDelegate{}
+            id: sentView
+            anchors.left: unsentView.left
+            anchors.top: sendedButton.bottom; anchors.topMargin: 15
+            model: SentModel{}
+            delegate: SentDelegate{}
             cacheBuffer: 100
             cellWidth: 465
             cellHeight: 80
             width: 1000
             height: 180
             flow: GridView.TopToBottom
-        }
+        }*/
 
         Rectangle {
             id: foreground
@@ -167,8 +181,11 @@ Item {
             onOk: {
                 dialogSend.y = 800
                 foreground.visible = false
+                unsentLoader.source = ""
+                sentLoader.source = ""
                 orderManager.sendOrder()
-                orderManager.suborderNO = orderManager.suborderNO + 1;
+                sentLoader.source = "qrc:/qml/SentView.qml"
+                unsentLoader.source = "qrc:/qml/UnsentView.qml"
             }
 
             onCancel: {

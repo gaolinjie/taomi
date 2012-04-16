@@ -23,7 +23,6 @@
         <file>qml/ItemsModel.qml</file>
         <file>qml/ItemsDelegate.qml</file>
         <file>images/back.png</file>
-        <file>qml/ShopcarModel.qml</file>
         <file>qml/rect.qml</file>
         <file>images/shadow.png</file>
         <file>images/appbar.minus.rest.png</file>
@@ -36,11 +35,9 @@
         <file>images/add.png</file>
         <file>qml/ShopcarView.qml</file>
         <file>qml/ShopcarListDelegate.qml</file>
-        <file>qml/ShopcarViewDelegate.qml</file>
         <file>qml/ScrollBar.qml</file>
         <file>qml/Dialog.qml</file>
         <file>qml/AlertDialog.qml</file>
-        <file>qml/SendedViewDelegate.qml</file>
         <file>images/veggie_box.png</file>
         <file>images/Tomato-Basil-Lasagne.png</file>
         <file>images/Tagine_Recipe.png</file>
@@ -58,5 +55,12 @@
         <file>images/Blueberry_muffins.png</file>
         <file>images/BimBimBop.png</file>
         <file>images/baba-ganoush.png</file>
+        <file>qml/ShopcarListModel.qml</file>
+        <file>qml/SentDelegate.qml</file>
+        <file>qml/SentModel.qml</file>
+        <file>qml/UnsentDelegate.qml</file>
+        <file>qml/UnsentModel.qml</file>
+        <file>qml/SentView.qml</file>
+        <file>qml/UnsentView.qml</file>
     </qresource>
 </RCC>

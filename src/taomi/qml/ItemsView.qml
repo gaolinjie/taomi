@@ -234,30 +234,81 @@ Item {
                         selectButton.color = Global.rectColor
                     }
                     onClicked: {
+                        if (shopcarList.model.count == 0) {
+                            shopcarList.model.append({"orderNO": orderManager.orderNO,
+                                                      "name": itemsList.itemTitle,
+                                                      "image": itemsList.itemImage,
+                                                      "price": itemsList.itemPrice,
+                                                      "num": 1,
+                                                      "sent": 0});
+
+                        }
+                        else {
+                            var unsent = -1;
+                            var sent = -1;
+                            for (var i = 0; i < shopcarList.model.count; i++) {
+                                if (shopcarList.model.get(i).name == itemsList.itemTitle) {
+                                    if (shopcarList.model.get(i).sent == 0) {
+                                        unsent = i;
+                                    }
+                                    else {
+                                        sent = i;
+                                    }
+                                }
+                            }
+
+                            if (unsent == -1) {
+                                shopcarList.model.append({"orderNO": orderManager.orderNO,
+                                                          "name": itemsList.itemTitle,
+                                                          "image": itemsList.itemImage,
+                                                          "price": itemsList.itemPrice,
+                                                          "num": 1,
+                                                          "sent": 0});
+
+
+                            }
+                            else {
+                                shopcarList.model.get(unsent).num++;
+                            }
+                            unsent = 0
+                            sent = 0
+                        }
+                        /*
                         if (shopcarList.model.count != 0) {
                             for (var i = 0; i < shopcarList.model.count; i++) {
                                 if (shopcarList.model.get(i).name == itemsList.itemTitle) {
-                                    shopcarList.model.get(i).num++;
-                                    return;
+                                    if (shopcarList.model.get(i).sent == 0) {
+                                        shopcarList.model.get(i).num++;
+                                        return;
+                                    }
+                                    else {
+                                        shopcarList.model.append({"orderNO": orderManager.orderNO,
+                                                                  "name": itemsList.itemTitle,
+                                                                  "image": itemsList.itemImage,
+                                                                  "price": itemsList.itemPrice,
+                                                                  "num": 1,
+                                                                  "sent": 0});
+                                        return;
+                                    }
                                 }
                             }
                             if (i == shopcarList.model.count) {
                                 shopcarList.model.append({"orderNO": orderManager.orderNO,
-                                                          "suborderNO": orderManager.suborderNO,
                                                           "name": itemsList.itemTitle,
                                                           "image": itemsList.itemImage,
                                                           "price": itemsList.itemPrice,
-                                                          "num": 1});
+                                                          "num": 1,
+                                                          "sent": 0});
                             }
                         }
                         else {
                             shopcarList.model.append({"orderNO": orderManager.orderNO,
-                                                      "suborderNO": orderManager.suborderNO,
                                                       "name": itemsList.itemTitle,
                                                       "image": itemsList.itemImage,
                                                       "price": itemsList.itemPrice,
-                                                      "num": 1});
-                        }
+                                                      "num": 1,
+                                                      "sent": 0});
+                        }*/
                     }
                     onReleased: {
                         selectButton.color = Global.hotColor
@@ -376,7 +427,7 @@ Item {
             z: 2
 
             Text {
-                x: 28; y: 40
+                x: 31; y: 40
                 text: "购物车"
                 font.pixelSize: 38
                 color: "white"
@@ -385,12 +436,40 @@ Item {
 
         ListView {
             id: shopcarList
-            x: 30; y: 110; width: 200; height:400
-            model: ShopcarModel{}
+            x: 35; y: 100; width: 230; height:400
+            model: ShopcarListModel{}
             delegate: ShopcarListDelegate{}
             cacheBuffer: 1000
-            spacing: 25
+            spacing: 20
             smooth: true
+            section.property: "sent"
+            section.criteria: ViewSection.FullString
+            section.delegate: startSpace
+        }
+
+        Component {
+            id: startSpace
+            Item {
+                width: 300
+                height: 60
+
+                Text {
+                    id: categoryTitle
+                    text: section == "1"  ? "已发送的菜单" : "未发送的菜单"
+                    anchors.left: parent.left; anchors.leftMargin: -3
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 20
+                    color: "white"
+                }
+
+                Rectangle {
+                    id: separator
+                    width: 230; height: 2
+                    anchors.left: categoryTitle.left
+                    anchors.top: categoryTitle.bottom; anchors.topMargin: 5
+                    opacity: 0.6
+                }
+            }
         }
 
         Rectangle {
@@ -401,7 +480,7 @@ Item {
 
             Rectangle {
                 id: sendButton
-                x: 31; y: 30
+                x: 36; y: 30
                 width: 79; height: 27
                 color: Global.hotColor
                 border.color: "white"
@@ -431,13 +510,21 @@ Item {
                         var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
                         db.transaction(
                             function(tx) {
-                                tx.executeSql('DROP TABLE shopcarOrder');
-                                tx.executeSql('CREATE TABLE IF NOT EXISTS shopcarOrder(orderNO INTEGER key, suborderNO INTEGER, name TEXT, image TEXT, price REAL, num INTEGER)');
+                                tx.executeSql('DROP TABLE sentModel');
+                                tx.executeSql('CREATE TABLE IF NOT EXISTS sentModel(orderNO INTEGER key, name TEXT, image TEXT, price REAL, num INTEGER, sent INTEGER)');
+                                tx.executeSql('DROP TABLE unsentModel');
+                                tx.executeSql('CREATE TABLE IF NOT EXISTS unsentModel(orderNO INTEGER key, name TEXT, image TEXT, price REAL, num INTEGER, sent INTEGER)');
                                 var index = 0;
                                 while (index < shopcarList.model.count) {
                                     var item = shopcarList.model.get(index);
-                                    tx.executeSql('INSERT INTO shopcarOrder VALUES(?,?,?,?,?,?)', [item.orderNO, item.suborderNO, item.name, item.image, item.price, item.num]);
-                                    index++;
+                                    if (item.sent == 1) {
+                                        tx.executeSql('INSERT INTO sentModel VALUES(?,?,?,?,?,?)', [item.orderNO, item.name, item.image, item.price, item.num, item.sent]);
+                                        index++;
+                                    }
+                                    else {
+                                        tx.executeSql('INSERT INTO unsentModel VALUES(?,?,?,?,?,?)', [item.orderNO, item.name, item.image, item.price, item.num, item.sent]);
+                                        index++;
+                                    }
                                 }
                             }
                         )
@@ -447,7 +534,7 @@ Item {
 
             Rectangle {
                 id: returnButto
-                x: 139; y: 30
+                x: 144; y: 30
                 width: 79; height: 27
                 color: Global.hotColor
                 border.color: "white"

@@ -10,7 +10,6 @@ class OrderManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(quint32 orderNO READ getOrderNO WRITE setOrderNO NOTIFY orderNOChanged)
-    Q_PROPERTY(quint16 suborderNO READ getSuborderNO WRITE setSuborderNO NOTIFY suborderNOChanged)
 public:
     explicit OrderManager(QObject *parent = 0);
     ~OrderManager();
@@ -19,12 +18,9 @@ public:
 
     quint32 getOrderNO() const;
     void setOrderNO(const quint32 &s);
-    quint16 getSuborderNO() const;
-    void setSuborderNO(const quint16 &s);
 
 signals:
     void orderNOChanged();
-    void suborderNOChanged();
     void send();
 
 public slots:
@@ -34,7 +30,6 @@ public slots:
 
 private:
     quint32 mOrderNO;
-    quint16 mSuborderNO;
 };
 
 #endif // ORDERMANAGER_H

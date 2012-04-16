@@ -24,16 +24,13 @@ OTHER_FILES += \
     qml/ItemsView.qml \
     qml/ItemsModel.qml \
     qml/ItemsDelegate.qml \
-    qml/ShopcarModel.qml \
     qml/rect.qml \
     js/global.js \
     qml/ShopcarView.qml \
     qml/ShopcarListDelegate.qml \
-    qml/ShopcarViewDelegate.qml \
     qml/ScrollBar.qml \
     qml/Dialog.qml \
     qml/AlertDialog.qml \
-    qml/SendedViewDelegate.qml \
     images/wether.png \
     images/video.png \
     images/veggie_box.jpg \
@@ -73,7 +70,14 @@ OTHER_FILES += \
     images/Tagine.png \
     images/Tagine_Recipe.png \
     images/Tomato-Basil-Lasagne.png \
-    images/veggie_box.png
+    images/veggie_box.png \
+    qml/ShopcarListModel.qml \
+    qml/UnsentDelegate.qml \
+    qml/UnsentModel.qml \
+    qml/SentDelegate.qml \
+    qml/SentModel.qml \
+    qml/UnsentView.qml \
+    qml/SentView.qml
 
 RESOURCES += \
     resource.qrc
@@ -84,6 +88,26 @@ HEADERS += \
     server.h \
     clientsocket.h \
     devicemanager.h
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

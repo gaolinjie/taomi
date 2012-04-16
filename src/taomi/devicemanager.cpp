@@ -54,6 +54,7 @@ QString DeviceManager::getDeviceMac()
     QNetworkInterface *qni;
     qni = new QNetworkInterface();
     *qni = qni->interfaceFromName(QString("%1").arg("wlan0"));
+    //*qni = qni->interfaceFromName(QString("%1").arg("eth0"));
     return qni->hardwareAddress();
 }
 
@@ -62,6 +63,7 @@ QString DeviceManager::getDeviceIP()
     QNetworkInterface *qni;
     qni = new QNetworkInterface();
     *qni = qni->interfaceFromName(QString("%1").arg("wlan0"));
+    //*qni = qni->interfaceFromName(QString("%1").arg("eth0"));
 
     // Begin Issue #4, gaolinjie, 2012-04-12 //
     QString ip;
