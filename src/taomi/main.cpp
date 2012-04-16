@@ -63,54 +63,6 @@ int main(int argc, char *argv[])
     QObject::connect(&deviceManager, SIGNAL(registerSignal()), &client, SLOT(sendRegistration()));
     view.rootContext()->setContextProperty("deviceManager", &deviceManager);
     deviceManager.registerDevice();
-/*
-    QSqlQuery query;
-    QSqlQuery query2;
-    QSqlQuery query3;
-    query.exec("SELECT * FROM unsentModel");
-
-    quint32 orderNO = 0;
-    QString name = "";
-    QString image = "";
-    float price = 0;
-    quint16 num = 0;
-    while (query.next()) {
-        if (orderNO == 0) {
-            orderNO = query.value(0).toUInt();
-        }
-        name = query.value(1).toString();
-        image = query.value(2).toString();
-        price = query.value(3).toFloat();
-        num = query.value(4).toUInt();
-
-
-        query2.exec("CREATE TABLE IF NOT EXISTS sentModel(orderNO INTEGER key, name TEXT, image TEXT, price REAL, num INTEGER, sent INTEGER)");
-        query2.prepare("SELECT * FROM sentModel WHERE name = ?");
-        query2.addBindValue(name);
-        query2.exec();
-
-        if (query2.next()) {
-            qDebug() << "dasf";
-            quint16 n = query2.value(4).toUInt();
-            query3.prepare("UPDATE sentModel SET num = ? WHERE name = ?" );
-            query3.addBindValue(++n);
-            query3.addBindValue(name);
-            query3.exec();
-        }
-        else {
-            qDebug() << "here!!!";
-            query3.prepare("INSERT INTO sentModel(orderNO, name, image, price, num, sent) VALUES (?, ?, ?, ?, ?, ?)");
-            query3.addBindValue(orderNO);
-            query3.addBindValue(name);
-            query3.addBindValue(image);
-            query3.addBindValue(price);
-            query3.addBindValue(num);
-            query3.addBindValue(1);
-            query3.exec();
-
-            qDebug() << "here!!!";
-        }
-    }*/
 
     return a.exec();
 }

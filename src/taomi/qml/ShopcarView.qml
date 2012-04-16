@@ -63,14 +63,14 @@ Item {
             font.pixelSize: 20
             color: "white"
         }
-
+/*
         Loader {
             id: unsentLoader
             anchors.left: viewTitle.left; anchors.leftMargin: 3
             anchors.top: viewTitle.bottom; anchors.topMargin: 70
             source: "qrc:/qml/UnsentView.qml"
-        }
-/*
+        }*/
+
         GridView {
             id: unsentView
             anchors.left: viewTitle.left; anchors.leftMargin: 3
@@ -83,12 +83,12 @@ Item {
             width: 1000
             height: 180
             flow: GridView.TopToBottom
-        }*/
+        }
 
         Rectangle {
             id: sendButton
-            anchors.left: unsentLoader.left; anchors.leftMargin: 6
-            anchors.top: unsentLoader.bottom; anchors.topMargin: 5
+            anchors.left: unsentView.left; anchors.leftMargin: 6
+            anchors.top: unsentView.bottom; anchors.topMargin: 5
             width: 79; height: 27
             color: orderManager.isHaveNewOrder() ? Global.rectColor : "grey"
             border.color: "white"
@@ -143,14 +143,14 @@ Item {
             font.pixelSize: 20
             color: "white"
         }
-
+/*
         Loader {
             id: sentLoader
             anchors.left: unsentLoader.left
             anchors.top: sendedButton.bottom; anchors.topMargin: 15
             source: "qrc:/qml/SentView.qml"
-        }
-/*
+        }*/
+
         GridView {
             id: sentView
             anchors.left: unsentView.left
@@ -163,7 +163,7 @@ Item {
             width: 1000
             height: 180
             flow: GridView.TopToBottom
-        }*/
+        }
 
         Rectangle {
             id: foreground
@@ -181,16 +181,48 @@ Item {
             onOk: {
                 dialogSend.y = 800
                 foreground.visible = false
-                unsentLoader.source = ""
-                sentLoader.source = ""
-                orderManager.sendOrder()
-                sentLoader.source = "qrc:/qml/SentView.qml"
-                unsentLoader.source = "qrc:/qml/UnsentView.qml"
+                //unsentLoader.source = ""
+                //sentLoader.source = ""
+                //orderManager.sendOrder()
+                //sentLoader.source = "qrc:/qml/SentView.qml"
+                //unsentLoader.source = "qrc:/qml/UnsentView.qml"
+                refreshUi();
+                timer2.running = true;
+            }
+
+            Timer {
+                id: timer2
+                interval: 300
+                running: false
+                onTriggered: {
+                    orderManager.sendOrder();
+                }
             }
 
             onCancel: {
                 dialogSend.y = 800
                 foreground.visible = false
+            }
+
+            function refreshUi() {
+                var i = 0;
+                var j = 0;
+                for (i = 0; i < unsentView.model.count; i++) {
+                    var unsent = unsentView.model.get(i);
+                    for (j = 0; j < sentView.model.count; j++) {
+                        var sent = sentView.model.get(j);
+                        if (unsent.name == sent.name) {
+                            sentView.model.setProperty(j, "num", Number(unsent.num) + Number(sent.num));
+                            break;
+                        }
+                    }
+
+                    if (j == sentView.model.count) {
+                        unsent.sent = 1;
+                        sentView.model.append(unsent);
+                    }
+                }
+                unsentView.model.clear();
             }
         }
 
