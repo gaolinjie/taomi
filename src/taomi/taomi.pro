@@ -27,7 +27,6 @@ OTHER_FILES += \
     qml/rect.qml \
     js/global.js \
     qml/ShopcarView.qml \
-    qml/ShopcarListDelegate.qml \
     qml/ScrollBar.qml \
     qml/Dialog.qml \
     qml/AlertDialog.qml \
@@ -71,13 +70,9 @@ OTHER_FILES += \
     images/Tagine_Recipe.png \
     images/Tomato-Basil-Lasagne.png \
     images/veggie_box.png \
-    qml/ShopcarListModel.qml \
-    qml/UnsentDelegate.qml \
-    qml/UnsentModel.qml \
-    qml/SentDelegate.qml \
-    qml/SentModel.qml \
     qml/UnsentView.qml \
-    qml/SentView.qml
+    qml/SentView.qml \
+    qml/ShopcarList.qml
 
 RESOURCES += \
     resource.qrc
@@ -88,6 +83,13 @@ HEADERS += \
     server.h \
     clientsocket.h \
     devicemanager.h
+
+
+
+
+
+
+
 
 
 

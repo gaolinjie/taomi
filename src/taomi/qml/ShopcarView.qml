@@ -10,7 +10,7 @@ Item {
     Connections {
         id: orderManagerConnection
         target: orderManager
-        onRefreshShopcarUi: {
+        onClearShopcar: {
             unsentView.model.clear()
             sentView.model.clear()
         }
@@ -72,26 +72,11 @@ Item {
             font.pixelSize: 20
             color: "white"
         }
-/*
-        Loader {
-            id: unsentLoader
-            anchors.left: viewTitle.left; anchors.leftMargin: 3
-            anchors.top: viewTitle.bottom; anchors.topMargin: 70
-            source: "qrc:/qml/UnsentView.qml"
-        }*/
 
-        GridView {
+        UnsentView {
             id: unsentView
             anchors.left: viewTitle.left; anchors.leftMargin: 3
             anchors.top: viewTitle.bottom; anchors.topMargin: 70
-            model: UnsentModel{}
-            delegate: UnsentDelegate{}
-            cacheBuffer: 100
-            cellWidth: 465
-            cellHeight: 80
-            width: 1000
-            height: 180
-            flow: GridView.TopToBottom
         }
 
         Rectangle {
@@ -152,26 +137,11 @@ Item {
             font.pixelSize: 20
             color: "white"
         }
-/*
-        Loader {
-            id: sentLoader
-            anchors.left: unsentLoader.left
-            anchors.top: sendedButton.bottom; anchors.topMargin: 15
-            source: "qrc:/qml/SentView.qml"
-        }*/
 
-        GridView {
+        SentView {
             id: sentView
             anchors.left: unsentView.left
             anchors.top: sendedButton.bottom; anchors.topMargin: 15
-            model: SentModel{}
-            delegate: SentDelegate{}
-            cacheBuffer: 100
-            cellWidth: 465
-            cellHeight: 80
-            width: 1000
-            height: 180
-            flow: GridView.TopToBottom
         }
 
         Rectangle {
@@ -190,11 +160,6 @@ Item {
             onOk: {
                 dialogSend.y = 800
                 foreground.visible = false
-                //unsentLoader.source = ""
-                //sentLoader.source = ""
-                //orderManager.sendOrder()
-                //sentLoader.source = "qrc:/qml/SentView.qml"
-                //unsentLoader.source = "qrc:/qml/UnsentView.qml"
                 refreshUi();
                 timer2.running = true;
             }

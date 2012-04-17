@@ -34,7 +34,6 @@
         <file>images/minus.png</file>
         <file>images/add.png</file>
         <file>qml/ShopcarView.qml</file>
-        <file>qml/ShopcarListDelegate.qml</file>
         <file>qml/ScrollBar.qml</file>
         <file>qml/Dialog.qml</file>
         <file>qml/AlertDialog.qml</file>
@@ -55,12 +54,8 @@
         <file>images/Blueberry_muffins.png</file>
         <file>images/BimBimBop.png</file>
         <file>images/baba-ganoush.png</file>
-        <file>qml/ShopcarListModel.qml</file>
-        <file>qml/SentDelegate.qml</file>
-        <file>qml/SentModel.qml</file>
-        <file>qml/UnsentDelegate.qml</file>
-        <file>qml/UnsentModel.qml</file>
         <file>qml/SentView.qml</file>
         <file>qml/UnsentView.qml</file>
+        <file>qml/ShopcarList.qml</file>
     </qresource>
 </RCC>

@@ -7,6 +7,7 @@ Item {
     height: 800
     signal loadStart
     signal loadRect(string qmlFile)
+    signal saveShopcar()
 
     Image {
         id: background
@@ -273,42 +274,6 @@ Item {
                             unsent = 0
                             sent = 0
                         }
-                        /*
-                        if (shopcarList.model.count != 0) {
-                            for (var i = 0; i < shopcarList.model.count; i++) {
-                                if (shopcarList.model.get(i).name == itemsList.itemTitle) {
-                                    if (shopcarList.model.get(i).sent == 0) {
-                                        shopcarList.model.get(i).num++;
-                                        return;
-                                    }
-                                    else {
-                                        shopcarList.model.append({"orderNO": orderManager.orderNO,
-                                                                  "name": itemsList.itemTitle,
-                                                                  "image": itemsList.itemImage,
-                                                                  "price": itemsList.itemPrice,
-                                                                  "num": 1,
-                                                                  "sent": 0});
-                                        return;
-                                    }
-                                }
-                            }
-                            if (i == shopcarList.model.count) {
-                                shopcarList.model.append({"orderNO": orderManager.orderNO,
-                                                          "name": itemsList.itemTitle,
-                                                          "image": itemsList.itemImage,
-                                                          "price": itemsList.itemPrice,
-                                                          "num": 1,
-                                                          "sent": 0});
-                            }
-                        }
-                        else {
-                            shopcarList.model.append({"orderNO": orderManager.orderNO,
-                                                      "name": itemsList.itemTitle,
-                                                      "image": itemsList.itemImage,
-                                                      "price": itemsList.itemPrice,
-                                                      "num": 1,
-                                                      "sent": 0});
-                        }*/
                     }
                     onReleased: {
                         selectButton.color = Global.hotColor
@@ -394,7 +359,7 @@ Item {
                     visible: flickArea.contentHeight > flickArea.height
                 }
             }
-}
+    }
 
 
         states: [
@@ -434,42 +399,9 @@ Item {
             }
         }
 
-        ListView {
+        ShopcarList {
             id: shopcarList
             x: 35; y: 100; width: 230; height:400
-            model: ShopcarListModel{}
-            delegate: ShopcarListDelegate{}
-            cacheBuffer: 1000
-            spacing: 20
-            smooth: true
-            section.property: "sent"
-            section.criteria: ViewSection.FullString
-            section.delegate: startSpace
-        }
-
-        Component {
-            id: startSpace
-            Item {
-                width: 300
-                height: 60
-
-                Text {
-                    id: categoryTitle
-                    text: section == "1"  ? "已发送的菜单" : "未发送的菜单"
-                    anchors.left: parent.left; anchors.leftMargin: -3
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: 20
-                    color: "white"
-                }
-
-                Rectangle {
-                    id: separator
-                    width: 230; height: 2
-                    anchors.left: categoryTitle.left
-                    anchors.top: categoryTitle.bottom; anchors.topMargin: 5
-                    opacity: 0.6
-                }
-            }
         }
 
         Rectangle {
@@ -499,35 +431,11 @@ Item {
                         sendButton.color = Global.rectColor
                     }
                     onClicked: {
-                        saveItemsData()
+                        saveShopcar()
                         loadRect("ShopcarView.qml")
                     }
                     onReleased: {
                         sendButton.color = Global.hotColor
-                    }
-
-                    function saveItemsData() {
-                        var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
-                        db.transaction(
-                            function(tx) {
-                                tx.executeSql('DROP TABLE sentModel');
-                                tx.executeSql('CREATE TABLE IF NOT EXISTS sentModel(orderNO INTEGER key, name TEXT, image TEXT, price REAL, num INTEGER, sent INTEGER)');
-                                tx.executeSql('DROP TABLE unsentModel');
-                                tx.executeSql('CREATE TABLE IF NOT EXISTS unsentModel(orderNO INTEGER key, name TEXT, image TEXT, price REAL, num INTEGER, sent INTEGER)');
-                                var index = 0;
-                                while (index < shopcarList.model.count) {
-                                    var item = shopcarList.model.get(index);
-                                    if (item.sent == 1) {
-                                        tx.executeSql('INSERT INTO sentModel VALUES(?,?,?,?,?,?)', [item.orderNO, item.name, item.image, item.price, item.num, item.sent]);
-                                        index++;
-                                    }
-                                    else {
-                                        tx.executeSql('INSERT INTO unsentModel VALUES(?,?,?,?,?,?)', [item.orderNO, item.name, item.image, item.price, item.num, item.sent]);
-                                        index++;
-                                    }
-                                }
-                            }
-                        )
                     }
                 }
             }

@@ -22,7 +22,7 @@ public:
 signals:
     void orderNOChanged();
     void send();
-    void refreshShopcarUi();
+    void clearShopcar();
 
 public slots:
     void sendOrder();
