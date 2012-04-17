@@ -118,6 +118,7 @@ void OrderManager::payOrder(quint32 orderNO)
     query.exec("CREATE TABLE IF NOT EXISTS sentModel(orderNO INTEGER key, name TEXT, image TEXT, price REAL, num INTEGER, sent INTEGER)");
     query.exec("DROP TABLE sentModel");
     mOrderNO = orderNO + 1;
+    emit refreshShopcarUi();
 }
 
 bool OrderManager::isHaveNewOrder()

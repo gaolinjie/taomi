@@ -7,6 +7,15 @@ Item {
     signal loadStart()
     signal loadRect(string qmlFile)
 
+    Connections {
+        id: orderManagerConnection
+        target: orderManager
+        onRefreshShopcarUi: {
+            unsentView.model.clear()
+            sentView.model.clear()
+        }
+    }
+
     Image {
         id: background
         source: "qrc:/images/background.png"
