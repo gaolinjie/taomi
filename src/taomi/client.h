@@ -12,6 +12,9 @@ public:
     explicit Client(QObject *parent = 0);
     ~Client();
 
+signals:
+    void sendOrderComplete();
+
 public slots:
     void sendOrder();
     void sendRegistration();

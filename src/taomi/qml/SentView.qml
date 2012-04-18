@@ -12,6 +12,13 @@ GridView {
     height: 180
     flow: GridView.TopToBottom
 
+    Connections {
+        target: client
+        onSendOrderComplete: {
+            sentModel.saveItemsData();
+        }
+    }
+
     Component {
         id: sentDelegate
 

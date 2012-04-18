@@ -91,7 +91,7 @@ void OrderManager::setOrderNO(const quint32 &s)
 }
 
 void OrderManager::sendOrder()
-{/*
+{
     QSqlQuery query;
     query.exec("CREATE TABLE IF NOT EXISTS unsentModel(orderNO INTEGER key, name TEXT, image TEXT, price REAL, num INTEGER, sent INTEGER)");
     query.exec("SELECT * FROM unsentModel");
@@ -104,7 +104,7 @@ void OrderManager::sendOrder()
     query.exec("DELETE FROM lastSentModel");
     query.prepare("INSERT INTO lastSentModel(orderNO) VALUES (?)");
     query.addBindValue(unsentOrderNO);
-    query.exec();*/
+    query.exec();
 
     emit send();
     qDebug() << TAG << "send order" << __FILE__ << __LINE__;

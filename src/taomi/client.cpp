@@ -35,8 +35,8 @@ void Client::sendOrder()
     out << quint16(0) << quint8('O');
 
     QSqlQuery query;
-    QSqlQuery query2;
-    QSqlQuery query3;
+//    QSqlQuery query2;
+//    QSqlQuery query3;
     query.exec("SELECT * FROM unsentModel");
 
     quint32 orderNO = 0;
@@ -54,7 +54,7 @@ void Client::sendOrder()
         price = query.value(3).toFloat();
         num = query.value(4).toUInt();
         out << 0x1111 << name  << price << num;
-
+/*
         query2.exec("CREATE TABLE IF NOT EXISTS sentModel(orderNO INTEGER key, name TEXT, image TEXT, price REAL, num INTEGER, sent INTEGER)");
         query2.prepare("SELECT * FROM sentModel WHERE name = ?");
         query2.addBindValue(name);
@@ -76,7 +76,7 @@ void Client::sendOrder()
             query3.addBindValue(num);
             query3.addBindValue(1);
             query3.exec();
-        }
+        }*/
     }
     query.exec("DELETE FROM unsentModel");
     out << 0xFFFF;
@@ -86,6 +86,7 @@ void Client::sendOrder()
 
     QString serverIP = DeviceManager::getServerIP();
     connectToServer(serverIP);
+    emit sendOrderComplete();
 }
 
 void Client::sendRegistration()
