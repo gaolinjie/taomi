@@ -72,7 +72,10 @@ OTHER_FILES += \
     images/veggie_box.png \
     qml/UnsentView.qml \
     qml/SentView.qml \
-    qml/ShopcarList.qml
+    qml/ShopcarList.qml \
+    qml/SeatView.qml \
+    qml/SeatCategory.qml \
+    qml/SeatGrid.qml
 
 RESOURCES += \
     resource.qrc
@@ -83,6 +86,11 @@ HEADERS += \
     server.h \
     clientsocket.h \
     devicemanager.h
+
+
+
+
+
 
 
 

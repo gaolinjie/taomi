@@ -35,8 +35,6 @@ void Client::sendOrder()
     out << quint16(0) << quint8('O');
 
     QSqlQuery query;
-//    QSqlQuery query2;
-//    QSqlQuery query3;
     query.exec("SELECT * FROM unsentModel");
 
     quint32 orderNO = 0;
@@ -54,29 +52,6 @@ void Client::sendOrder()
         price = query.value(3).toFloat();
         num = query.value(4).toUInt();
         out << 0x1111 << name  << price << num;
-/*
-        query2.exec("CREATE TABLE IF NOT EXISTS sentModel(orderNO INTEGER key, name TEXT, image TEXT, price REAL, num INTEGER, sent INTEGER)");
-        query2.prepare("SELECT * FROM sentModel WHERE name = ?");
-        query2.addBindValue(name);
-        query2.exec();
-
-        if (query2.next()) {
-            quint16 n = query2.value(4).toUInt();
-            query3.prepare("UPDATE sentModel SET num = ? WHERE name = ?" );
-            query3.addBindValue(n + num);
-            query3.addBindValue(name);
-            query3.exec();
-        }
-        else {
-            query3.prepare("INSERT INTO sentModel(orderNO, name, image, price, num, sent) VALUES (?, ?, ?, ?, ?, ?)");
-            query3.addBindValue(orderNO);
-            query3.addBindValue(name);
-            query3.addBindValue(image);
-            query3.addBindValue(price);
-            query3.addBindValue(num);
-            query3.addBindValue(1);
-            query3.exec();
-        }*/
     }
     query.exec("DELETE FROM unsentModel");
     out << 0xFFFF;

@@ -57,5 +57,8 @@
         <file>qml/SentView.qml</file>
         <file>qml/UnsentView.qml</file>
         <file>qml/ShopcarList.qml</file>
+        <file>qml/SeatView.qml</file>
+        <file>qml/SeatCategory.qml</file>
+        <file>qml/SeatGrid.qml</file>
     </qresource>
 </RCC>

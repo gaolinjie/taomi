@@ -49,15 +49,15 @@ ListModel {
                 hotColor: "#d54d34"
                 slotQml: "rect.qml"
                 image: "qrc:/images/skaner.png"
-                title: "优惠"
+                title: "优 惠"
                 style: "ICON_RECT"
             },
             ListElement {
                 rectColor: "#6e155f"
                 hotColor: "#d54d34"
-                slotQml: "rect.qml"
+                slotQml: "SeatView.qml"
                 image: "qrc:/images/POI.png"
-                title: "座位"
+                title: "座 位"
                 style: "ICON_RECT"
             },
             ListElement {
@@ -101,7 +101,7 @@ ListModel {
                 hotColor: "#d54d34"
                 slotQml: "rect.qml"
                 image: "qrc:/images/sett-big.png"
-                title: "设置"
+                title: "设 置"
                 style: "ICON_RECT"
             }
         ]
@@ -154,7 +154,7 @@ ListModel {
                 hotColor: "#d54d34"
                 slotQml: "rect.qml"
                 image: "qrc:/images/tasks.png"
-                title: "记录"
+                title: "记 录"
                 style: "ICON_RECT"
             },
             ListElement {
@@ -171,7 +171,7 @@ ListModel {
                 hotColor: "#d54d34"
                 slotQml: "rect.qml"
                 image: "qrc:/images/rss.png"
-                title: "新闻"
+                title: "新 闻"
                 style: "ICON_RECT"
             }
         ]
@@ -197,7 +197,7 @@ ListModel {
                 hotColor: "#d54d34"
                 slotQml: "rect.qml"
                 image: "qrc:/images/video.png"
-                title: "视频"
+                title: "视 频"
                 style: "ICON_RECT"
             },
             ListElement {
@@ -205,7 +205,7 @@ ListModel {
                 hotColor: "#d54d34"
                 slotQml: "rect.qml"
                 image: "qrc:/images/search.png"
-                title: "搜索"
+                title: "搜 索"
                 style: "ICON_RECT"
             }
         ]
@@ -276,7 +276,7 @@ ListModel {
                 hotColor: "#d54d34"
                 slotQml: "rect.qml"
                 image: "qrc:/images/favs.png"
-                title: "喜欢"
+                title: "喜 欢"
                 style: "ICON_RECT"
             }
         ]
