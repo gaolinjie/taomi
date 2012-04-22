@@ -136,4 +136,28 @@ bool OrderManager::isHaveNewOrder()
     }
 }
 
+qint16 OrderManager::getSeatNO() const
+{
+    QSqlQuery query;
+    query.exec("SELECT * FROM currentSeatModel");
+    if (query.next()) {
+        qint16 s = query.value(0).toUInt();
+        return s;
+    }
+    else {
+        qDebug() << TAG << "Not set seatNO yet" << __FILE__ << __LINE__;
+        return -1;
+    }
+}
+
+void OrderManager::setSeatNO(const quint16 &s)
+{
+    QSqlQuery query;
+    query.exec("DROP TABLE currentSeatModel");
+    query.exec("CREATE TABLE IF NOT EXISTS currentSeatModel(sid INTEGER key)");
+    query.prepare("INSERT INTO currentSeatModel(sid) VALUES (?)");
+    query.addBindValue(s);
+    query.exec();
+}
+
 

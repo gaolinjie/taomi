@@ -100,30 +100,40 @@ Item {
                 onPressed: {
                     if (orderManager.isHaveNewOrder())
                     {
-                        sendButton.color = Global.hotColor
+                        sendButton.color = Global.hotColor;
                     }
                 }
                 onClicked: {
-                    if (orderManager.isHaveNewOrder())
+                    if (orderManager.getSeatNO() == -1)
                     {
+                        foreground.visible = true;
+                        dialogAlert.visible = true;
+                        dialogAlert.content = "  您还未选择座位，请先选择座位再试！";
+                        dialogAlert.y = 275;
+                        return;
+                    }
+
+                    if (orderManager.isHaveNewOrder())
+                    {                        
                         if (deviceManager.isRegistered()) {
-                            foreground.visible = true
-                            dialogSend.visible = true
-                            dialogSend.y = 275
-                            sendButton.color = "grey"
+                            foreground.visible = true;
+                            dialogSend.visible = true;
+                            dialogAlert.content = "  服务器未能连接，请稍后再试！";
+                            dialogSend.y = 275;
+                            sendButton.color = "grey";
                         }
                         else {
-                            foreground.visible = true
-                            dialogAlert.visible = true
-                            dialogAlert.y = 275
-                            deviceManager.registerDevice()
+                            foreground.visible = true;
+                            dialogAlert.visible = true;
+                            dialogAlert.y = 275;
+                            deviceManager.registerDevice();
                         }
                     }
                 }
                 onReleased: {
                     if (orderManager.isHaveNewOrder())
                     {
-                        sendButton.color = Global.rectColor
+                        sendButton.color = Global.rectColor;
                     }
                 }               
             }

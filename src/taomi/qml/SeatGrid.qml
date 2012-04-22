@@ -40,6 +40,7 @@ GridView {
                  anchors.fill: parent
 
                  onClicked: {
+                     orderManager.setSeatNO(sid);
                      for (var i = 0; i < seatView.model.count; i++) {
                          if (seatView.model.get(i).sid == sid) {
                              seatView.model.setProperty(i, "active", 1);
@@ -47,7 +48,7 @@ GridView {
                          else {
                              seatView.model.setProperty(i, "active", 0);
                          }
-                     }
+                     }                   
                  }
              }
         }
@@ -244,5 +245,21 @@ GridView {
                 }
             )
         }
+/*
+        function saveItemsData() {
+            var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
+            db.transaction(
+                function(tx) {
+                    tx.executeSql('DROP TABLE seatCategoryModel');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS seatModel(sid INTEGER key, cid INTEGER, seat TEXT, active INTEGER)');
+                    var index = 0;
+                    while (index < seatModel.count) {
+                        var item = seatModel.get(index);
+                        tx.executeSql('INSERT INTO seatModel VALUES(?,?,?,?)', [item.sid, item.cid, item.seat, item.active]);
+                        index++;
+                    }
+                }
+            )
+        }*/
     }
 }

@@ -35,7 +35,6 @@ Item {
         onChangeSeatType: {
             seatView.source = "";
             timer3.running = true;
-            //seatView.source = "qrc:/qml/SeatGrid.qml";
         }
     }
 

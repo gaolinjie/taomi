@@ -27,7 +27,7 @@ Client::~Client()
 
 void Client::sendOrder()
 {
-    quint16 seatNO = 1; // 暂时定义
+    quint16 seatNO = getSeatNO();
 
     block = new QByteArray();
     QDataStream out(block, QIODevice::WriteOnly);
@@ -121,4 +121,18 @@ void Client::error()
 void Client::closeConnection()
 {
     tcpSocket.close();
+}
+
+quint16 Client::getSeatNO()
+{
+    QSqlQuery query;
+    query.exec("SELECT * FROM currentSeatModel");
+    if (query.next()) {
+        quint16 s = query.value(0).toUInt();
+        return s;
+    }
+    else {
+        qDebug() << TAG << "Not set seatNO yet" << __FILE__ << __LINE__;
+        return -1;
+    }
 }

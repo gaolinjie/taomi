@@ -25,6 +25,9 @@ private slots:
     void connectionClosedByServer();
     void error();
 
+public:
+    quint16 getSeatNO();
+
 private:
     void connectToServer(const QString & serverIP);
     void connectToServer(const QHostAddress & address);
