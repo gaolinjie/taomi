@@ -10,6 +10,7 @@
 #include "client.h"
 #include "ordermanager.h"
 #include "devicemanager.h"
+#include "refreshmanager.h"
 
 int main(int argc, char *argv[])
 { 
@@ -32,9 +33,6 @@ int main(int argc, char *argv[])
     view.engine()->setOfflineStoragePath(path);
     QObject::connect((QObject*)view.engine(), SIGNAL(quit()), &a, SLOT(quit()));
 
-    view.setSource(QUrl("qrc:/qml/main.qml"));
-    view.show();
-
     QString md5;
     QString dbname="DemoDB";
     QByteArray ba;
@@ -50,6 +48,12 @@ int main(int argc, char *argv[])
         std::cerr << "Cannot open database" << std::endl;
         return 1;
     }
+
+    RefreshManager refreshManager;
+    view.rootContext()->setContextProperty("refreshManager", &refreshManager);
+
+    view.setSource(QUrl("qrc:/qml/main.qml"));
+    view.show();
 
     OrderManager orderManager;
     view.rootContext()->setContextProperty("server", &server);

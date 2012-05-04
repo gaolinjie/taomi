@@ -17,6 +17,7 @@ ListModel {
                 title: "特 色"
                 style: "IMAGE_RECT"
                 tag: "特色"
+                cid: 0
             },
             ListElement {
                 rectColor: "#5859b9"
@@ -34,6 +35,7 @@ ListModel {
                 title: "套 餐"
                 style: "IMAGE_RECT"
                 tag: "套餐"
+                cid: 1
             }
         ]
     }
@@ -68,6 +70,7 @@ ListModel {
                 title: "主 食"
                 style: "IMAGE_RECT"
                 tag: "主食"
+                cid: 2
             }
         ]
     }
@@ -86,6 +89,7 @@ ListModel {
                 title: "浓 汤"
                 style: "IMAGE_RECT"
                 tag: "浓汤"
+                cid: 3
             },
             ListElement {
                 rectColor: "#4eb3b9"
@@ -95,6 +99,7 @@ ListModel {
                 title: "小 食"
                 style: "IMAGE_RECT"
                 tag: "小食"
+                cid: 4
             },
             ListElement {
                 rectColor: "#de9317"
@@ -121,6 +126,7 @@ ListModel {
                 title: "红 酒"
                 style: "IMAGE_RECT"
                 tag: "红酒"
+                cid: 5
             },
             ListElement {
                 rectColor: "#6e155f"
@@ -130,6 +136,7 @@ ListModel {
                 title: "甜 品"
                 style: "IMAGE_RECT"
                 tag: "甜品"
+                cid: 6
             },
             ListElement {
                 rectColor: "#d54d34"
@@ -139,6 +146,7 @@ ListModel {
                 title: "拼 盘"
                 style: "IMAGE_RECT"
                 tag: "拼盘"
+                cid: 7
             }
         ]
     }
@@ -165,6 +173,7 @@ ListModel {
                 title: "炒 饭"
                 style: "IMAGE_RECT"
                 tag: "炒饭"
+                cid: 8
             },
             ListElement {
                 rectColor: "#de9317"
@@ -191,6 +200,7 @@ ListModel {
                 title: "食 谱"
                 style: "IMAGE_RECT"
                 tag: "食谱"
+                cid: 9
             },
             ListElement {
                 rectColor: "#4eb3b9"
@@ -225,6 +235,7 @@ ListModel {
                 title: "风 味"
                 style: "IMAGE_RECT"
                 tag: "风味"
+                cid: 10
             },
             ListElement {
                 rectColor: "#de9317"
@@ -234,6 +245,7 @@ ListModel {
                 title: "时 蔬"
                 style: "IMAGE_RECT"
                 tag: "时蔬"
+                cid: 11
             },
             ListElement {
                 rectColor: "#6e155f"
@@ -243,6 +255,7 @@ ListModel {
                 title: "煲 仔"
                 style: "IMAGE_RECT"
                 tag: "煲仔"
+                cid: 12
             }
         ]
     }
@@ -261,6 +274,7 @@ ListModel {
                 title: "沙 拉"
                 style: "IMAGE_RECT"
                 tag: "沙拉"
+                cid: 13
             },
             ListElement {
                 rectColor: "#034888"
@@ -270,6 +284,7 @@ ListModel {
                 title: "水 果"
                 style: "IMAGE_RECT"
                 tag: "水果"
+                cid: 14
             },
             ListElement {
                 rectColor: "#FF0097"

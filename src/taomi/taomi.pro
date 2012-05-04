@@ -9,7 +9,8 @@ SOURCES += \
     ordermanager.cpp \
     server.cpp \
     clientsocket.cpp \
-    devicemanager.cpp
+    devicemanager.cpp \
+    refreshmanager.cpp
 
 OTHER_FILES += \
     qml/main.qml \
@@ -85,7 +86,8 @@ HEADERS += \
     ordermanager.h \
     server.h \
     clientsocket.h \
-    devicemanager.h
+    devicemanager.h \
+    refreshmanager.h
 
 
 

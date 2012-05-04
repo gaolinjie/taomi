@@ -53,10 +53,6 @@ Item {
                 onClicked: {
                     itemsView.state = "gone"
                     timer.running = true
-
-                    while(itemsList.model.count > 3) {
-                        itemsList.model.remove(itemsList.model.count - 1)
-                    }
                 }
             }
         }
