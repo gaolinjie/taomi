@@ -8,7 +8,7 @@ RefreshManager::RefreshManager(QObject *parent) :
     QObject(parent)
 {
     // 临时
-    /*
+/*
     QSqlQuery query;
     query.exec("CREATE TABLE IF NOT EXISTS startModel(id INTEGER primary key, cid INTEGER, cursor INTEGER)");
     query.exec("INSERT INTO startModel(id, cid, cursor) VALUES (0, 0, 0)");
@@ -26,7 +26,7 @@ RefreshManager::RefreshManager(QObject *parent) :
     query.exec("INSERT INTO startModel(id, cid, cursor) VALUES (12, 12, 0)");
     query.exec("INSERT INTO startModel(id, cid, cursor) VALUES (13, 13, 0)");
     query.exec("INSERT INTO startModel(id, cid, cursor) VALUES (14, 14, 0)");
-    */
+*/
 }
 
 QString RefreshManager::getImageNext(quint16 cid)
@@ -42,7 +42,7 @@ QString RefreshManager::getImageNext(quint16 cid)
         cursor = query.value(2).toUInt();
     }
 
-    query.exec("CREATE TABLE IF NOT EXISTS itemsData(id INTEGER primary key, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL)");
+    query.exec("CREATE TABLE IF NOT EXISTS itemsData(iid INTEGER primary key, cursor INTEGER, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL)");
     query.prepare("SELECT * FROM itemsData WHERE cid = ?");
     query.addBindValue(cid);
     query.exec();
@@ -51,7 +51,7 @@ QString RefreshManager::getImageNext(quint16 cid)
     quint16 c = 0;
     while (query.next()) {
         if (c == cursor) {
-            image = query.value(4).toString();
+            image = query.value(5).toString();
         }
         c++;
     }
@@ -67,4 +67,11 @@ QString RefreshManager::getImageNext(quint16 cid)
     query.exec();
 
     return image;
+}
+
+quint16 RefreshManager::getRandom()
+{
+    quint16 r = (qrand()%8+1)*100 + (qrand()%8+1)*1000 + qrand()%3*10000;
+    qDebug() << QString("%1").arg(r);
+    return r;
 }

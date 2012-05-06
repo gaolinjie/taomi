@@ -13,6 +13,7 @@ signals:
     
 public slots:
     QString getImageNext(quint16 cid);
+    quint16 getRandom();
 };
 
 #endif // REFRESHMANAGER_H

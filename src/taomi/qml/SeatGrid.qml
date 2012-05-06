@@ -17,7 +17,7 @@ GridView {
     }
 
     Behavior on x {
-        NumberAnimation { duration: 400; easing.type: Easing.OutQuint}
+        NumberAnimation { duration: 200; easing.type: Easing.OutQuint}
     }
 
     Component {

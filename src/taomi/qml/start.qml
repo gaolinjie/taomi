@@ -3,6 +3,7 @@ import QtQuick 1.0
 Item {
     id: start
     width: 1280; height: 800
+    clip: true
 
     signal loadRect(string qmlFile)
 

@@ -49,10 +49,9 @@ Item {
 
     Timer {
         id: timer2
-        interval: getRandom()
+        interval: refreshManager.getRandom()
         repeat: true
         onTriggered: {
-            console.log(cid)
             if (imageNow.y == 0) {
                 imageNext.visible = true
                 imageNow.y = -imageNow.height;
@@ -65,12 +64,12 @@ Item {
                 imageNow.y = 0
                 timer.running = true
             }
-            timer2.interval = getRandom();
+            timer2.interval = refreshManager.getRandom();
         }
 
         function getRandom() {
             var r = Math.round(Math.random()*10000);
-            if (r < 3000) {
+            /*if (r < 3000) {
                 r = 3000;
             }
             else if (r < 4000) {
@@ -87,6 +86,9 @@ Item {
             }
             else if (r < 8000) {
                 r = 8000
+            }*/
+            if (r < 4000) {
+                r = 4000
             }
 
             return r;

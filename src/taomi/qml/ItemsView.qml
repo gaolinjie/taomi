@@ -8,6 +8,7 @@ Item {
     signal loadStart
     signal loadRect(string qmlFile)
     signal saveShopcar()
+    clip: true
 
     Image {
         id: background

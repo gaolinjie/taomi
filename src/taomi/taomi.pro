@@ -76,7 +76,29 @@ OTHER_FILES += \
     qml/ShopcarList.qml \
     qml/SeatView.qml \
     qml/SeatCategory.qml \
-    qml/SeatGrid.qml
+    qml/SeatGrid.qml \
+    images/Curry_laksa_soup.png \
+    images/Crushed_pea_tartines.png \
+    images/crimini_mushrooms_pasta.png \
+    images/Cranberry_Sauce.png \
+    images/ChristopherBreakfast.png \
+    images/Christmas_Brunch.png \
+    images/Cherry_amandines.png \
+    images/Chermoula_aubergine.png \
+    images/camping_breakfast_stirring.png \
+    images/camping_breakfast_copping.png \
+    images/camping_breakfast_coffee.png \
+    images/camping_breakfast.png \
+    images/butternut_squash_salad.png \
+    images/Butter_Nut_Soup.png \
+    images/Briwates_Recipe.png \
+    images/Briwates.png \
+    images/Blueberry_cake.png \
+    images/BerryPie.png \
+    images/BasilDrawing.png \
+    images/Basil.png \
+    images/asian_noodle_soup.png \
+    images/AlmondCookies.png
 
 RESOURCES += \
     resource.qrc
