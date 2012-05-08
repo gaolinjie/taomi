@@ -33,6 +33,9 @@ int main(int argc, char *argv[])
     view.engine()->setOfflineStoragePath(path);
     QObject::connect((QObject*)view.engine(), SIGNAL(quit()), &a, SLOT(quit()));
 
+    view.setSource(QUrl("qrc:/qml/main.qml"));
+    view.show();
+
     QString md5;
     QString dbname="DemoDB";
     QByteArray ba;
@@ -51,9 +54,6 @@ int main(int argc, char *argv[])
 
     RefreshManager refreshManager;
     view.rootContext()->setContextProperty("refreshManager", &refreshManager);
-
-    view.setSource(QUrl("qrc:/qml/main.qml"));
-    view.show();
 
     OrderManager orderManager;
     view.rootContext()->setContextProperty("server", &server);

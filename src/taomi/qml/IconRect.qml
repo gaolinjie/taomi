@@ -6,7 +6,6 @@ Rectangle {
     width: parent.width
     height: parent.height
     color: rectColor
-    state: columnState
 
     property string iconSource: ""
     property string iconTitle: ""
