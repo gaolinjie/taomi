@@ -4,7 +4,7 @@ import "../js/global.js" as Global
 ListModel {
     id: itemsModel
     Component.onCompleted: loadItemsData()
-//  Component.onDestruction: saveItemsData()
+  //Component.onDestruction: saveItemsData()
     function loadItemsData() {
         var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
         db.transaction(
@@ -27,73 +27,73 @@ ListModel {
                     }
                 } else {
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 0, "cid": 0, "tag": "特色", "name": "拌豆腐丝", "image": "qrc:/images/AlmondCookies.png", "detail": "", "price": 10.0},
-                                                     {"iid": 1, "cid": 0, "tag": "特色", "name": "白切鸡", "image": "qrc:/images/asian_noodle_soup.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 0, "cid": 0, "tag": "特色", "name": "拌豆腐丝", "image": "file:///C:/Users/gao/pics/AlmondCookies.png", "detail": "", "price": 10.0},
+                                                     {"iid": 1, "cid": 0, "tag": "特色", "name": "白切鸡", "image": "file:///C:/Users/gao/pics/asian_noodle_soup.png", "detail": "", "price": 10.5}]});
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 2, "cid": 0, "tag": "特色", "name": "白菜心拌蜇头", "image": "qrc:/images/baba-ganoush.png", "detail": "", "price": 10.0},
-                                                     {"iid": 3, "cid": 0, "tag": "特色", "name": "白灵菇扣鸭掌", "image": "qrc:/images/Basil.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 2, "cid": 0, "tag": "特色", "name": "白菜心拌蜇头", "image": "file:///C:/Users/gao/pics/baba-ganoush.png", "detail": "", "price": 10.0},
+                                                     {"iid": 3, "cid": 0, "tag": "特色", "name": "白灵菇扣鸭掌", "image": "file:///C:/Users/gao/pics/Basil.png", "detail": "", "price": 10.5}]});
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 4, "cid": 0, "tag": "特色", "name": "拌双耳", "image": "qrc:/images/BasilDrawing.png", "detail": "", "price": 10.0},
-                                                     {"iid": 5, "cid": 0, "tag": "特色", "name": "冰梅凉瓜", "image": "qrc:/images/BerryPie.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 4, "cid": 0, "tag": "特色", "name": "拌双耳", "image": "file:///C:/Users/gao/pics/BasilDrawing.png", "detail": "", "price": 10.0},
+                                                     {"iid": 5, "cid": 0, "tag": "特色", "name": "冰梅凉瓜", "image": "file:///C:/Users/gao/pics/BerryPie.png", "detail": "", "price": 10.5}]});
                     itemsModel.append({"segment": 1,
-                                          "column": [{"iid": 6, "cid": 0, "tag": "特色", "name": "冰镇芥兰", "image": "qrc:/images/BimBimBop.png", "detail": "", "price": 10.0},
-                                                     {"iid": 7, "cid": 0, "tag": "特色", "name": "白灵菇扣鸭掌", "image": "qrc:/images/Blueberry_cake.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 6, "cid": 0, "tag": "特色", "name": "冰镇芥兰", "image": "file:///C:/Users/gao/pics/BimBimBop.png", "detail": "", "price": 10.0},
+                                                     {"iid": 7, "cid": 0, "tag": "特色", "name": "白灵菇扣鸭掌", "image": "file:///C:/Users/gao/pics/Blueberry_cake.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 8, "cid": 2, "tag": "套餐", "name": "朝鲜辣白菜", "image": "qrc:/images/Blueberry_muffins.png", "detail": "", "price": 10.0},
-                                                     {"iid": 9, "cid": 2, "tag": "套餐", "name": "陈皮兔肉", "image": "qrc:/images/Briwates.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 8, "cid": 2, "tag": "套餐", "name": "朝鲜辣白菜", "image": "file:///C:/Users/gao/pics/Blueberry_muffins.png", "detail": "", "price": 10.0},
+                                                     {"iid": 9, "cid": 2, "tag": "套餐", "name": "陈皮兔肉", "image": "file:///C:/Users/gao/pics/Briwates.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 10, "cid": 5, "tag": "主食", "name": "川北凉粉", "image": "qrc:/images/Briwates_Recipe.png", "detail": "", "price": 10.0},
-                                                     {"iid": 11, "cid": 5, "tag": "主食", "name": "刺身凉瓜", "image": "qrc:/images/Butter_Nut_Soup.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 10, "cid": 5, "tag": "主食", "name": "川北凉粉", "image": "file:///C:/Users/gao/pics/Briwates_Recipe.png", "detail": "", "price": 10.0},
+                                                     {"iid": 11, "cid": 5, "tag": "主食", "name": "刺身凉瓜", "image": "file:///C:/Users/gao/pics/Butter_Nut_Soup.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 12, "cid": 6, "tag": "浓汤", "name": "豆豉多春鱼", "image": "qrc:/images/butternut_squash_salad.png", "detail": "", "price": 10.0},
-                                                     {"iid": 13, "cid": 6, "tag": "浓汤", "name": "夫妻肺片", "image": "qrc:/images/camping_breakfast.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 12, "cid": 6, "tag": "浓汤", "name": "豆豉多春鱼", "image": "file:///C:/Users/gao/pics/butternut_squash_salad.png", "detail": "", "price": 10.0},
+                                                     {"iid": 13, "cid": 6, "tag": "浓汤", "name": "夫妻肺片", "image": "file:///C:/Users/gao/pics/camping_breakfast.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 14, "cid": 7, "tag": "小食", "name": "干拌牛舌", "image": "qrc:/images/camping_breakfast_coffee.png", "detail": "", "price": 10.0},
-                                                     {"iid": 15, "cid": 7, "tag": "小食", "name": "干拌顺风", "image": "qrc:/images/camping_breakfast_copping.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 14, "cid": 7, "tag": "小食", "name": "干拌牛舌", "image": "file:///C:/Users/gao/pics/camping_breakfast_coffee.png", "detail": "", "price": 10.0},
+                                                     {"iid": 15, "cid": 7, "tag": "小食", "name": "干拌顺风", "image": "file:///C:/Users/gao/pics/camping_breakfast_copping.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 16, "cid": 9, "tag": "红酒", "name": "怪味牛腱", "image": "qrc:/images/camping_breakfast_stirring.png", "detail": "", "price": 10.0},
-                                                     {"iid": 17, "cid": 9, "tag": "红酒", "name": "红心鸭卷", "image": "qrc:/images/Carrot-Ginger-Soup.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 16, "cid": 9, "tag": "红酒", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/camping_breakfast_stirring.png", "detail": "", "price": 10.0},
+                                                     {"iid": 17, "cid": 9, "tag": "红酒", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/Carrot-Ginger-Soup.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 18, "cid": 10, "tag": "甜品", "name": "怪味牛腱", "image": "qrc:/images/CheeseStraws.png", "detail": "", "price": 10.0},
-                                                     {"iid": 19, "cid": 10, "tag": "甜品", "name": "红心鸭卷", "image": "qrc:/images/Chermoula_aubergine.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 18, "cid": 10, "tag": "甜品", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/CheeseStraws.png", "detail": "", "price": 10.0},
+                                                     {"iid": 19, "cid": 10, "tag": "甜品", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/Chermoula_aubergine.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 20, "cid": 11, "tag": "拼盘", "name": "怪味牛腱", "image": "qrc:/images/Cherries.png", "detail": "", "price": 10.0},
-                                                     {"iid": 21, "cid": 11, "tag": "拼盘", "name": "红心鸭卷", "image": "qrc:/images/Cherry_amandines.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 20, "cid": 11, "tag": "拼盘", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/Cherries.png", "detail": "", "price": 10.0},
+                                                     {"iid": 21, "cid": 11, "tag": "拼盘", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/Cherry_amandines.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 22, "cid": 13, "tag": "炒饭", "name": "怪味牛腱", "image": "qrc:/images/Christmas_Brunch.png", "detail": "", "price": 10.0},
-                                                     {"iid": 23, "cid": 13, "tag": "炒饭", "name": "红心鸭卷", "image": "qrc:/images/ChristopherBreakfast.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 22, "cid": 13, "tag": "炒饭", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/Christmas_Brunch.png", "detail": "", "price": 10.0},
+                                                     {"iid": 23, "cid": 13, "tag": "炒饭", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/ChristopherBreakfast.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 24, "cid": 15, "tag": "食谱", "name": "怪味牛腱", "image": "qrc:/images/Cranberry_Sauce.png", "detail": "", "price": 10.0},
-                                                     {"iid": 25, "cid": 15, "tag": "食谱", "name": "红心鸭卷", "image": "qrc:/images/crimini_mushrooms_pasta.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 24, "cid": 15, "tag": "食谱", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/Cranberry_Sauce.png", "detail": "", "price": 10.0},
+                                                     {"iid": 25, "cid": 15, "tag": "食谱", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/crimini_mushrooms_pasta.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 26, "cid": 18, "tag": "风味", "name": "怪味牛腱", "image": "qrc:/images/Crushed_pea_tartines.png", "detail": "", "price": 10.0},
-                                                     {"iid": 27, "cid": 18, "tag": "风味", "name": "红心鸭卷", "image": "qrc:/images/Curry_laksa_soup.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 26, "cid": 18, "tag": "风味", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/Crushed_pea_tartines.png", "detail": "", "price": 10.0},
+                                                     {"iid": 27, "cid": 18, "tag": "风味", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/Curry_laksa_soup.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 28, "cid": 19, "tag": "时蔬", "name": "怪味牛腱", "image": "qrc:/images/Kermit-Lynch-Wine.png", "detail": "", "price": 10.0},
-                                                     {"iid": 29, "cid": 19, "tag": "时蔬", "name": "红心鸭卷", "image": "qrc:/images/rustic_soup.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 28, "cid": 19, "tag": "时蔬", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/Kermit-Lynch-Wine.png", "detail": "", "price": 10.0},
+                                                     {"iid": 29, "cid": 19, "tag": "时蔬", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/rustic_soup.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 30, "cid": 20, "tag": "煲仔", "name": "怪味牛腱", "image": "qrc:/images/Salmon_with_pesto.png", "detail": "", "price": 10.0},
-                                                     {"iid": 31, "cid": 20,"tag": "煲仔", "name": "红心鸭卷", "image": "qrc:/images/SeaFoodStew.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 30, "cid": 20, "tag": "煲仔", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/Salmon_with_pesto.png", "detail": "", "price": 10.0},
+                                                     {"iid": 31, "cid": 20,"tag": "煲仔", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/SeaFoodStew.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 32, "cid": 21, "tag": "沙拉", "name": "怪味牛腱", "image": "qrc:/images/Soft_Scamble_Breakfast.png", "detail": "", "price": 10.0},
-                                                     {"iid": 33, "cid": 21, "tag": "沙拉", "name": "红心鸭卷", "image": "qrc:/images/Summer_Salad.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 32, "cid": 21, "tag": "沙拉", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/Soft_Scamble_Breakfast.png", "detail": "", "price": 10.0},
+                                                     {"iid": 33, "cid": 21, "tag": "沙拉", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/Summer_Salad.png", "detail": "", "price": 10.5}]});
 
                     itemsModel.append({"segment": 0,
-                                          "column": [{"iid": 34, "cid": 22, "tag": "水果", "name": "怪味牛腱", "image": "qrc:/images/Tagine.png", "detail": "", "price": 10.0},
-                                                     {"iid": 35, "cid": 22, "tag": "水果", "name": "红心鸭卷", "image": "qrc:/images/Tagine_Recipe.png", "detail": "", "price": 10.5}]});
+                                          "column": [{"iid": 34, "cid": 22, "tag": "水果", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/Tagine.png", "detail": "", "price": 10.0},
+                                                     {"iid": 35, "cid": 22, "tag": "水果", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/Tagine_Recipe.png", "detail": "", "price": 10.5}]});
 
                 }
             }

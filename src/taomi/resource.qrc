@@ -1,63 +1,25 @@
 <RCC>
     <qresource prefix="/">
         <file>images/add.png</file>
-        <file>images/AlmondCookies.png</file>
         <file>images/appbar.close.rest.png</file>
         <file>images/appbar.minus.rest.png</file>
         <file>images/appbar.new.rest.png</file>
-        <file>images/asian_noodle_soup.png</file>
-        <file>images/baba-ganoush.png</file>
         <file>images/back.png</file>
         <file>images/background.png</file>
-        <file>images/Basil.png</file>
-        <file>images/BasilDrawing.png</file>
-        <file>images/BerryPie.png</file>
-        <file>images/BimBimBop.png</file>
-        <file>images/Blueberry_cake.png</file>
-        <file>images/Blueberry_muffins.png</file>
-        <file>images/Briwates.png</file>
-        <file>images/Briwates_Recipe.png</file>
-        <file>images/Butter_Nut_Soup.png</file>
-        <file>images/butternut_squash_salad.png</file>
-        <file>images/camping_breakfast.png</file>
-        <file>images/camping_breakfast_coffee.png</file>
-        <file>images/camping_breakfast_copping.png</file>
-        <file>images/camping_breakfast_stirring.png</file>
-        <file>images/Carrot-Ginger-Soup.png</file>
-        <file>images/CheeseStraws.png</file>
-        <file>images/Chermoula_aubergine.png</file>
-        <file>images/Cherries.png</file>
-        <file>images/Cherry_amandines.png</file>
-        <file>images/Christmas_Brunch.png</file>
-        <file>images/ChristopherBreakfast.png</file>
         <file>images/close.png</file>
         <file>images/control-panel.png</file>
-        <file>images/Cranberry_Sauce.png</file>
-        <file>images/crimini_mushrooms_pasta.png</file>
-        <file>images/Crushed_pea_tartines.png</file>
-        <file>images/Curry_laksa_soup.png</file>
         <file>images/favs.png</file>
         <file>images/help.png</file>
-        <file>images/Kermit-Lynch-Wine.png</file>
         <file>images/minus.png</file>
         <file>images/note.png</file>
         <file>images/POI.png</file>
         <file>images/rss.png</file>
-        <file>images/rustic_soup.png</file>
-        <file>images/Salmon_with_pesto.png</file>
-        <file>images/SeaFoodStew.png</file>
         <file>images/search.png</file>
         <file>images/sett-big.png</file>
         <file>images/shadow.png</file>
         <file>images/skaner.png</file>
-        <file>images/Soft_Scamble_Breakfast.png</file>
         <file>images/store.png</file>
-        <file>images/Summer_Salad.png</file>
-        <file>images/Tagine.png</file>
-        <file>images/Tagine_Recipe.png</file>
         <file>images/tasks.png</file>
-        <file>images/Tomato-Basil-Lasagne.png</file>
-        <file>images/veggie_box.png</file>
         <file>images/video.png</file>
         <file>images/wether.png</file>
         <file>js/global.js</file>
