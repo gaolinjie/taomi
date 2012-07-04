@@ -1,1 +1,26 @@
-/home/gao/taomi/src/taomi-android/android/bin/classes.dex : \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes.dex : \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\example\taomi_android\BuildConfig.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\example\taomi_android\R$array.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\example\taomi_android\R$attr.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\example\taomi_android\R$drawable.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\example\taomi_android\R$layout.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\example\taomi_android\R$string.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\example\taomi_android\R.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\ministro\IMinistro$Stub$Proxy.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\ministro\IMinistro$Stub.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\ministro\IMinistro.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\ministro\IMinistroCallback$Stub$Proxy.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\ministro\IMinistroCallback$Stub.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\ministro\IMinistroCallback.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtActivity$1.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtActivity$2.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtActivity$3$1$1.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtActivity$3$1.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtActivity$3.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtActivity$4.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtActivity$5.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtActivity$6.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtActivity.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtApplication$InvokeResult.class \
+C:\Users\gao\Documents\GitHub\taomi\src\taomi-android\android\bin\classes\org\kde\necessitas\origo\QtApplication.class \
+C:\Android\android-sdk\tools\support\annotations.jar \

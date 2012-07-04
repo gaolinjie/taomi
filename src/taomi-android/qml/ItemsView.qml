@@ -7,6 +7,8 @@ Item {
     height: 800
     signal loadStart
     signal loadRect(string qmlFile)
+    signal saveShopcar()
+    clip: true
 
     Image {
         id: background
@@ -52,10 +54,6 @@ Item {
                 onClicked: {
                     itemsView.state = "gone"
                     timer.running = true
-
-                    while(itemsList.model.count > 3) {
-                        itemsList.model.remove(itemsList.model.count - 1)
-                    }
                 }
             }
         }
@@ -234,25 +232,44 @@ Item {
                         selectButton.color = Global.rectColor
                     }
                     onClicked: {
-                        if (shopcarList.model.count != 0) {
-                            for (var i = 0; i < shopcarList.model.count; i++) {
-                                if (shopcarList.model.get(i).name == itemsList.itemTitle) {
-                                    shopcarList.model.get(i).num++;
-                                    return;
-                                }
-                            }
-                            if (i == shopcarList.model.count) {
-                                shopcarList.model.append({"name": itemsList.itemTitle,
-                                                          "image": itemsList.itemImage,
-                                                          "price": itemsList.itemPrice,
-                                                          "num": 1});
-                            }
-                        }
-                        else {
-                            shopcarList.model.append({"name": itemsList.itemTitle,
+                        if (shopcarList.model.count == 0) {
+                            shopcarList.model.append({"orderNO": orderManager.orderNO,
+                                                      "name": itemsList.itemTitle,
                                                       "image": itemsList.itemImage,
                                                       "price": itemsList.itemPrice,
-                                                      "num": 1});
+                                                      "num": 1,
+                                                      "sent": 0});
+
+                        }
+                        else {
+                            var unsent = -1;
+                            var sent = -1;
+                            for (var i = 0; i < shopcarList.model.count; i++) {
+                                if (shopcarList.model.get(i).name == itemsList.itemTitle) {
+                                    if (shopcarList.model.get(i).sent == 0) {
+                                        unsent = i;
+                                    }
+                                    else {
+                                        sent = i;
+                                    }
+                                }
+                            }
+
+                            if (unsent == -1) {
+                                shopcarList.model.append({"orderNO": orderManager.orderNO,
+                                                          "name": itemsList.itemTitle,
+                                                          "image": itemsList.itemImage,
+                                                          "price": itemsList.itemPrice,
+                                                          "num": 1,
+                                                          "sent": 0});
+
+
+                            }
+                            else {
+                                shopcarList.model.get(unsent).num++;
+                            }
+                            unsent = 0
+                            sent = 0
                         }
                     }
                     onReleased: {
@@ -339,7 +356,7 @@ Item {
                     visible: flickArea.contentHeight > flickArea.height
                 }
             }
-}
+    }
 
 
         states: [
@@ -372,21 +389,16 @@ Item {
             z: 2
 
             Text {
-                x: 28; y: 40
+                x: 31; y: 40
                 text: "购物车"
                 font.pixelSize: 38
                 color: "white"
             }
         }
 
-        ListView {
+        ShopcarList {
             id: shopcarList
-            x: 30; y: 110; width: 200; height:400
-            model: ShopcarModel{}
-            delegate: ShopcarListDelegate{}
-            cacheBuffer: 1000
-            spacing: 25
-            smooth: true
+            x: 35; y: 100; width: 230; height:400
         }
 
         Rectangle {
@@ -397,7 +409,7 @@ Item {
 
             Rectangle {
                 id: sendButton
-                x: 31; y: 30
+                x: 36; y: 30
                 width: 79; height: 27
                 color: Global.hotColor
                 border.color: "white"
@@ -416,34 +428,18 @@ Item {
                         sendButton.color = Global.rectColor
                     }
                     onClicked: {
-                        saveItemsData()
+                        saveShopcar()
                         loadRect("ShopcarView.qml")
                     }
                     onReleased: {
                         sendButton.color = Global.hotColor
-                    }
-
-                    function saveItemsData() {
-                        var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
-                        db.transaction(
-                            function(tx) {
-                                tx.executeSql('DROP TABLE shopcarData');
-                                tx.executeSql('CREATE TABLE IF NOT EXISTS shopcarData(name TEXT, image TEXT, price MONEY, num INTEGER)');
-                                var index = 0;
-                                while (index < shopcarList.model.count) {
-                                    var item = shopcarList.model.get(index);
-                                    tx.executeSql('INSERT INTO shopcarData VALUES(?,?,?,?)', [item.name, item.image, item.price, item.num]);
-                                    index++;
-                                }
-                            }
-                        )
                     }
                 }
             }
 
             Rectangle {
                 id: returnButto
-                x: 139; y: 30
+                x: 144; y: 30
                 width: 79; height: 27
                 color: Global.hotColor
                 border.color: "white"

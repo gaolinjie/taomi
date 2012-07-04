@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /home/gao/taomi/src/taomi-android/android/src/org/kde/necessitas/ministro/IMinistroCallback.aidl
+ * Original file: C:\\Users\\gao\\Documents\\GitHub\\taomi\\src\\taomi-android\\android\\src\\org\\kde\\necessitas\\ministro\\IMinistroCallback.aidl
  */
 package org.kde.necessitas.ministro;
 public interface IMinistroCallback extends android.os.IInterface

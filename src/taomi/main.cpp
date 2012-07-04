@@ -2,7 +2,7 @@
 #include <QtDeclarative/QDeclarativeView>
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeContext>
-#include <iostream>
+//#include <iostream> // 会产生错误:预料中的符号 `;'
 #include <QtSql>
 #include <QDebug>
 
@@ -25,7 +25,8 @@ int main(int argc, char *argv[])
 
     Server server;
     if (!server.listen(QHostAddress::Any, 6177)) {
-        std::cerr << "Failed to bind to port" << std::endl;
+        //std::cerr << "Failed to bind to port" << std::endl;
+        qDebug() << "Failed to bind to port";
         return 1;
     }
 
@@ -48,7 +49,8 @@ int main(int argc, char *argv[])
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(path);
     if (!db.open()) {
-        std::cerr << "Cannot open database" << std::endl;
+        //std::cerr << "Cannot open database" << std::endl;
+        qDebug() << "Cannot open database";
         return 1;
     }
 

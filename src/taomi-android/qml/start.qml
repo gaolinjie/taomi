@@ -3,6 +3,7 @@ import QtQuick 1.0
 Item {
     id: start
     width: 1280; height: 800
+    clip: true
 
     signal loadRect(string qmlFile)
 
@@ -46,7 +47,7 @@ Item {
         cacheBuffer: 1000
         spacing: 6
         smooth: true
-        section.property: "columnCategory"
+        section.property: "segment"
         section.criteria: ViewSection.FullString
         section.delegate: startSpace
 
@@ -60,11 +61,6 @@ Item {
         Component.onCompleted: {
             timer.running = true
             listView.x = 30
-
-            for (var i = 0; i < listView.model.count; i++)
-            {
-                listView.model.get(i).columnState = "active"
-            }
         }
     }
 

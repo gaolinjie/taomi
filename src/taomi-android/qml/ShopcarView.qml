@@ -4,8 +4,17 @@ import "../js/global.js" as Global
 Item {
     id: itemsScreen
     width: 1280; height: 800
-    signal loadStart
+    signal loadStart()
     signal loadRect(string qmlFile)
+
+    Connections {
+        id: orderManagerConnection
+        target: orderManager
+        onClearShopcar: {
+            unsentView.model.clear()
+            sentView.model.clear()
+        }
+    }
 
     Image {
         id: background
@@ -55,26 +64,27 @@ Item {
             }
         }
 
-        GridView {
-            id: shopcarView
+        Text {
+            id: unsendedButton
+            text: "未发送的菜单◢"
+            anchors.left: viewTitle.left; anchors.leftMargin: 5
+            anchors.top: viewTitle.bottom; anchors.topMargin: 35
+            font.pixelSize: 20
+            color: "white"
+        }
+
+        UnsentView {
+            id: unsentView
             anchors.left: viewTitle.left; anchors.leftMargin: 3
-            anchors.top: viewTitle.bottom; anchors.topMargin: 40
-            model: ShopcarModel{}
-            delegate: ShopcarViewDelegate{}
-            cacheBuffer: 100
-            cellWidth: 301
-            cellHeight: 223
-            width: 1000
-            height: 446
-            flow: GridView.TopToBottom
+            anchors.top: viewTitle.bottom; anchors.topMargin: 70
         }
 
         Rectangle {
             id: sendButton
-            anchors.left: shopcarView.left; anchors.leftMargin: 1
-            anchors.top: shopcarView.bottom; anchors.topMargin: 35
+            anchors.left: unsentView.left; anchors.leftMargin: 6
+            anchors.top: unsentView.bottom; anchors.topMargin: 5
             width: 79; height: 27
-            color: Global.rectColor
+            color: orderManager.isHaveNewOrder() ? Global.rectColor : "grey"
             border.color: "white"
             border.width: 2
 
@@ -88,17 +98,60 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onPressed: {
-                    sendButton.color = Global.hotColor
+                    if (orderManager.isHaveNewOrder())
+                    {
+                        sendButton.color = Global.hotColor;
+                    }
                 }
-                onClicked: {                   
-                    foreground.visible = true
-                    dialog.visible = true
-                    dialog.y = 275
+                onClicked: {
+                    if (orderManager.getSeatNO() == -1)
+                    {
+                        foreground.visible = true;
+                        dialogAlert.visible = true;
+                        dialogAlert.content = "  您还未选择座位，请先选择座位再试！";
+                        dialogAlert.y = 275;
+                        return;
+                    }
+
+                    if (orderManager.isHaveNewOrder())
+                    {                        
+                        if (deviceManager.isRegistered()) {
+                            foreground.visible = true;
+                            dialogSend.visible = true;
+                            dialogAlert.content = "  服务器未能连接，请稍后再试！";
+                            dialogSend.y = 275;
+                            sendButton.color = "grey";
+                        }
+                        else {
+                            foreground.visible = true;
+                            dialogAlert.visible = true;
+                            dialogAlert.y = 275;
+                            deviceManager.registerDevice();
+                        }
+                    }
                 }
                 onReleased: {
-                    sendButton.color = Global.rectColor
+                    if (orderManager.isHaveNewOrder())
+                    {
+                        sendButton.color = Global.rectColor;
+                    }
                 }               
             }
+        }
+
+        Text {
+            id: sendedButton
+            text: "已发送的菜单◢"
+            anchors.left: unsendedButton.left
+            anchors.top: sendButton.bottom; anchors.topMargin: 50
+            font.pixelSize: 20
+            color: "white"
+        }
+
+        SentView {
+            id: sentView
+            anchors.left: unsentView.left
+            anchors.top: sendedButton.bottom; anchors.topMargin: 15
         }
 
         Rectangle {
@@ -110,87 +163,65 @@ Item {
             visible: false
         }
 
-        Rectangle {
-            id: dialog
-            y: 800
-            width: 1280; height: 250
-            color: Global.hotColor
-            visible: false
+        Dialog {
+            id: dialogSend
+            content: "  发送您点的菜单到厨房？"
 
-            Behavior on y {
-                NumberAnimation { duration: 400; easing.type: Easing.OutQuint}
+            onOk: {
+                dialogSend.y = 800
+                foreground.visible = false
+                refreshUi();
+                timer2.running = true;
             }
 
-            Text {
-                id: sendPrompt
-                text: "  发送您点的菜单到厨房？"
-                color: "white"
-                font.pixelSize: 28
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom; anchors.bottomMargin: 140
-            }
-
-            Rectangle {
-                id: okButton
-                anchors.right: dialog.horizontalCenter; anchors.rightMargin: 20
-                anchors.bottom: dialog.bottom; anchors.bottomMargin: 70
-                width: 79; height: 27
-                color: Global.hotColor
-                border.color: "white"
-                border.width: 2
-
-                Text {
-                    text: "确 定"
-                    anchors.centerIn: parent
-                    color: "white"
-                    font.pixelSize: 16
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onPressed: {
-                        okButton.color = Global.rectColor
-                    }
-                    onClicked: {
-                        client.sendOrder()
-                        dialog.y = 800
-                        foreground.visible = false
-                    }
-                    onReleased: {
-                        okButton.color = Global.hotColor
-                    }
+            Timer {
+                id: timer2
+                interval: 300
+                running: false
+                onTriggered: {
+                    orderManager.sendOrder();
                 }
             }
 
-            Rectangle {
-                id: cancelButton
-                anchors.left: dialog.horizontalCenter; anchors.leftMargin: 20
-                anchors.bottom: dialog.bottom; anchors.bottomMargin: 70
-                width: 79; height: 27
-                color: Global.hotColor
-                border.color: "white"
-                border.width: 2
+            onCancel: {
+                dialogSend.y = 800
+                foreground.visible = false
+            }
 
-                Text {
-                    text: "取 消"
-                    anchors.centerIn: parent
-                    color: "white"
-                    font.pixelSize: 16
-                }
+            function refreshUi() {
+                var i = 0;
+                var j = 0;
+                for (i = 0; i < unsentView.model.count; i++) {
+                    var unsent = unsentView.model.get(i);
+                    for (j = 0; j < sentView.model.count; j++) {
+                        var sent = sentView.model.get(j);
+                        if (unsent.name == sent.name) {
+                            sentView.model.setProperty(j, "num", Number(unsent.num) + Number(sent.num));
+                            break;
+                        }
+                    }
 
-                MouseArea {
-                    anchors.fill: parent
-                    onPressed: {
-                        cancelButton.color = Global.rectColor
-                    }
-                    onClicked: {
-                        dialog.y = 800
-                        foreground.visible = false
-                    }
-                    onReleased: {
-                        cancelButton.color = Global.hotColor
+                    if (j == sentView.model.count) {
+                        unsent.sent = 1;
+                        sentView.model.append(unsent);
                     }
                 }
+                unsentView.model.clear();
+            }
+        }
+
+        AlertDialog {
+            id: dialogAlert
+            content: "  服务器未能连接，请稍后再试！"
+
+            onOk: {
+                dialogAlert.y = 800
+                foreground.visible = false
+            }
+
+            onCancel: {
+                dialogAlert.y = 800
+                foreground.visible = false
             }
         }
 

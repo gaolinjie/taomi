@@ -6,18 +6,16 @@ Component {
     Item {
         width: 300; height: 465
         Column {
-            id: column
+            id: col
             anchors.centerIn: parent
             spacing: 6
 
             Repeater {
-                model: columnModel
+                model: column
 
                 Item {
                     id: wraper
-                    width: 47; height: 24
-                    state: 'active'
-                    opacity: 0
+                    width: 300; height: 150
 
                     Component.onCompleted: {
                         var component;
@@ -31,31 +29,6 @@ Component {
                             component.createObject(wraper, {"iconSource": image, "iconTitle": title});
                         }
                     }
-
-                    states: State {
-                        name: "active"
-                        PropertyChanges { target: wraper; width: 300; height: 150; opacity: 1 }
-                    }
-
-                    transitions: [
-                        Transition {
-                            from: 'normal'; to: 'active'
-
-                            NumberAnimation {
-                                target: wraper
-                                properties: 'width, height'
-                                duration: sizeDuration
-                                easing.type: Easing.Linear
-                            }
-
-                            NumberAnimation {
-                                target: wraper
-                                properties: 'opacity'
-                                duration: opacityDuration
-                                easing.type: Easing.Linear
-                            }
-                        }
-                    ]
                 }
             }
         }

@@ -1,18 +1,23 @@
 import QtQuick 1.0
+import "../js/global.js" as Global
 
 Rectangle {
     id: rect
     width: parent.width
     height: parent.height
     color: rectColor
-    state: columnState
 
     property string iconSource: ""
     property string iconTitle: ""
 
     MouseArea{
         anchors.fill: parent
-        onClicked: loadRect(slotQml)
+        onClicked: {
+            Global.rectColor = rectColor
+            Global.hotColor = hotColor
+            Global.title = title
+            loadRect(slotQml)
+        }
     }
 
     Image {
