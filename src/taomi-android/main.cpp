@@ -18,10 +18,12 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
-
+/*
     QString privatePathQt(QApplication::applicationDirPath());
     QString path(privatePathQt);
     path = QDir::toNativeSeparators(path);
+*/
+    QString path = "/sdcard/taomi-android";
 
     Server server;
     if (!server.listen(QHostAddress::Any, 6177)) {
