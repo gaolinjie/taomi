@@ -98,7 +98,9 @@ OTHER_FILES += \
     images/BasilDrawing.png \
     images/Basil.png \
     images/asian_noodle_soup.png \
-    images/AlmondCookies.png
+    images/AlmondCookies.png \
+    qml/SyncView.qml \
+    images/Cloud-refresh.png
 
 RESOURCES += \
     resource.qrc

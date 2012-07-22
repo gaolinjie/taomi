@@ -7,7 +7,7 @@ Component {
         width: 300; height: 465
         Column {
             id: col
-            anchors.centerIn: parent
+            //anchors.centerIn: parent
             spacing: 6
 
             Repeater {

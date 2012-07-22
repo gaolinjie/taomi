@@ -20,23 +20,29 @@ ListModel {
                         if (index + 2 == rs.rows.length) {
                             item1 = rs.rows.item(index+1);
                             item2 = '';
+                            startModel.append({"segment": Math.floor(index/9),
+                                               "column": [{"cid": item0.cid, "cursor": item0.cursor, "title": item0.title, "image": item0.image, "style": item0.style, "slotQml": item0.slotQml, "rectColor": item0.rectColor, "hotColor": item0.hotColor},
+                                                          {"cid": item1.cid, "cursor": item1.cursor, "title": item1.title, "image": item1.image, "style": item1.style, "slotQml": item1.slotQml, "rectColor": item1.rectColor, "hotColor": item1.hotColor}]});
                         }
                         else if (index + 1 == rs.rows.length) {                         
                             item1 = '';
                             item2 = '';
+                            startModel.append({"segment": Math.floor(index/9),
+                                               "column": [{"cid": item0.cid, "cursor": item0.cursor, "title": item0.title, "image": item0.image, "style": item0.style, "slotQml": item0.slotQml, "rectColor": item0.rectColor, "hotColor": item0.hotColor}]});
                         }
                         else {
                             item1 = rs.rows.item(index+1);
                             item2 = rs.rows.item(index+2);
+                            startModel.append({"segment": Math.floor(index/9),
+                                               "column": [{"cid": item0.cid, "cursor": item0.cursor, "title": item0.title, "image": item0.image, "style": item0.style, "slotQml": item0.slotQml, "rectColor": item0.rectColor, "hotColor": item0.hotColor},
+                                                          {"cid": item1.cid, "cursor": item1.cursor, "title": item1.title, "image": item1.image, "style": item1.style, "slotQml": item1.slotQml, "rectColor": item1.rectColor, "hotColor": item1.hotColor},
+                                                          {"cid": item2.cid, "cursor": item2.cursor, "title": item2.title, "image": item2.image, "style": item2.style, "slotQml": item2.slotQml, "rectColor": item2.rectColor, "hotColor": item2.hotColor}]});
                         }
 
-                        startModel.append({"segment": Math.floor(index/9),
-                                           "column": [{"cid": item0.cid, "cursor": item0.cursor, "title": item0.title, "image": item0.image, "style": item0.style, "slotQml": item0.slotQml, "rectColor": item0.rectColor, "hotColor": item0.hotColor},
-                                                      {"cid": item1.cid, "cursor": item1.cursor, "title": item1.title, "image": item1.image, "style": item1.style, "slotQml": item1.slotQml, "rectColor": item1.rectColor, "hotColor": item1.hotColor},
-                                                      {"cid": item2.cid, "cursor": item2.cursor, "title": item2.title, "image": item2.image, "style": item2.style, "slotQml": item2.slotQml, "rectColor": item2.rectColor, "hotColor": item2.hotColor}]});
+
                         index+=3;
                     }
-                } else {
+                } else {/*
                     startModel.append({"segment": 0,
                                        "column": [{"cid": 0, cursor: 0, "title": "特 色", "image": "file:///C:/Users/gao/pics/AlmondCookies.png", "style": "IMAGE_RECT", "slotQml": "ItemsView.qml", "rectColor": "#de9317", "hotColor": "#d54d34"},
                                                   {"cid": 1, cursor: 0, "title": "购物车", "image": "qrc:/images/note.png", "style": "ICON_RECT", "slotQml": "ShopcarView.qml", "rectColor": "#5859b9", "hotColor": "#d54d34"},
@@ -71,7 +77,7 @@ ListModel {
                                        "column": [{"cid": 21, cursor: 0, "title": "沙 拉", "image": "file:///C:/Users/gao/pics/Soft_Scamble_Breakfast.png", "style": "IMAGE_RECT", "slotQml": "ItemsView.qml", "rectColor": "#5859b9", "hotColor": "#d54d34"},
                                                   {"cid": 22, cursor: 0, "title": "水 果", "image":  "file:///C:/Users/gao/pics/Tagine.png", "style": "IMAGE_RECT", "slotQml": "ItemsView.qml", "rectColor": "#034888", "hotColor": "#d54d34"},
                                                   {"cid": 23, cursor: 0, "title": "喜 欢", "image": "qrc:/images/favs.png", "style": "ICON_RECT", "slotQml": "rect.qml", "rectColor": "#FF0097", "hotColor": "#4eb3b9"}]});
-                }
+                */}
             }
         )
     }

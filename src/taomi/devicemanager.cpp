@@ -69,7 +69,7 @@ QString DeviceManager::getDeviceIP()
     QString ip;
     if (qni->addressEntries().isEmpty())
     {
-        qCritical() << TAG << "ERROR: Cannot find wireless network hardware" << __FILE__ << __LINE__ ;
+        //qCritical() << TAG << "ERROR: Cannot find wireless network hardware" << __FILE__ << __LINE__ ;
     }
     else
     {

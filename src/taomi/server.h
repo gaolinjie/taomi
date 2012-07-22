@@ -13,10 +13,12 @@ public:
 signals:
     void refreshUi();
     void paied(quint32 orderNO);
+    void sync();
 
 private slots:
     void sendRefreshUiSignal();
     void sendPaiedSignal(quint32 orderNO);
+    void sendSyncSignal();
 
 private:
     void incomingConnection(int socketId);

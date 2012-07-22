@@ -43,5 +43,8 @@
         <file>qml/StartDelegate.qml</file>
         <file>qml/StartModel.qml</file>
         <file>qml/UnsentView.qml</file>
+        <file>qml/SyncView.qml</file>
+        <file>images/cloud_download.png</file>
+        <file>images/Cloud-refresh.png</file>
     </qresource>
 </RCC>

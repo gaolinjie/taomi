@@ -18,14 +18,17 @@ ListModel {
                         var item1 = rs.rows.item(index+1);
                         if (index + 1 == rs.rows.length) {
                             item1 = ''
+                            itemsModel.append({"segment": Math.floor(index/6),
+                                               "column": [{"iid": item0.iid, "cid": item0.cid, "tag": item0.tag, "name": item0.name, "image": item0.image, "detail": item0.detail, "price": item0.price}]});
                         }
-
-                        itemsModel.append({"segment": Math.floor(index/6),
-                                           "column": [{"iid": item0.iid, "cid": item0.cid, "tag": item0.tag, "name": item0.name, "image": item0.image, "detail": item0.detail, "price": item0.price},
-                                                         {"iid": item1.iid, "cid": item1.cid, "tag": item1.tag, "name": item1.name, "image": item1.image, "detail": item1.detail, "price": item1.price}]});
+                        else {
+                            itemsModel.append({"segment": Math.floor(index/6),
+                                               "column": [{"iid": item0.iid, "cid": item0.cid, "tag": item0.tag, "name": item0.name, "image": item0.image, "detail": item0.detail, "price": item0.price},
+                                                             {"iid": item1.iid, "cid": item1.cid, "tag": item1.tag, "name": item1.name, "image": item1.image, "detail": item1.detail, "price": item1.price}]});
+                        }
                         index+=2;
                     }
-                } else {
+                } else {/*
                     itemsModel.append({"segment": 0,
                                           "column": [{"iid": 0, "cid": 0, "tag": "特色", "name": "拌豆腐丝", "image": "file:///C:/Users/gao/pics/AlmondCookies.png", "detail": "", "price": 10.0},
                                                      {"iid": 1, "cid": 0, "tag": "特色", "name": "白切鸡", "image": "file:///C:/Users/gao/pics/asian_noodle_soup.png", "detail": "", "price": 10.5}]});
@@ -95,7 +98,7 @@ ListModel {
                                           "column": [{"iid": 34, "cid": 22, "tag": "水果", "name": "怪味牛腱", "image": "file:///C:/Users/gao/pics/Tagine.png", "detail": "", "price": 10.0},
                                                      {"iid": 35, "cid": 22, "tag": "水果", "name": "红心鸭卷", "image": "file:///C:/Users/gao/pics/Tagine_Recipe.png", "detail": "", "price": 10.5}]});
 
-                }
+                */}
             }
         )
     }

@@ -13,6 +13,7 @@ void Server::incomingConnection(int socketId)
     socket->setSocketDescriptor(socketId);
     connect(socket, SIGNAL(dbChanged()), this, SLOT(sendRefreshUiSignal()));
     connect(socket, SIGNAL(paied(quint32)), this, SLOT(sendPaiedSignal(quint32)));
+    connect(socket, SIGNAL(readySync()), this, SLOT(sendSyncSignal()));
 }
 
 void Server::sendRefreshUiSignal()
@@ -24,4 +25,9 @@ void Server::sendPaiedSignal(quint32 orderNO)
 {
     emit paied(orderNO);
     qDebug() << "paied in server";
+}
+
+void Server::sendSyncSignal()
+{
+    emit sync();
 }

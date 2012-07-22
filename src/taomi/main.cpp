@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     QObject::connect((QObject*)view.engine(), SIGNAL(quit()), &a, SLOT(quit()));
 
     view.setSource(QUrl("qrc:/qml/main.qml"));
-    view.show();
+    view.showFullScreen();
 
     QString md5;
     QString dbname="DemoDB";

@@ -11,7 +11,7 @@ Component {
 
         Column {
             id: col
-            anchors.centerIn: parent
+            //anchors.centerIn: parent
             spacing: 38
 
             Repeater {
