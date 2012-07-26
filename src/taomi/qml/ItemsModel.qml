@@ -9,8 +9,8 @@ ListModel {
         var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
         db.transaction(
             function(tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS itemsData(iid INTEGER primary key, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL)');
-                var rs = tx.executeSql('SELECT * FROM itemsData where cid = ?', [Global.cid]);
+                tx.executeSql('CREATE TABLE IF NOT EXISTS itemsDB(iid INTEGER primary key, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL, needPrint INTEGER, printer TEXT)');
+                var rs = tx.executeSql('SELECT * FROM itemsDB where cid = ?', [Global.cid]);
                 var index = 0;
                 if (rs.rows.length > 0) {
                     while (index < rs.rows.length) {
@@ -19,12 +19,12 @@ ListModel {
                         if (index + 1 == rs.rows.length) {
                             item1 = ''
                             itemsModel.append({"segment": Math.floor(index/6),
-                                               "column": [{"iid": item0.iid, "cid": item0.cid, "tag": item0.tag, "name": item0.name, "image": item0.image, "detail": item0.detail, "price": item0.price}]});
+                                                  "column": [{"iid": item0.iid, "cid": item0.cid, "tag": item0.tag, "name": item0.name, "image": item0.image, "detail": item0.detail, "price": item0.price, "needPrint": item0.needPrint, "printer": item0.printer}]});
                         }
                         else {
                             itemsModel.append({"segment": Math.floor(index/6),
-                                               "column": [{"iid": item0.iid, "cid": item0.cid, "tag": item0.tag, "name": item0.name, "image": item0.image, "detail": item0.detail, "price": item0.price},
-                                                             {"iid": item1.iid, "cid": item1.cid, "tag": item1.tag, "name": item1.name, "image": item1.image, "detail": item1.detail, "price": item1.price}]});
+                                               "column": [{"iid": item0.iid, "cid": item0.cid, "tag": item0.tag, "name": item0.name, "image": item0.image, "detail": item0.detail, "price": item0.price, "needPrint": item0.needPrint, "printer": item0.printer},
+                                                             {"iid": item1.iid, "cid": item1.cid, "tag": item1.tag, "name": item1.name, "image": item1.image, "detail": item1.detail, "price": item1.price, "needPrint": item1.needPrint, "printer": item1.printer}]});
                         }
                         index+=2;
                     }
@@ -107,14 +107,14 @@ ListModel {
         var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
         db.transaction(
             function(tx) {
-                tx.executeSql('DROP TABLE itemsData');
-                tx.executeSql('CREATE TABLE IF NOT EXISTS itemsData(iid INTEGER primary key, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL)');
+                tx.executeSql('DROP TABLE itemsDB');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS itemsDB(iid INTEGER primary key, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL, needPrint INTEGER, printer TEXT)');
                 var index = 0;
                 while (index < itemsModel.count) {
                     var item1 = itemsModel.get(index).column.get(0);
                     var item2 = itemsModel.get(index).column.get(1);
-                    tx.executeSql('INSERT INTO itemsData VALUES(?,?,?,?,?,?,?)', [item1.iid, item1.cid, item1.tag, item1.name, item1.image, item1.detail, item1.price]);
-                    tx.executeSql('INSERT INTO itemsData VALUES(?,?,?,?,?,?,?)', [item2.iid, item2.cid, item2.tag, item2.name, item2.image, item2.detail, item2.price]);
+                    tx.executeSql('INSERT INTO itemsDB VALUES(?,?,?,?,?,?,?,?,?)', [item1.iid, item1.cid, item1.tag, item1.name, item1.image, item1.detail, item1.price, item1.needPrint, item1.printer]);
+                    tx.executeSql('INSERT INTO itemsDB VALUES(?,?,?,?,?,?,?,?,?)', [item2.iid, item2.cid, item2.tag, item2.name, item2.image, item2.detail, item2.price, item2.needPrint, item2.printer]);
                     index++;
                 }
             }

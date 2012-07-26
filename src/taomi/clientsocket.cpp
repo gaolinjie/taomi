@@ -62,8 +62,8 @@ void ClientSocket::readClient()
 
         QSqlQuery query;
         if (cnum > 0) {
-            query.exec("DROP TABLE startModel");
-            query.exec("CREATE TABLE IF NOT EXISTS startModel(cid INTEGER primary key, cursor INTEGER, title TEXT, image TEXT, style TEXT, slotQml TEXT, rectColor TEXT, hotColor TEXT)");
+            query.exec("DROP TABLE menuDB");
+            query.exec("CREATE TABLE IF NOT EXISTS menuDB(cid INTEGER primary key, cursor INTEGER, title TEXT, image TEXT, style TEXT, slotQml TEXT, rectColor TEXT, hotColor TEXT)");
             quint16 cid = 0;
             quint16 cursor = 0;
             QString title = "";
@@ -76,7 +76,7 @@ void ClientSocket::readClient()
                 in >> cid >> title >> image >> style
                 >> slotQml >> rectColor >> hotColor;
                 image.prepend("file:///C:/taomi/");
-                query.prepare("INSERT INTO startModel(cid, cursor, title, image, style, slotQml, rectColor, hotColor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                query.prepare("INSERT INTO menuDB(cid, cursor, title, image, style, slotQml, rectColor, hotColor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 query.addBindValue(cid);
                 query.addBindValue(cursor);
                 query.addBindValue(title);
@@ -92,7 +92,7 @@ void ClientSocket::readClient()
 
         if (inum > 0) {
             query.exec("DROP TABLE itemModel");
-            query.exec("CREATE TABLE IF NOT EXISTS itemsData(iid INTEGER primary key, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL)");
+            query.exec("CREATE TABLE IF NOT EXISTS itemsDB(iid INTEGER primary key, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL, needPrint INTEGER, printer TEXT)");
             quint16 iid = 0;
             quint16 cid = 0;
             QString tag = "";
@@ -100,11 +100,13 @@ void ClientSocket::readClient()
             QString image = "";
             QString detail = "";
             float price = 0;
+            quint16 needPrint = 0;
+            QString printer = "";
             while (inum > 0) {
                 in >> iid >> cid >> tag >> name
-                >> image >> detail >> price;
+                >> image >> detail >> price >> needPrint >> printer;
                 image.prepend("file:///C:/taomi/");
-                query.prepare("INSERT INTO itemsData (iid, cid, tag, name, image, detail, price) VALUES (?,?,?,?,?,?,?)");
+                query.prepare("INSERT INTO itemsDB (iid, cid, tag, name, image, detail, price, needPrint, printer) VALUES (?,?,?,?,?,?,?,?,?)");
                 query.addBindValue(iid);
                 query.addBindValue(cid);
                 query.addBindValue(tag);
@@ -112,6 +114,8 @@ void ClientSocket::readClient()
                 query.addBindValue(image);
                 query.addBindValue(detail);
                 query.addBindValue(price);
+                query.addBindValue(needPrint);
+                query.addBindValue(printer);
                 query.exec();
                 inum--;
             }
@@ -151,6 +155,12 @@ void ClientSocket::readClient()
             mCount--;
         }
         emit readySync();
+
+        QString mac = DeviceManager::getDeviceMac();
+        QDataStream out(this);
+        out.setVersion(QDataStream::Qt_4_7);
+        out << quint16(0) << quint8('X') << mac;
+        qDebug() << "Synced";
     }
 
     close();

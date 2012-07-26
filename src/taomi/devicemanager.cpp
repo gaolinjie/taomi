@@ -51,15 +51,36 @@ void DeviceManager::setServerIP(QString &serverIP)
 
 QString DeviceManager::getDeviceMac()
 {
+#ifdef WIN32
+    QString str2;
+    QList<QNetworkInterface> list = QNetworkInterface::allInterfaces();
+    str2 = list.at(1).hardwareAddress();
+    return str2;
+#else
     QNetworkInterface *qni;
     qni = new QNetworkInterface();
     //*qni = qni->interfaceFromName(QString("%1").arg("wlan0"));
     *qni = qni->interfaceFromName(QString("%1").arg("eth0"));
     return qni->hardwareAddress();
+#endif
 }
 
 QString DeviceManager::getDeviceIP()
-{
+{   
+#ifdef WIN32
+    // Windows code here
+    QString hostIP;
+    QString localHostName = QHostInfo::localHostName();
+    QHostInfo info = QHostInfo::fromName(localHostName);
+    foreach(QHostAddress address,info.addresses())
+    {
+        if(address.protocol() == QAbstractSocket::IPv4Protocol)
+        {
+            hostIP = address.toString();
+        }
+    }
+    return hostIP;
+#else
     QNetworkInterface *qni;
     qni = new QNetworkInterface();
     //*qni = qni->interfaceFromName(QString("%1").arg("wlan0"));
@@ -79,4 +100,5 @@ QString DeviceManager::getDeviceIP()
 
     return ip;
     // End Issue #4 //
+#endif
 }

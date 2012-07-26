@@ -12,8 +12,8 @@ RefreshManager::RefreshManager(QObject *parent) :
 QString RefreshManager::getImageNext(quint16 cid)
 {
     QSqlQuery query;
-    query.exec("CREATE TABLE IF NOT EXISTS startModel(cid INTEGER primary key, cursor INTEGER, title TEXT, image TEXT, style TEXT, slotQml TEXT, rectColor TEXT, hotColor TEXT)");
-    query.prepare("SELECT * FROM startModel WHERE cid = ?");
+    query.exec("CREATE TABLE IF NOT EXISTS menuDB(cid INTEGER primary key, cursor INTEGER, title TEXT, image TEXT, style TEXT, slotQml TEXT, rectColor TEXT, hotColor TEXT)");
+    query.prepare("SELECT * FROM menuDB WHERE cid = ?");
     query.addBindValue(cid);
     query.exec();
 
@@ -22,8 +22,8 @@ QString RefreshManager::getImageNext(quint16 cid)
         cursor = query.value(1).toUInt();
     } 
 
-    query.exec("CREATE TABLE IF NOT EXISTS itemsData(iid INTEGER primary key, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL)");
-    query.prepare("SELECT * FROM itemsData WHERE cid = ?");
+    query.exec("CREATE TABLE IF NOT EXISTS itemsDB(iid INTEGER primary key, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL, needPrint INTEGER, printer TEXT)");
+    query.prepare("SELECT * FROM itemsDB WHERE cid = ?");
     query.addBindValue(cid);
     query.exec();
 
@@ -45,7 +45,7 @@ QString RefreshManager::getImageNext(quint16 cid)
         cursor = 0;
     }
 
-    query.prepare("UPDATE startModel SET cursor = ?, image = ? WHERE cid = ?");
+    query.prepare("UPDATE menuDB SET cursor = ?, image = ? WHERE cid = ?");
     query.addBindValue(cursor);
     query.addBindValue(image);
     query.addBindValue(cid);

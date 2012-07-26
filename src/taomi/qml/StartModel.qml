@@ -9,8 +9,8 @@ ListModel {
         var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
         db.transaction(
             function(tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS startModel(cid INTEGER primary key, cursor INTEGER, title TEXT, image TEXT, style TEXT, slotQml TEXT, rectColor TEXT, hotColor TEXT)');
-                var rs = tx.executeSql('SELECT * FROM startModel');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS menuDB(cid INTEGER primary key, cursor INTEGER, title TEXT, image TEXT, style TEXT, slotQml TEXT, rectColor TEXT, hotColor TEXT)');
+                var rs = tx.executeSql('SELECT * FROM menuDB');
                 var index = 0;
                 if (rs.rows.length > 0) {
                     while (index < rs.rows.length) {
@@ -86,8 +86,8 @@ ListModel {
         var db = openDatabaseSync("DemoDB", "1.0", "Demo Model SQL", 50000);
         db.transaction(
             function(tx) {
-                tx.executeSql('DROP TABLE startModel');
-                tx.executeSql('CREATE TABLE IF NOT EXISTS startModel(cid INTEGER primary key, cursor INTEGER, title TEXT, image TEXT, style TEXT, slotQml TEXT, rectColor TEXT, hotColor TEXT)');
+                tx.executeSql('DROP TABLE menuDB');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS menuDB(cid INTEGER primary key, cursor INTEGER, title TEXT, image TEXT, style TEXT, slotQml TEXT, rectColor TEXT, hotColor TEXT)');
                 var index = 0;
                 while (index < startModel.count) {
                     var item0 = startModel.get(index).column.get(0);
