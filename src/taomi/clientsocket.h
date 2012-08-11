@@ -13,11 +13,11 @@ public:
 signals:
     void dbChanged();
     void paied(quint32 orderNO);
-    void readySync();
+    void requestSync();
+    void synced();
 
 private slots:
     void readClient();
-    void loadSyncView();
 
 private:
     quint16 nextBlockSize;

@@ -46,6 +46,9 @@ QString DeviceManager::getServerIP()
 
 void DeviceManager::setServerIP(QString &serverIP)
 {
+    if (mServerIP != serverIP) {
+        qDebug() << "WARNNING: The server IP has changed";
+    }
     mServerIP = serverIP;
 }
 

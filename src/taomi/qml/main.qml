@@ -68,9 +68,10 @@ Item {
 
     Connections{
         target: server
-        onSync: {
-            toast.opacity = 1;
-            toastDisappearTimer.running = true;
+        onReadySync: {
+            //toast.opacity = 1;
+            //toastDisappearTimer.running = true;
+            mainLoader.source = "qrc:/qml/SyncView.qml"
         }
     }
 }

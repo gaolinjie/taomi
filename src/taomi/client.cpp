@@ -64,6 +64,22 @@ void Client::sendOrder()
     emit sendOrderComplete();
 }
 
+void Client::startSync()
+{
+    qDebug() << "33333333333333333333333333333";
+    block = new QByteArray();
+    QDataStream out(block, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_4_7);
+    out << quint16(0) << quint8('X') << 0xFFFF;
+
+    out.device()->seek(0);
+    out << quint16(block->size() - sizeof(quint16));
+
+    QString serverIP = DeviceManager::getServerIP();
+    qDebug() << serverIP;
+    connectToServer(serverIP);
+}
+
 void Client::sendRegistration()
 {
     QByteArray datagram;

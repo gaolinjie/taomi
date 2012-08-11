@@ -46,5 +46,7 @@
         <file>qml/SyncView.qml</file>
         <file>images/cloud_download.png</file>
         <file>images/Cloud-refresh.png</file>
+        <file>qml/BusyIndicator.qml</file>
+        <file>images/animated_loader.gif</file>
     </qresource>
 </RCC>

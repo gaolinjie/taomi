@@ -100,7 +100,9 @@ OTHER_FILES += \
     images/asian_noodle_soup.png \
     images/AlmondCookies.png \
     qml/SyncView.qml \
-    images/Cloud-refresh.png
+    images/Cloud-refresh.png \
+    qml/BusyIndicator.qml \
+    images/animated_loader.gif
 
 RESOURCES += \
     resource.qrc

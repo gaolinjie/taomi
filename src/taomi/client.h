@@ -18,6 +18,7 @@ signals:
 public slots:
     void sendOrder();
     void sendRegistration();
+    void startSync();
 
 private slots:
     void sendData();

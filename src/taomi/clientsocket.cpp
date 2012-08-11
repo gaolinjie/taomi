@@ -19,7 +19,6 @@ ClientSocket::ClientSocket(QObject *parent)
 
 void ClientSocket::readClient()
 {
-    qDebug() << "cnum << inum";
     QDataStream in(this);
     in.setVersion(QDataStream::Qt_4_7);
 
@@ -35,7 +34,6 @@ void ClientSocket::readClient()
 
     quint8 requestType;
 
-
     in >> requestType;
     if (requestType == 'S')
     {
@@ -50,21 +48,77 @@ void ClientSocket::readClient()
         QString serverIP;
 
         in >> deviceNO >> serverIP;
+        qDebug() << "dsafasd" << serverIP;
 
         DeviceManager::setDeviceNO(deviceNO);
         DeviceManager::setServerIP(serverIP);
     }
     else if (requestType == 'X')
     {
-        quint16 cnum;
-        quint16 inum;
-        in >> cnum >> inum;
+        emit requestSync();
+
+        QTime dieTime = QTime::currentTime().addMSecs(5000);
+        while( QTime::currentTime() < dieTime )
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+        quint16 cnum=0;
+        quint16 inum=0;
+        quint16 scnum=0;
+        quint16 snum=0;
+        in >> scnum >> snum>> cnum >> inum;
+
+        qDebug() << "scnum" << scnum << "snum" << snum << "cnum" << cnum << "inum" << inum;
 
         QSqlQuery query;
+        if (scnum > 0) {
+            query.exec("DROP TABLE seatTypeDB");
+            query.exec("CREATE TABLE IF NOT EXISTS seatTypeDB(scid TEXT key, name TEXT, active INTEGER)");
+            QString scid = "";
+            QString scname = "";
+            quint16 active = 1;
+            while (scnum > 0) {
+                in >> scid >> scname;
+                query.prepare("INSERT INTO seatTypeDB(scid, name, active) VALUES (?, ?, ?)");
+                query.addBindValue(scid);
+                query.addBindValue(scname);
+                query.addBindValue(active);
+                query.exec();
+                scnum--;
+                if (active == 1) {
+                    active = 0;
+                }
+            }
+        }
+
+        if (snum > 0) {
+            qDebug() << "scnumqqqqq";
+            query.exec("DROP TABLE seatItemDB");
+            query.exec("CREATE TABLE IF NOT EXISTS seatItemDB(sid TEXT key, scid TEXT, seat TEXT, type TEXT, capacity INTEGER, active INTEGER)");
+            QString sid = "";
+            QString scid = "";
+            QString seat = "";
+            QString scname = "";
+            quint16 capacity = 0;
+            quint16 active = 0;
+            while (snum > 0) {
+                qDebug() << "xxxxxxxx";
+                in >> sid >> scid >> seat >> scname >> capacity;
+                query.prepare("INSERT INTO seatItemDB(sid, scid, seat, type, capacity, active) VALUES (?, ?, ?, ?, ?, ?)");
+                query.addBindValue(sid);
+                query.addBindValue(scid);
+                query.addBindValue(seat);
+                query.addBindValue(scname);
+                query.addBindValue(capacity);
+                query.addBindValue(active);
+                query.exec();
+                snum--;
+            }
+        }
+
         if (cnum > 0) {
             query.exec("DROP TABLE menuDB");
-            query.exec("CREATE TABLE IF NOT EXISTS menuDB(cid INTEGER primary key, cursor INTEGER, title TEXT, image TEXT, style TEXT, slotQml TEXT, rectColor TEXT, hotColor TEXT)");
-            quint16 cid = 0;
+            query.exec("CREATE TABLE IF NOT EXISTS menuDB(cid TEXT primary key, cursor INTEGER, title TEXT, image TEXT, style TEXT, slotQml TEXT, rectColor TEXT, hotColor TEXT)");
+            QString cid = "";
             quint16 cursor = 0;
             QString title = "";
             QString image = "";
@@ -92,9 +146,9 @@ void ClientSocket::readClient()
 
         if (inum > 0) {
             query.exec("DROP TABLE itemModel");
-            query.exec("CREATE TABLE IF NOT EXISTS itemsDB(iid INTEGER primary key, cid INTEGER, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL, needPrint INTEGER, printer TEXT)");
-            quint16 iid = 0;
-            quint16 cid = 0;
+            query.exec("CREATE TABLE IF NOT EXISTS itemsDB(iid TEXT primary key, cid TEXT, tag TEXT, name TEXT, image TEXT, detail TEXT, price REAL, needPrint INTEGER, printer TEXT)");
+            QString iid = 0;
+            QString cid = 0;
             QString tag = "";
             QString name = "";
             QString image = "";
@@ -125,7 +179,7 @@ void ClientSocket::readClient()
 
         if (mCount<0) {
             in >> mCount;
-            qDebug() << mCount;
+            qDebug() <<"cccccccc"<< mCount;
         }
 
         quint32 imageSize = 0;
@@ -154,30 +208,14 @@ void ClientSocket::readClient()
             imageSize=0;
             mCount--;
         }
-        emit readySync();
 
         QString mac = DeviceManager::getDeviceMac();
         QDataStream out(this);
         out.setVersion(QDataStream::Qt_4_7);
         out << quint16(0) << quint8('X') << mac;
+        emit synced();
         qDebug() << "Synced";
     }
 
     close();
-}
-
-void ClientSocket::loadSyncView()
-{
-    QDeclarativeEngine engine;
-    QDeclarativeComponent component(&engine, QUrl("qrc:/qml/start.qml"));
-    QObject *object = component.create();
-
-    QVariant returnedValue;
-    QVariant msg = "loadSyncView";
-    QMetaObject::invokeMethod(object, "loadSyncView",
-    Q_RETURN_ARG(QVariant, returnedValue),
-    Q_ARG(QVariant, msg));
-
-    qDebug() << "QML function returned:" << returnedValue.toString();
-    delete object;
 }
