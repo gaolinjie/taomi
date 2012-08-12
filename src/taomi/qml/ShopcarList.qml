@@ -31,7 +31,9 @@ ListView {
                 anchors.left: parent.left; anchors.leftMargin: -3
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 20
+                font.family: "微软雅黑"
                 color: "white"
+                smooth: true
             }
 
             Rectangle {
@@ -65,7 +67,9 @@ ListView {
                 text: name
                 x: 80; anchors.top: parent.top
                 font.pixelSize: 16
+                font.family: "微软雅黑"
                 color: "white"
+                smooth: true
             }
 
             Text {
@@ -73,7 +77,9 @@ ListView {
                 text: "￥ " + price + " 元 x "
                 x: 80; anchors.bottom: parent.bottom
                 font.pixelSize: 14
+                font.family: "微软雅黑"
                 color: "white"
+                smooth: true
             }
 
             Text {
@@ -81,7 +87,9 @@ ListView {
                 text: num + " 份"
                 anchors.left: priceText.right; anchors.bottom: parent.bottom
                 font.pixelSize: 14
+                font.family: "微软雅黑"
                 color: "white"
+                smooth: true
             }
         }
     }

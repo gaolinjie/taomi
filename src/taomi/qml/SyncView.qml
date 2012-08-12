@@ -116,6 +116,7 @@ Item {
                 font.family: "微软雅黑"
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top; anchors.topMargin: 70
+                smooth: true
             }
 
             BusyIndicator {
@@ -140,6 +141,7 @@ Item {
                     color: "white"
                     font.pixelSize: 16
                     font.family: "微软雅黑"
+                    smooth: true
                 }
 
                 MouseArea {
@@ -179,6 +181,7 @@ Item {
                     color: "white"
                     font.pixelSize: 16
                     font.family: "微软雅黑"
+                    smooth: true
                 }
 
                 MouseArea {
@@ -212,6 +215,7 @@ Item {
                     color: "white"
                     font.pixelSize: 16
                     font.family: "微软雅黑"
+                    smooth: true
                 }
 
                 MouseArea {

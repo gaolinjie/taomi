@@ -102,7 +102,9 @@ OTHER_FILES += \
     qml/SyncView.qml \
     images/Cloud-refresh.png \
     qml/BusyIndicator.qml \
-    images/animated_loader.gif
+    images/animated_loader.gif \
+    images/shopping_cart.png \
+    images/map_pin.png
 
 RESOURCES += \
     resource.qrc

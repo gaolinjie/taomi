@@ -45,7 +45,9 @@ Item {
             anchors.leftMargin: 125; anchors.topMargin: 70
             text: "购物车"
             font.pixelSize: 50
+            font.family: "微软雅黑"
             color: "white"
+            smooth: true
         }
 
         Image {
@@ -70,7 +72,9 @@ Item {
             anchors.left: viewTitle.left; anchors.leftMargin: 5
             anchors.top: viewTitle.bottom; anchors.topMargin: 35
             font.pixelSize: 20
+            font.family: "微软雅黑"
             color: "white"
+            smooth: true
         }
 
         UnsentView {
@@ -93,6 +97,8 @@ Item {
                 anchors.centerIn: parent
                 color: "white"
                 font.pixelSize: 16
+                font.family: "微软雅黑"
+                smooth: true
             }
 
             MouseArea {
@@ -145,7 +151,9 @@ Item {
             anchors.left: unsendedButton.left
             anchors.top: sendButton.bottom; anchors.topMargin: 50
             font.pixelSize: 20
+            font.family: "微软雅黑"
             color: "white"
+            smooth: true
         }
 
         SentView {

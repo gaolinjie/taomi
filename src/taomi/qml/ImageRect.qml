@@ -102,6 +102,8 @@ Item {
         anchors.verticalCenter: titleRect.verticalCenter
         text: parent.iconTitle
         font.pixelSize: 20
+        font.family: "微软雅黑"
         color: "white"
+        smooth: true
     }
 }

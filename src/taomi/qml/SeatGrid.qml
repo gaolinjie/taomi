@@ -34,6 +34,8 @@ GridView {
                  anchors.centerIn: parent
                  color: "white"
                  font.pixelSize: 16
+                 font.family: "微软雅黑"
+                 smooth: true
              }
 
              MouseArea {

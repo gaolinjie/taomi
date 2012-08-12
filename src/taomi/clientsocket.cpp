@@ -50,6 +50,8 @@ void ClientSocket::readClient()
         in >> deviceNO >> serverIP;
         qDebug() << "dsafasd" << serverIP;
 
+        serverIP = "192.168.1.100"; // 暂时调试使用@@@@@
+
         DeviceManager::setDeviceNO(deviceNO);
         DeviceManager::setServerIP(serverIP);
     }
@@ -129,7 +131,10 @@ void ClientSocket::readClient()
             while (cnum > 0) {
                 in >> cid >> title >> image >> style
                 >> slotQml >> rectColor >> hotColor;
-                image.prepend("file:///C:/taomi/");
+                qDebug() << style << "ICON_RECT";
+                if (style!="ICON_RECT") {
+                    image.prepend("file:///C:/taomi/");
+                }
                 query.prepare("INSERT INTO menuDB(cid, cursor, title, image, style, slotQml, rectColor, hotColor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 query.addBindValue(cid);
                 query.addBindValue(cursor);

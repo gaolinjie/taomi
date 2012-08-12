@@ -51,7 +51,9 @@ GridView {
                     anchors.left: parent.left; anchors.leftMargin: 10
                     anchors.top: parent.top; anchors.topMargin: 10
                     font.pixelSize: 20
+                    font.family: "微软雅黑"
                     color: "white"
+                    smooth: true
                 }
 
                 Text {
@@ -60,7 +62,9 @@ GridView {
                     anchors.left: nameText.left
                     anchors.top: nameText.bottom; anchors.topMargin: 10
                     font.pixelSize: 16
+                    font.family: "微软雅黑"
                     color: "white"
+                    smooth: true
                 }
 
                 Text {
@@ -68,7 +72,9 @@ GridView {
                     anchors.left: priceText.right; anchors.leftMargin: 10
                     anchors.top: priceText.top
                     font.pixelSize: 16
+                    font.family: "微软雅黑"
                     color: "white"
+                    smooth: true
                 }
             }
         }

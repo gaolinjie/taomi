@@ -31,10 +31,14 @@ Rectangle {
 
     Text {
         id: text
-        x: 150
+        //x: 150
         anchors.verticalCenter: parent.verticalCenter
+        anchors.left: icon.right
+        anchors.leftMargin: 20
         text: parent.iconTitle
         font.pixelSize: 30
+        font.family: "微软雅黑"
         color: "white"
+        smooth: true
     }
 }

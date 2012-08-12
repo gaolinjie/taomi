@@ -45,6 +45,7 @@ Item {
             font.pixelSize: 20
             font.family: "微软雅黑"
             font.letterSpacing: 2
+            smooth: true
         }
 
         Image {

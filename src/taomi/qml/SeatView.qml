@@ -53,7 +53,9 @@ Item {
             anchors.leftMargin: 125; anchors.topMargin: 70
             text: Global.title
             font.pixelSize: 50
+            font.family: "微软雅黑"
             color: "white"
+            smooth: true
         }
 
         Image {
@@ -78,7 +80,9 @@ Item {
             anchors.left: viewTitle.left; anchors.leftMargin: 5
             anchors.top: viewTitle.bottom; anchors.topMargin: 50
             font.pixelSize: 20
+            font.family: "微软雅黑"
             color: "white"
+            smooth: true
         }
 
         SeatCategory {
@@ -93,7 +97,9 @@ Item {
             anchors.left: viewTitle.left; anchors.leftMargin: 5
             anchors.top: seatCategory.bottom; anchors.topMargin: 60
             font.pixelSize: 20
+            font.family: "微软雅黑"
             color: "white"
+            smooth: true
         }
 
         Loader {

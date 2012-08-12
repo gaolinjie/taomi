@@ -48,5 +48,7 @@
         <file>images/Cloud-refresh.png</file>
         <file>qml/BusyIndicator.qml</file>
         <file>images/animated_loader.gif</file>
+        <file>images/map_pin.png</file>
+        <file>images/shopping_cart.png</file>
     </qresource>
 </RCC>

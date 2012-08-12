@@ -16,10 +16,11 @@ Item {
         id: startText
         x: 130; y: 70
         text: "菜 单"
-        font.family: "Vera Sans YuanTi"
+        font.family: "微软雅黑"
         font.pixelSize: 50
         color: "white"
         opacity: 0
+        smooth: true
 
         Behavior on x {
             NumberAnimation {duration: 1000; easing.type: Easing.OutQuint}

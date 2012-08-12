@@ -55,7 +55,9 @@ Component {
                             anchors.left: parent.left; anchors.leftMargin: 10
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 14
+                            font.family: "微软雅黑"
                             color: "white"
+                            smooth: true
                         }
 
                         Text {
@@ -64,7 +66,9 @@ Component {
                             anchors.right: parent.right; anchors.rightMargin: 10
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 14
+                            font.family: "微软雅黑"
                             color: "white"
+                            smooth: true
                         }
                     }
                 }

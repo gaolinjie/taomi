@@ -39,7 +39,9 @@ Item {
             anchors.leftMargin: 125; anchors.topMargin: 70
             text: Global.title
             font.pixelSize: 50
+            font.family: "微软雅黑"
             color: "white"
+            smooth: true
         }
 
         Image {
@@ -64,8 +66,10 @@ Item {
             anchors.left: viewTitle.left; anchors.leftMargin: 5
             anchors.top: viewTitle.bottom; anchors.topMargin: 35
             font.pixelSize: 20
+            font.family: "微软雅黑"
             color: "white"
             visible: !itemsList.itemVisible
+            smooth: true
         }
 
         Text {
@@ -74,8 +78,10 @@ Item {
             anchors.left: allButton.right; anchors.leftMargin: 42
             anchors.verticalCenter: allButton.verticalCenter
             font.pixelSize: 20
+            font.family: "微软雅黑"
             color: "white"
             visible: allButton.visible
+            smooth: true
         }
 
         Text {
@@ -84,8 +90,10 @@ Item {
             anchors.left: selectedButton.right; anchors.leftMargin: 42
             anchors.verticalCenter: selectedButton.verticalCenter
             font.pixelSize: 20
+            font.family: "微软雅黑"
             color: "white"
             visible: allButton.visible
+            smooth: true
 
             MouseArea {
                 anchors.fill: parent
@@ -194,7 +202,9 @@ Item {
                 id: detailTitle
                 text: itemsList.itemTitle
                 font.pixelSize: 28
+                font.family: "微软雅黑"
                 color: "white"
+                smooth: true
                 Behavior on x {
                     NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
                 }
@@ -206,7 +216,9 @@ Item {
                 anchors.right: returnButton.right
                 anchors.bottom: detailTitle.bottom; anchors.bottomMargin: 3
                 font.pixelSize: 18
+                font.family: "微软雅黑"
                 color: "white"
+                smooth: true
                 Behavior on x {
                     NumberAnimation { duration: 600; easing.type: Easing.OutQuint}
                 }
@@ -224,6 +236,8 @@ Item {
                     anchors.centerIn: parent
                     color: "white"
                     font.pixelSize: 14
+                    font.family: "微软雅黑"
+                    smooth: true
                 }
 
                 MouseArea {
@@ -290,6 +304,8 @@ Item {
                     anchors.centerIn: parent
                     color: "white"
                     font.pixelSize: 14
+                    font.family: "微软雅黑"
+                    smooth: true
                 }
 
                 Timer {
@@ -392,7 +408,9 @@ Item {
                 x: 31; y: 40
                 text: "购物车"
                 font.pixelSize: 38
+                font.family: "微软雅黑"
                 color: "white"
+                smooth: true
             }
         }
 
@@ -420,6 +438,8 @@ Item {
                     anchors.centerIn: parent
                     color: "white"
                     font.pixelSize: 16
+                    font.family: "微软雅黑"
+                    smooth: true
                 }
 
                 MouseArea {
@@ -450,6 +470,8 @@ Item {
                     anchors.centerIn: parent
                     color: "white"
                     font.pixelSize: 16
+                    font.family: "微软雅黑"
+                    smooth: true
                 }
 
                 MouseArea {

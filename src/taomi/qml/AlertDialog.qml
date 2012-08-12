@@ -25,6 +25,8 @@ Rectangle {
         font.pixelSize: 28
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom; anchors.bottomMargin: 140
+        font.family: "微软雅黑"
+        smooth: true
     }
 
     Rectangle {
@@ -41,6 +43,8 @@ Rectangle {
             anchors.centerIn: parent
             color: "white"
             font.pixelSize: 16
+            font.family: "微软雅黑"
+            smooth: true
         }
 
         MouseArea {
