@@ -6,11 +6,11 @@ QT += sql
 SOURCES += \
     main.cpp \
     client.cpp \
-    ordermanager.cpp \
     server.cpp \
     clientsocket.cpp \
     devicemanager.cpp \
-    refreshmanager.cpp
+    refreshmanager.cpp \
+    ordermanager.cpp
 
 OTHER_FILES += \
     qml/main.qml \
@@ -104,7 +104,9 @@ OTHER_FILES += \
     qml/BusyIndicator.qml \
     images/animated_loader.gif \
     images/shopping_cart.png \
-    images/map_pin.png
+    images/map_pin.png \
+    qml/AddSeatPanel.qml \
+    images/check.png
 
 RESOURCES += \
     resource.qrc

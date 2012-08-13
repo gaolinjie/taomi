@@ -27,7 +27,7 @@ Client::~Client()
 
 void Client::sendOrder()
 {
-    quint16 seatNO = getSeatNO();
+    QString seatID = getSeatID();
 
     block = new QByteArray();
     QDataStream out(block, QIODevice::WriteOnly);
@@ -45,7 +45,7 @@ void Client::sendOrder()
     while (query.next()) {
         if (orderNO == 0) {
             orderNO = query.value(0).toUInt();
-            out << quint32(orderNO) << quint16(seatNO) << DeviceManager::getDeviceMac();
+            out << quint32(orderNO) << QString(seatID) << DeviceManager::getDeviceMac();
         }
         name = query.value(1).toString();
         image = query.value(2).toString();
@@ -139,16 +139,18 @@ void Client::closeConnection()
     tcpSocket.close();
 }
 
-quint16 Client::getSeatNO()
+QString Client::getSeatID()
 {
     QSqlQuery query;
-    query.exec("SELECT * FROM currentSeatModel");
+    query.prepare("SELECT * FROM seatItemDB WHERE active = ?");
+    query.addBindValue(1);
+    query.exec();
     if (query.next()) {
-        quint16 s = query.value(0).toUInt();
+        QString s = query.value(0).toString();
         return s;
     }
     else {
         qDebug() << TAG << "Not set seatNO yet" << __FILE__ << __LINE__;
-        return -1;
+        return "";
     }
 }

@@ -50,5 +50,8 @@
         <file>images/animated_loader.gif</file>
         <file>images/map_pin.png</file>
         <file>images/shopping_cart.png</file>
+        <file>qml/AddSeatPanel.qml</file>
+        <file>images/check.png</file>
+        <file>ordermanager.cpp</file>
     </qresource>
 </RCC>

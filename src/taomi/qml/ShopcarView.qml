@@ -110,7 +110,7 @@ Item {
                     }
                 }
                 onClicked: {
-                    if (orderManager.getSeatNO() == -1)
+                    if (client.getSeatID() == "")
                     {
                         foreground.visible = true;
                         dialogAlert.visible = true;

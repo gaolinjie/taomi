@@ -19,15 +19,13 @@ public slots:
     void sendOrder();
     void sendRegistration();
     void startSync();
+    QString getSeatID();
 
 private slots:
     void sendData();
     void getData();
     void connectionClosedByServer();
     void error();
-
-public:
-    quint16 getSeatNO();
 
 private:
     void connectToServer(const QString & serverIP);

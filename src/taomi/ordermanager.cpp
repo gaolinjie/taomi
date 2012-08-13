@@ -1,3 +1,4 @@
+
 #include "ordermanager.h"
 #include "devicemanager.h"
 
@@ -8,7 +9,7 @@
 
 #define TAG "[OrderManager]"
 
-// è®¾å¤‡åºå·ï¼šPADæ¥å…¥å±€åŸŸç½‘ï¼Œå‘æœåŠ¡å™¨å‘é€æ³¨å†Œä¿¡å·ï¼Œè·å–å”¯ä¸€è®¾å¤‡åºå·
+// Éè±¸ĞòºÅ£ºPAD½ÓÈë¾ÖÓòÍø£¬Ïò·şÎñÆ÷·¢ËÍ×¢²áĞÅºÅ£¬»ñÈ¡Î¨Ò»Éè±¸ĞòºÅ
 #define DEVICE_NO 10100000
 
 OrderManager::OrderManager(QObject *parent) :
@@ -30,7 +31,7 @@ void OrderManager::updateOrderNO()
     if (query.next()) {
         lastSentOrderNO = query.value(0).toUInt();
         if (lastSentOrderNO == 0) {
-            qDebug() << TAG << "lastSentModel è¡¨ä¸­æ•°æ®æœ‰é”™è¯¯" << __FILE__ << __LINE__ ;
+            qDebug() << TAG << "lastSentModel ±íÖĞÊı¾İÓĞ´íÎó" << __FILE__ << __LINE__ ;
 
         }
     }
@@ -41,7 +42,7 @@ void OrderManager::updateOrderNO()
     if (query.next()) {
         sentOrderNO = query.value(0).toUInt();
         if (sentOrderNO == 0) {
-            qDebug() << TAG << "sentModel ä¸­æ•°æ®æœ‰é”™è¯¯" << __FILE__ << __LINE__;
+            qDebug() << TAG << "sentModel ÖĞÊı¾İÓĞ´íÎó" << __FILE__ << __LINE__;
         }
     }
 
@@ -51,19 +52,19 @@ void OrderManager::updateOrderNO()
     if (query.next()) {
         unsentOrderNO = query.value(0).toUInt();
         if (unsentOrderNO == 0) {
-            qDebug() << TAG << "unsentModel ä¸­æ•°æ®æœ‰é”™è¯¯" << __FILE__ << __LINE__;
+            qDebug() << TAG << "unsentModel ÖĞÊı¾İÓĞ´íÎó" << __FILE__ << __LINE__;
         }
     }
 
     if (sentOrderNO == 0 && unsentOrderNO == 0) {
         if (lastSentOrderNO == 0) {
-            // ç”Ÿæˆæ–°çš„orderNO
+            // Éú³ÉĞÂµÄorderNO
             quint32  orderNO;
             orderNO = DEVICE_NO + 1;
             mOrderNO = orderNO;
         }
         else {
-            // ä¸Šä¸€ä¸ª orderNO + 1
+            // ÉÏÒ»¸ö orderNO + 1
             quint32 nOrderNO = lastSentOrderNO;
             nOrderNO++;
             mOrderNO = nOrderNO;
@@ -135,29 +136,3 @@ bool OrderManager::isHaveNewOrder()
         return false;
     }
 }
-
-qint16 OrderManager::getSeatNO() const
-{
-    QSqlQuery query;
-    query.exec("SELECT * FROM currentSeatModel");
-    if (query.next()) {
-        qint16 s = query.value(0).toUInt();
-        return s;
-    }
-    else {
-        qDebug() << TAG << "Not set seatNO yet" << __FILE__ << __LINE__;
-        return -1;
-    }
-}
-
-void OrderManager::setSeatNO(const quint16 &s)
-{
-    QSqlQuery query;
-    query.exec("DROP TABLE currentSeatModel");
-    query.exec("CREATE TABLE IF NOT EXISTS currentSeatModel(sid INTEGER key)");
-    query.prepare("INSERT INTO currentSeatModel(sid) VALUES (?)");
-    query.addBindValue(s);
-    query.exec();
-}
-
-
